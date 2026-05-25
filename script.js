@@ -1,3 +1,7 @@
+/* ============================================================
+   Biblioteca Palafoxiana — script.js
+   ============================================================ */
+
 const PREFERS_REDUCED_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 const STORAGE = {
@@ -5,10 +9,9 @@ const STORAGE = {
   theme: 'palafoxiana.theme',
 };
 
-const NUMBER_FMT = new Intl.NumberFormat('es-MX');
-
-let i18nEls = [];
-let i18nPlaceholderEls = [];
+function safeGet(key)      { try { return localStorage.getItem(key); }    catch { return null; } }
+function safeSet(key, val) { try { localStorage.setItem(key, val); }       catch { /* noop */ } }
+function safeRemove(key)   { try { localStorage.removeItem(key); }         catch { /* noop */ } }
 
 const translations = {
   es: {
@@ -35,14 +38,13 @@ const translations = {
 
     /* hero */
     'hero.badge':    'UNESCO · Memoria del Mundo · 2005',
-    'hero.cta':      'Solicitar visita guiada',
     'hero.title':    'Biblioteca<br>Palafoxiana',
     'hero.subtitle': 'La primera biblioteca pública de América',
     'hero.location': 'Puebla, México',
 
     /* visit */
-    'visit.tag':              'Acceso',
-    'visit.title':            'Cómo visitarnos',
+    'visit.tag':              'Visitar',
+    'visit.title':            'Planifica tu visita',
     'visit.hours':            'Horarios',
     'visit.hours-detail':     'Martes a domingo<br>10:00 – 18:00 h',
     'visit.hours-note':       'Lunes cerrado',
@@ -64,24 +66,10 @@ const translations = {
     'history.p1':    'En 1646 el obispo de Puebla <strong>Juan de Palafox y Mendoza</strong> donó al seminario su colección personal de 5,000 volúmenes, con la condición de que cualquier persona que supiera leer pudiera consultarla. Fue el acto fundacional de la primera biblioteca pública de América.',
     'history.p2':    'En 1773 el obispo <strong>Francisco Fabián y Fuero</strong> levantó la sala principal de <strong>43 metros de longitud</strong> con sus tres niveles de estantería en cedro y ayacahuite. Una estructura monumental que perdura como testigo de cuatro siglos de historia y conocimiento acumulado.',
     'history.p3':    'El acervo creció a través de los siglos, alcanzando hoy más de 45,000 volúmenes distribuidos en 54 materias y catorce idiomas. Fue declarada Monumento Histórico en 1981 y reconocida por la UNESCO como Memoria del Mundo en 2005.',
-    'timeline.1646': 'Fundación',
-    'timeline.1773': 'Recinto actual',
-    'timeline.1821': 'Independencia',
+    'timeline.1646': 'Donación de Palafox',
+    'timeline.1773': 'Recinto de Fabián y Fuero',
     'timeline.1981': 'Monumento Histórico',
-    'timeline.2005': 'UNESCO',
-    'timeline.2014': 'Restauración',
-    'event.1646.title': 'Donación fundacional',
-    'event.1646.body':  'El obispo de Puebla <strong>Juan de Palafox y Mendoza</strong> entregó al Colegio de San Juan su biblioteca personal de 5,000 volúmenes, bajo la condición de que cualquier persona alfabetizada pudiera acceder libremente a ella. Este acto inaugural convirtió a la Palafoxiana en la primera biblioteca pública de América.',
-    'event.1773.title': 'Recinto de Fabián y Fuero',
-    'event.1773.body':  'El obispo <strong>Francisco Fabián y Fuero</strong> ordenó la construcción del recinto que conocemos hoy: una sala de <strong>43 metros de longitud</strong> con tres niveles de estantería tallada en cedro y ayacahuite. Los estantes —que albergan más de 41,000 volúmenes encuadernados en piel— permanecen intactos desde entonces.',
-    'event.1821.title': 'Independencia y patrimonio nacional',
-    'event.1821.body':  'Con la consumación de la Independencia de México, la Biblioteca Palafoxiana pasó de la tutela eclesiástica al patrimonio civil del Estado. La institución continuó abierta al público, reafirmando su vocación de acceso universal al conocimiento en el México recién nacido.',
-    'event.1981.title': 'Monumento Histórico Nacional',
-    'event.1981.body':  'El <strong>Instituto Nacional de Antropología e Historia (INAH)</strong> declaró la Biblioteca Palafoxiana Monumento Histórico Nacional, reconociendo el valor excepcional de su recinto, su mobiliario original del siglo XVIII y su acervo bibliográfico como legado del patrimonio mexicano.',
-    'event.2005.title': 'UNESCO · Memoria del Mundo',
-    'event.2005.body':  'La <strong>UNESCO</strong> inscribió el acervo de la Biblioteca Palafoxiana en el Registro Internacional de la Memoria del Mundo, reconociendo sus más de 45,000 volúmenes —entre ellos incunables y manuscritos únicos— como patrimonio documental de la humanidad. Fue el primer acervo mexicano en recibir esta distinción.',
-    'event.2014.title': 'Restauración integral',
-    'event.2014.body':  'Una extensa intervención de restauración consolidó los estantes originales de cedro y ayacahuite del siglo XVIII, trató los volúmenes más deteriorados y actualizó las condiciones de climatización y conservación del recinto para preservar el acervo para las generaciones venideras.',
+    'timeline.2005': 'UNESCO · Memoria del Mundo',
 
     /* gallery */
     'gallery.tag':       'Galería',
@@ -170,14 +158,13 @@ const translations = {
 
     /* hero */
     'hero.badge':    'UNESCO · Memory of the World · 2005',
-    'hero.cta':      'Request a guided tour',
     'hero.title':    'Library<br>Palafoxiana',
     'hero.subtitle': 'The first public library in the Americas',
     'hero.location': 'Puebla, Mexico',
 
     /* visit */
-    'visit.tag':              'Access',
-    'visit.title':            'Visiting the library',
+    'visit.tag':              'Visit',
+    'visit.title':            'Plan your visit',
     'visit.hours':            'Hours',
     'visit.hours-detail':     'Tuesday to Sunday<br>10:00 – 18:00',
     'visit.hours-note':       'Closed on Mondays',
@@ -199,24 +186,10 @@ const translations = {
     'history.p1':    'In 1646 Bishop <strong>Juan de Palafox y Mendoza</strong> donated his personal collection of 5,000 volumes to the seminary, on the condition that any literate person could consult it. It was the founding act of the first public library in the Americas.',
     'history.p2':    'In 1773 Bishop <strong>Francisco Fabián y Fuero</strong> built the main reading hall, <strong>43 metres long</strong>, with three levels of cedar and ayacahuite shelving — a monumental structure that endures as witness to four centuries of history and accumulated knowledge.',
     'history.p3':    'The collection grew across the centuries, now holding more than 45,000 volumes across 54 subjects and fourteen languages. Declared a National Historic Monument in 1981 and recognised by UNESCO as Memory of the World in 2005.',
-    'timeline.1646': 'Foundation',
-    'timeline.1773': 'Current hall',
-    'timeline.1821': 'Independence',
+    'timeline.1646': 'Palafox donation',
+    'timeline.1773': 'Fabián y Fuero hall',
     'timeline.1981': 'Historic Monument',
-    'timeline.2005': 'UNESCO',
-    'timeline.2014': 'Restoration',
-    'event.1646.title': 'Foundation donation',
-    'event.1646.body':  'Bishop <strong>Juan de Palafox y Mendoza</strong> of Puebla donated his personal library of 5,000 volumes to the Colegio de San Juan, on the condition that any literate person could freely access it. This inaugural act established the Palafoxiana as the first public library in the Americas.',
-    'event.1773.title': 'Fabián y Fuero hall',
-    'event.1773.body':  'Bishop <strong>Francisco Fabián y Fuero</strong> commissioned the hall we see today: <strong>43 metres long</strong> with three tiers of shelving carved in cedar and ayacahuite. The shelves — holding over 41,000 leather-bound volumes — have remained intact ever since.',
-    'event.1821.title': 'Independence and national heritage',
-    'event.1821.body':  'With Mexican independence, the Palafoxiana passed from ecclesiastical custody to civil state patrimony. The institution remained open to the public, reaffirming its vocation of universal access to knowledge in the newly born Mexican nation.',
-    'event.1981.title': 'National Historic Monument',
-    'event.1981.body':  'Mexico\'s <strong>National Institute of Anthropology and History (INAH)</strong> declared the Palafoxiana a National Historic Monument, recognising the outstanding value of its hall, original 18th-century furniture and bibliographic collection as an essential part of Mexican heritage.',
-    'event.2005.title': 'UNESCO · Memory of the World',
-    'event.2005.body':  '<strong>UNESCO</strong> inscribed the Palafoxiana collection in its International Memory of the World Register, recognising its 45,000 volumes — including unique incunabula and manuscripts — as documentary heritage of humanity. It was the first Mexican collection to receive this distinction.',
-    'event.2014.title': 'Comprehensive restoration',
-    'event.2014.body':  'A major restoration project consolidated the original 18th-century cedar and ayacahuite shelving, treated the most deteriorated volumes, and updated the climate-control and conservation systems of the hall to preserve the collection for future generations.',
+    'timeline.2005': 'UNESCO · Memory of the World',
 
     /* gallery */
     'gallery.tag':       'Gallery',
@@ -286,13 +259,12 @@ document.addEventListener('DOMContentLoaded', () => {
   initTheme();
   initLanguage();
   initLenis();
-  initParallax();
   initDropdowns();
   initMobileMenu();
   initSmoothScroll();
   initScrollFx();
-  initTimeline();
   initCounters();
+  initParallax();
   initCollectionTabs();
   initContactForm();
   initFooterYear();
@@ -305,18 +277,18 @@ function initTheme(){
   if (!toggle) return;
 
   // Migrate legacy storage keys
-  const legacyDark = localStorage.getItem('darkMode');
-  const legacyLang = localStorage.getItem('lang');
-  if (legacyDark !== null && localStorage.getItem(STORAGE.theme) === null){
-    localStorage.setItem(STORAGE.theme, legacyDark === 'true' ? 'dark' : 'light');
-    localStorage.removeItem('darkMode');
+  const legacyDark = safeGet('darkMode');
+  const legacyLang = safeGet('lang');
+  if (legacyDark !== null && safeGet(STORAGE.theme) === null){
+    safeSet(STORAGE.theme, legacyDark === 'true' ? 'dark' : 'light');
+    safeRemove('darkMode');
   }
-  if (legacyLang !== null && localStorage.getItem(STORAGE.lang) === null){
-    localStorage.setItem(STORAGE.lang, legacyLang);
-    localStorage.removeItem('lang');
+  if (legacyLang !== null && safeGet(STORAGE.lang) === null){
+    safeSet(STORAGE.lang, legacyLang);
+    safeRemove('lang');
   }
 
-  const stored = localStorage.getItem(STORAGE.theme);
+  const stored = safeGet(STORAGE.theme);
   const isDark = stored
     ? stored === 'dark'
     : window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -326,16 +298,23 @@ function initTheme(){
 
   toggle.addEventListener('change', () => {
     applyTheme(toggle.checked);
-    localStorage.setItem(STORAGE.theme, toggle.checked ? 'dark' : 'light');
+    safeSet(STORAGE.theme, toggle.checked ? 'dark' : 'light');
   });
 }
 
 function applyTheme(isDark){
   const root = document.documentElement;
+  // 1. Desactivamos transitions y ocultamos los 1px que viven en capas
+  //    compositadas (header sticky, secciones con transform). Esas capas
+  //    pueden tardar 1 frame en repintarse y mostrar el color stale del
+  //    tema anterior — sin esto se ve una "línea blanca" bajo el header
+  //    al pasar de claro a oscuro.
   root.classList.add('no-theme-transition', 'theme-swap');
   root.setAttribute('data-theme', isDark ? 'dark' : 'light');
   document.querySelector('meta[name="theme-color"]')
     ?.setAttribute('content', isDark ? '#0e0d0b' : '#f3eee2');
+  // 2. Forzamos reflow y esperamos dos rAF para que el compositor tenga
+  //    la textura nueva antes de restaurar los pseudo-elementos.
   void root.offsetHeight;
   requestAnimationFrame(() => {
     requestAnimationFrame(() => {
@@ -346,10 +325,7 @@ function applyTheme(isDark){
 
 /* ── Language ────────────────────────────────────────── */
 function initLanguage(){
-  i18nEls = Array.from(document.querySelectorAll('[data-i18n]'));
-  i18nPlaceholderEls = Array.from(document.querySelectorAll('[data-i18n-placeholder]'));
-
-  const stored = localStorage.getItem(STORAGE.lang) || 'es';
+  const stored = safeGet(STORAGE.lang) || 'es';
 
   document.querySelectorAll('.lang-btn').forEach(btn => {
     btn.addEventListener('click', () => {
@@ -363,7 +339,7 @@ function initLanguage(){
 }
 
 function setLanguage(lang){
-  localStorage.setItem(STORAGE.lang, lang);
+  safeSet(STORAGE.lang, lang);
   document.documentElement.lang = lang;
 
   document.querySelectorAll('.lang-btn').forEach(btn => {
@@ -373,12 +349,19 @@ function setLanguage(lang){
   });
 
   const t = translations[lang] || translations.es;
-  // innerHTML is intentional: some values contain <br> and <strong>. Values are hardcoded above, not user-supplied.
-  i18nEls.forEach(el => {
+  document.querySelectorAll('[data-i18n]').forEach(el => {
     const value = t[el.dataset.i18n];
-    if (value !== undefined) el.innerHTML = value;
+    if (value === undefined) return;
+    // Use innerHTML only for translations that contain actual HTML tags;
+    // textContent for everything else avoids potential XSS if the source
+    // of translations ever changes.
+    if (/<[a-z]/i.test(value)) {
+      el.innerHTML = value;
+    } else {
+      el.textContent = value;
+    }
   });
-  i18nPlaceholderEls.forEach(el => {
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
     const value = t[el.dataset.i18nPlaceholder];
     if (value !== undefined) el.setAttribute('placeholder', value);
   });
@@ -386,18 +369,15 @@ function setLanguage(lang){
   document.dispatchEvent(new CustomEvent('languagechange', { detail: { lang } }));
 }
 
+/* los menús desplegables */
 function initDropdowns(){
   const items = document.querySelectorAll('.has-dropdown');
   if (!items.length) return;
-
-  const toggleMap = new Map();
 
   items.forEach(item => {
     const toggle = item.querySelector('.dropdown-toggle');
     const dropdown = item.querySelector('.dropdown-menu');
     if (!toggle || !dropdown) return;
-
-    toggleMap.set(item, toggle);
 
     toggle.addEventListener('click', (e) => {
       e.stopPropagation();
@@ -407,10 +387,12 @@ function initDropdowns(){
       items.forEach(other => {
         if (other !== item) {
           other.classList.remove('open');
-          toggleMap.get(other)?.setAttribute('aria-expanded', 'false');
+          const otherToggle = other.querySelector('.dropdown-toggle');
+          if (otherToggle) otherToggle.setAttribute('aria-expanded', 'false');
         }
       });
 
+      /* abre o cierra este */
       if (isOpen) {
         item.classList.remove('open');
         toggle.setAttribute('aria-expanded', 'false');
@@ -432,12 +414,14 @@ function initDropdowns(){
     if (!e.target.closest('.has-dropdown')){
       items.forEach(item => {
         item.classList.remove('open');
-        toggleMap.get(item)?.setAttribute('aria-expanded', 'false');
+        const toggle = item.querySelector('.dropdown-toggle');
+        if (toggle) toggle.setAttribute('aria-expanded', 'false');
       });
     }
   });
 }
 
+/* menú hamburguesa en móvil */
 function initMobileMenu(){
   const toggle = document.querySelector('.menu-toggle');
   const nav    = document.querySelector('.main-nav');
@@ -466,16 +450,19 @@ function initMobileMenu(){
     }
   });
 
+  // Cerrar menú al hacer click en enlace
   nav.querySelectorAll('a').forEach(link => {
     link.addEventListener('click', closeMenu);
   });
 
+  // Cerrar menú al hacer click fuera
   document.addEventListener('click', (e) => {
     if (nav.classList.contains('open') && !nav.contains(e.target) && !toggle.contains(e.target)) {
       closeMenu();
     }
   });
 
+  // Cerrar menú con ESC
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && nav.classList.contains('open')) {
       closeMenu();
@@ -487,33 +474,22 @@ function initMobileMenu(){
 let lenis = null;
 function initLenis(){
   if (PREFERS_REDUCED_MOTION) return;
-  if (typeof window.Lenis !== 'function') return; 
+  if (typeof window.Lenis !== 'function') return; // CDN no cargó
 
   lenis = new window.Lenis({
     duration: 1.1,
     easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
     smoothWheel: true,
-    smoothTouch: false, // móvil mantiene el scroll nativo 
+    smoothTouch: false, // móvil mantiene el scroll nativo (más natural)
     wheelMultiplier: 1,
     touchMultiplier: 1.4,
   });
 
-  let rafId = null;
-
   function raf(time){
     lenis.raf(time);
-    rafId = requestAnimationFrame(raf);
+    requestAnimationFrame(raf);
   }
-
-  function startRaf(){ if (rafId === null) rafId = requestAnimationFrame(raf); }
-  function stopRaf(){
-    if (rafId !== null){ cancelAnimationFrame(rafId); rafId = null; }
-  }
-
-  startRaf();
-  document.addEventListener('visibilitychange', () => {
-    if (document.hidden) stopRaf(); else startRaf();
-  });
+  requestAnimationFrame(raf);
 
   // Si abrimos el lightbox o el menú móvil, paramos Lenis para que el body
   // no compita con el overlay scrolleable
@@ -525,14 +501,8 @@ function initLenis(){
   observer.observe(document.body, { attributes: true, attributeFilter: ['class'] });
 }
 
+/* ── Smooth scroll para enlaces de anclaje ───────────── */
 function initSmoothScroll(){
-  const header = document.querySelector('header');
-  let headerH = header?.offsetHeight || 0;
-
-  window.addEventListener('resize', () => {
-    headerH = header?.offsetHeight || 0;
-  }, { passive: true });
-
   document.querySelectorAll('a[href^="#"]').forEach(a => {
     a.addEventListener('click', function (e){
       const href = this.getAttribute('href');
@@ -542,6 +512,7 @@ function initSmoothScroll(){
       e.preventDefault();
 
       if (lenis){
+        const headerH = document.querySelector('header')?.offsetHeight || 0;
         lenis.scrollTo(target, { offset: -headerH, duration: 1.2 });
       } else {
         target.scrollIntoView({
@@ -553,40 +524,20 @@ function initSmoothScroll(){
   });
 }
 
-function initParallax(){
-  const img = document.querySelector('.hero-img');
-  if (!img || PREFERS_REDUCED_MOTION) return;
-
-  const FACTOR = 0.35;
-  let ticking = false;
-
-  const update = () => {
-    img.style.transform = `translateY(${window.scrollY * FACTOR}px)`;
-    ticking = false;
-  };
-
-  window.addEventListener('scroll', () => {
-    if (ticking) return;
-    ticking = true;
-    requestAnimationFrame(update);
-  }, { passive: true });
-}
-
+/* ── Scroll effects (single rAF for progress · header shrink) ── */
 function initScrollFx(){
   const progress = document.getElementById('scroll-progress');
   const header   = document.querySelector('header');
 
-  let docH = document.documentElement.scrollHeight - window.innerHeight;
   let ticking = false;
 
-  window.addEventListener('resize', () => {
-    docH = document.documentElement.scrollHeight - window.innerHeight;
-  }, { passive: true });
-
   const update = () => {
-    const y = window.scrollY;
+    const y    = window.scrollY;
+    const docH = document.documentElement.scrollHeight - window.innerHeight;
+
     if (progress) progress.style.width = docH > 0 ? (y / docH * 100) + '%' : '0';
     if (header)   header.classList.toggle('scrolled', y > 60);
+
     ticking = false;
   };
 
@@ -612,47 +563,12 @@ function initScrollFx(){
   document.querySelectorAll('.scroll-fade').forEach(el => fadeObs.observe(el));
 }
 
-function initTimeline(){
-  const tabs  = document.querySelectorAll('.timeline-item[role="tab"]');
-  const panel = document.getElementById('historia-panel');
-  if (!tabs.length || !panel) return;
-
-  const intro  = panel.querySelector('.historia-intro');
-  const events = panel.querySelectorAll('.historia-event');
-
-  function showPane(pane){
-    [intro, ...events].forEach(p => {
-      p.classList.remove('is-active');
-      if (p !== intro) p.setAttribute('aria-hidden', 'true');
-    });
-    pane.classList.add('is-active');
-    if (pane !== intro) pane.removeAttribute('aria-hidden');
-  }
-
-  tabs.forEach(tab => {
-    tab.addEventListener('click', () => {
-      const year       = tab.dataset.year;
-      const isSelected = tab.getAttribute('aria-selected') === 'true';
-
-      tabs.forEach(t => t.setAttribute('aria-selected', 'false'));
-
-      if (isSelected){
-        showPane(intro);
-      } else {
-        tab.setAttribute('aria-selected', 'true');
-        const target = panel.querySelector(`.historia-event[data-year="${year}"]`);
-        if (target) showPane(target);
-      }
-    });
-  });
-}
-
 /* ── Animated counters (ease-out-cubic) ──────────────── */
 function initCounters(){
   const nums = document.querySelectorAll('.stat-num');
   if (!nums.length) return;
 
-  // guardamos el valor original como data-attribute
+  // guardamos el valor original como data-attribute para evitar que se pierda
   nums.forEach(el => {
     if (!el.dataset.target) el.dataset.target = el.textContent.trim();
     el.textContent = '0';
@@ -676,7 +592,7 @@ function animateNumber(el){
   if (!raw) return;
 
   if (PREFERS_REDUCED_MOTION){
-    el.textContent = NUMBER_FMT.format(raw) + (hasSuffix ? '+' : '');
+    el.textContent = raw.toLocaleString('es-MX') + (hasSuffix ? '+' : '');
     return;
   }
 
@@ -687,11 +603,31 @@ function animateNumber(el){
     const t    = Math.min((now - start) / dur, 1);
     const ease = 1 - Math.pow(1 - t, 3);
     const val  = Math.round(ease * raw);
-    el.textContent = NUMBER_FMT.format(val) + (hasSuffix ? '+' : '');
+    el.textContent = val.toLocaleString('es-MX') + (hasSuffix ? '+' : '');
     if (t < 1) requestAnimationFrame(tick);
   };
 
   requestAnimationFrame(tick);
+}
+
+/* ── Hero parallax ───────────────────────────────────── */
+function initParallax(){
+  if (PREFERS_REDUCED_MOTION) return;
+  const img = document.querySelector('.hero-img');
+  if (!img) return;
+
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if (ticking) return;
+    requestAnimationFrame(() => {
+      const y = window.scrollY;
+      if (y < window.innerHeight * 1.2){
+        img.style.transform = `translate3d(0, ${y * 0.28}px, 0) scale(1.05)`;
+      }
+      ticking = false;
+    });
+    ticking = true;
+  }, { passive: true });
 }
 
 /* ── Footer year ─────────────────────────────────────── */
@@ -700,6 +636,7 @@ function initFooterYear(){
   if (el) el.textContent = new Date().getFullYear();
 }
 
+/* el formulario de contacto */
 function initContactForm(){
   const form = document.getElementById('contact-form');
   if (!form) return;
@@ -708,6 +645,7 @@ function initContactForm(){
   const submitLbl = form.querySelector('.form-submit-label');
   const feedback  = form.querySelector('.form-feedback');
   const honeypot  = form.querySelector('input[name="website"]');
+  if (!submitBtn || !submitLbl) return;
 
   // Apply translated placeholders
   applyPlaceholders();
@@ -782,6 +720,8 @@ function initCollectionTabs(){
   const moreWrap = moreBtn ? moreBtn.parentElement : null;
   if (!tabs.length || !cards.length) return;
 
+  // Marca .over-limit las cards visibles que excedan el límite y
+  // muestra/oculta el botón "mostrar más" según haga falta.
   function applyLimit(){
     let visibleCount = 0;
     let overflow = 0;
@@ -819,37 +759,44 @@ function initCollectionTabs(){
         card.classList.toggle('hidden', !show);
       });
 
+      // al cambiar de filtro, replegamos y recalculamos el límite
       if (grid){
         grid.classList.add('collapsed');
         if (moreBtn){
           moreBtn.setAttribute('aria-expanded', 'false');
-          moreBtn.querySelector('span').textContent = dict('collection.show-more');
+          const span = moreBtn.querySelector('span');
+          if (span) span.textContent = dict('collection.show-more');
         }
+        grid.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
       }
       applyLimit();
     });
   });
 
+  // botón mostrar más / menos
   if (moreBtn && grid){
     moreBtn.addEventListener('click', () => {
       const isCollapsed = grid.classList.toggle('collapsed');
       moreBtn.setAttribute('aria-expanded', String(!isCollapsed));
-      moreBtn.querySelector('span').textContent = dict(isCollapsed ? 'collection.show-more' : 'collection.show-less');
+      const span = moreBtn.querySelector('span');
+      if (span) span.textContent = dict(isCollapsed ? 'collection.show-more' : 'collection.show-less');
     });
   }
 
-  if (moreBtn) moreBtn.querySelector('span').textContent = dict('collection.show-more');
-
+  // actualizar texto del botón al cambiar idioma
   document.addEventListener('languagechange', () => {
     if (!moreBtn || !grid) return;
-    const isCollapsed = grid.classList.contains('collapsed');
-    moreBtn.querySelector('span').textContent = dict(isCollapsed ? 'collection.show-more' : 'collection.show-less');
+    const span = moreBtn.querySelector('span');
+    if (span) span.textContent = dict(
+      grid.classList.contains('collapsed') ? 'collection.show-more' : 'collection.show-less'
+    );
   });
 
+  // estado inicial
   applyLimit();
 }
 
-/* ── Lightbox ──────────────────────────── */
+/* ── Lightbox de la galería ──────────────────────────── */
 function initLightbox(){
   const grid     = document.getElementById('gallery-grid');
   const lightbox = document.getElementById('lightbox');
@@ -895,7 +842,7 @@ function initLightbox(){
     lightbox.classList.remove('open');
     lightbox.setAttribute('aria-hidden', 'true');
     document.body.classList.remove('lightbox-open');
-    imgEl.src = '';
+    imgEl.removeAttribute('src');
     if (lastTrigger) lastTrigger.focus();
   }
 
@@ -904,31 +851,29 @@ function initLightbox(){
     render();
   }
 
-  const indexMap = new Map(items.map((btn, i) => [btn, i]));
-  grid.addEventListener('click', e => {
-    const btn = e.target.closest('.gallery-item');
-    if (!btn) return;
-    const i = indexMap.get(btn);
-    if (i !== undefined) open(i, btn);
+  items.forEach((btn, i) => {
+    btn.addEventListener('click', () => open(i, btn));
   });
 
+  // botón mostrar más / menos
   const moreBtn  = document.getElementById('gallery-show-more');
   const moreWrap = moreBtn ? moreBtn.parentElement : null;
   if (moreBtn && moreWrap){
     moreBtn.addEventListener('click', () => {
       const isCollapsed = grid.classList.toggle('collapsed');
       moreBtn.setAttribute('aria-expanded', String(!isCollapsed));
-      moreBtn.querySelector('span').textContent = dict(isCollapsed ? 'gallery.show-more' : 'gallery.show-less');
+      const span = moreBtn.querySelector('span');
+      if (span) span.textContent = dict(isCollapsed ? 'gallery.show-more' : 'gallery.show-less');
+    });
+
+    // actualizar texto al cambiar idioma
+    document.addEventListener('languagechange', () => {
+      const span = moreBtn.querySelector('span');
+      if (span) span.textContent = dict(
+        grid.classList.contains('collapsed') ? 'gallery.show-more' : 'gallery.show-less'
+      );
     });
   }
-
-  if (moreBtn) moreBtn.querySelector('span').textContent = dict('gallery.show-more');
-
-  document.addEventListener('languagechange', () => {
-    if (!moreBtn || !grid) return;
-    const isCollapsed = grid.classList.contains('collapsed');
-    moreBtn.querySelector('span').textContent = dict(isCollapsed ? 'gallery.show-more' : 'gallery.show-less');
-  });
 
   btnClose.addEventListener('click', close);
   btnPrev.addEventListener('click', () => step(-1));
@@ -940,9 +885,21 @@ function initLightbox(){
 
   document.addEventListener('keydown', (e) => {
     if (!lightbox.classList.contains('open')) return;
-    if (e.key === 'Escape')       { e.preventDefault(); close(); }
-    else if (e.key === 'ArrowLeft')  { e.preventDefault(); step(-1); }
-    else if (e.key === 'ArrowRight') { e.preventDefault(); step(1); }
+    if (e.key === 'Escape')        { e.preventDefault(); close(); return; }
+    if (e.key === 'ArrowLeft')     { e.preventDefault(); step(-1); return; }
+    if (e.key === 'ArrowRight')    { e.preventDefault(); step(1);  return; }
+
+    // Focus trap: keep Tab cycling within the lightbox controls
+    if (e.key === 'Tab') {
+      const focusable = [btnClose, btnPrev, btnNext];
+      const first = focusable[0];
+      const last  = focusable[focusable.length - 1];
+      if (e.shiftKey) {
+        if (document.activeElement === first) { e.preventDefault(); last.focus(); }
+      } else {
+        if (document.activeElement === last)  { e.preventDefault(); first.focus(); }
+      }
+    }
   });
 
   // swipe táctil
