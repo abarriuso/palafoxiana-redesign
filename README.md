@@ -1,136 +1,69 @@
 # Biblioteca Palafoxiana — rediseño conceptual (no oficial)
 
-> ⚠️ **Proyecto educativo de portafolio, sin ninguna afiliación, patrocinio ni autorización** de la Biblioteca Palafoxiana, del Gobierno del Estado de Puebla, de la UNESCO ni de ninguna otra institución. Este repositorio **no** es ni representa al sitio oficial.
+> ⚠️ **Proyecto educativo de portafolio.** Sin afiliación, patrocinio ni autorización de la Biblioteca Palafoxiana, del Gobierno del Estado de Puebla, ni de UNESCO. Este repositorio **no** es una fuente oficial.
 
 Rediseño conceptual del sitio web de la **Biblioteca Palafoxiana** (Puebla, México) — la primera biblioteca pública de América (1646), Patrimonio de la Humanidad UNESCO · Memoria del Mundo (2005).
 
 **Sitio oficial:** <http://www.palafoxiana.com>
 
-Para horarios reales, visitas, catálogo o cualquier consulta institucional, dirígete **siempre** al sitio oficial o a los teléfonos publicados ahí.
+Para horarios reales, visitas, catálogo o cualquier consulta institucional, dirígete siempre al sitio oficial o a los teléfonos publicados ahí.
 
 ---
 
-## Créditos y atribuciones
+## Material visual: todo bajo licencia abierta
 
-### Fotografías de la biblioteca
+Esta demo se distribuye con todas las imágenes incluidas. Ninguna proviene del sitio oficial: todas son material de licencia abierta tomado de **Wikimedia Commons**, ya sea **dominio público** (obras pre-1700) o **Creative Commons** (CC BY / CC BY-SA). El detalle completo de cada archivo, su autor y su licencia está en [`NOTICE`](NOTICE).
 
-Las fotografías de la sala, fachada y galería (archivos `galeria_*.webp` y `logo.webp`) proceden del **sitio oficial [palafoxiana.com](http://www.palafoxiana.com)** y son propiedad de la Biblioteca Palafoxiana / Gobierno del Estado de Puebla. Se reproducen aquí exclusivamente para fines educativos y de portafolio personal, sin uso comercial. Serán retiradas de inmediato si el titular lo solicita.
+Resumen:
 
-### Reproducciones de obras históricas (acervo)
-
-Las imágenes de libros históricos proceden de **Wikimedia Commons** y corresponden a obras del dominio público (publicadas antes de 1700). Se reproduce la imagen digital, no el original:
-
-| Archivo | Obra | Fuente |
+| Tipo | Origen | Licencia |
 |---|---|---|
-| `libro_herodoto.webp` | *Historiae*, Heródoto, ed. 1473 | Wikimedia Commons — dominio público |
-| `liber_chronicarum.webp` | *Liber Chronicarum* (Crónica de Núremberg), 1493 | Wikimedia Commons — dominio público |
-| `biblia_poliglota.webp` | *Biblia Políglota* de Amberes, 1569–1572 | Wikimedia Commons — dominio público |
-| `vesalius_fabrica.webp` | *De Humani Corporis Fabrica*, Vesalio, 1543 | Wikimedia Commons — dominio público |
-| `vocabulario_molina.webp` | *Vocabulario en lengua castellana y mexicana*, Fr. A. de Molina, 1571 | Wikimedia Commons — dominio público |
-| `doctrina_christiana.webp` | *Doctrina Christiana*, Fr. J. de la Anunciación, 1575 | Wikimedia Commons — dominio público |
-| `moriae_encomium.webp` | *Moriae Encomium*, Erasmo de Róterdam, s. XVI | Wikimedia Commons — dominio público |
-| `don_quijote.webp` | *Don Quijote de la Mancha*, Cervantes, ed. temprana s. XVII | Wikimedia Commons — dominio público |
+| Fotografías de la sala, fachada, puerta, rueda de libros (`MG_*.jpg`, `puerta_hq.jpg`, `frenteinterior*.jpg`, `interior_1.webp`) | Wikimedia Commons — categoría *Biblioteca Palafoxiana* | CC BY-SA 4.0 (algunas CC BY 2.0) |
+| Retrato de Juan de Palafox (`grabdo-palafox*.jpg`) | Diego de Borgraf, c. 1640 · Wikimedia Commons | Dominio público |
+| Reproducciones de incunables y libros impresos (`liber_chronicarum`, `vesalius_fabrica`, `quijote_1605`, `erasmo_locura`, `codex_mendoza`, `libros*`, `palafox_libro_18`) | Wikimedia Commons | Dominio público (obras pre-1700) |
+| Logotipo (`logo.jpg`) | Marca institucional de la Biblioteca Palafoxiana — *placeholder*; sustituye por uno propio si publicas un fork | Marca de su titular |
 
-### Logotipo
+> Si reutilizas la demo como base para otro proyecto, recuerda **respetar la atribución CC BY-SA** de las fotos de la sala y **sustituir el `logo.jpg`** por una marca propia.
 
-`logo.webp` — Marca institucional © Biblioteca Palafoxiana. Reproducido para identificación en este ejercicio de rediseño.
+## Datos y textos editoriales
 
-### Fuentes tipográficas
-
-[Lora](https://fonts.google.com/specimen/Lora), [DM Sans](https://fonts.google.com/specimen/DM+Sans) y [Prata](https://fonts.google.com/specimen/Prata) vía **Google Fonts** (SIL Open Font License 1.1).
-
-### Librería de scroll suave
-
-[Lenis](https://github.com/darkroomengineering/lenis) por darkroom.engineering (MIT License), cargado desde CDN.
-
-### Textos editoriales
-
-Los textos descriptivos de la historia y el acervo se han elaborado a partir de información de dominio público y del sitio oficial (<http://www.palafoxiana.com>). Pueden estar resumidos o adaptados con fines didácticos. Si eres titular de algún contenido y prefieres que lo retire, abre un issue.
-
----
-
-## Tecnología
-
-- **HTML5 · CSS3 · JavaScript vanilla** — sin frameworks, sin build step, sin dependencias npm.
-- Fuentes: **Lora** (serif), **DM Sans** (sans-serif), **Prata** (display) — Google Fonts.
-- Scroll suave: [Lenis](https://github.com/darkroomengineering/lenis) desde CDN.
-- Tema claro/oscuro con `localStorage` y respeto a `prefers-color-scheme`.
-- Internacionalización ES/EN con persistencia en `localStorage`.
-- Animaciones de entrada con `IntersectionObserver` y `prefers-reduced-motion`.
-
----
-
-## Ejecutar localmente
-
-El repositorio incluye todos los assets. Solo hace falta un servidor estático:
-
-```bash
-# Python 3
-python3 -m http.server 8080
-
-# Node (npx)
-npx serve .
-```
-
-Abrir <http://localhost:8080>.
-
----
-
-## Catálogo de assets
-
-| Archivo (`assets/`) | Uso | Fuente |
-|---|---|---|
-| `favicon.svg` | Icono de pestaña | Creado para este proyecto — MIT |
-| `logo.webp` | Header y footer | © Biblioteca Palafoxiana — palafoxiana.com |
-| `galeria_03.webp` | Hero + galería | © Biblioteca Palafoxiana — palafoxiana.com |
-| `galeria_04.webp` | Galería | © Biblioteca Palafoxiana — palafoxiana.com |
-| `galeria_06.webp` | Galería | © Biblioteca Palafoxiana — palafoxiana.com |
-| `galeria_08.webp` | Galería | © Biblioteca Palafoxiana — palafoxiana.com |
-| `galeria_09.webp` | Galería | © Biblioteca Palafoxiana — palafoxiana.com |
-| `galeria_11.webp` | Galería | © Biblioteca Palafoxiana — palafoxiana.com |
-| `galeria_13.webp` | Galería | © Biblioteca Palafoxiana — palafoxiana.com |
-| `galeria_14.webp` | Galería | © Biblioteca Palafoxiana — palafoxiana.com |
-| `galeria_15.webp` | Galería | © Biblioteca Palafoxiana — palafoxiana.com |
-| `galeria_16.webp` | Galería | © Biblioteca Palafoxiana — palafoxiana.com |
-| `galeria_17.webp` | Galería | © Biblioteca Palafoxiana — palafoxiana.com |
-| `galeria_18.webp` | Galería | © Biblioteca Palafoxiana — palafoxiana.com |
-| `galeria_19.webp` | Galería | © Biblioteca Palafoxiana — palafoxiana.com |
-| `galeria_20.webp` | Galería | © Biblioteca Palafoxiana — palafoxiana.com |
-| `libro_herodoto.webp` | Acervo | Wikimedia Commons — dominio público |
-| `liber_chronicarum.webp` | Acervo | Wikimedia Commons — dominio público |
-| `biblia_poliglota.webp` | Acervo | Wikimedia Commons — dominio público |
-| `vesalius_fabrica.webp` | Acervo | Wikimedia Commons — dominio público |
-| `vocabulario_molina.webp` | Acervo | Wikimedia Commons — dominio público |
-| `doctrina_christiana.webp` | Acervo | Wikimedia Commons — dominio público |
-| `moriae_encomium.webp` | Acervo | Wikimedia Commons — dominio público |
-| `don_quijote.webp` | Acervo | Wikimedia Commons — dominio público |
-
----
-
-## Estado y limitaciones
-
-- **Demo estática*: sin backend ni base de datos.
-- **El formulario de contacto no envía nada.** Está claramente señalizado como demo.
-- No conecta con el catálogo real, el sistema de reservas ni ninguna API institucional.
-- No está pensado para producción ni para representar a la institución.
-
----
+Los textos descriptivos de la historia de la biblioteca y las 8 obras emblemáticas del "Acervo" están redactados a partir de información de dominio público y del propio sitio oficial (<http://www.palafoxiana.com/acervo/>). Pueden estar resumidos o adaptados con fines didácticos. **Si eres titular de alguno de estos contenidos y prefieres que retire algo, abre un issue y lo elimino de inmediato.**
 
 ## Lo que es mío en este repositorio
 
-El código fuente (HTML, CSS, JavaScript), el favicon SVG y esta documentación, publicados bajo **licencia MIT** — ver [`LICENSE.txt`](LICENSE.txt).
+El código (HTML, CSS, JavaScript) y esta documentación, bajo **licencia MIT** — ver [`LICENSE`](LICENSE). El MIT cubre **solo el código**: el material visual sigue las licencias de cada archivo (CC BY-SA, CC BY o dominio público, según el caso). Ver [`NOTICE`](NOTICE) para el detalle de los activos de terceros.
 
-El MIT cubre **solo el código propio**. Los assets visuales y textos siguen las licencias de cada recurso según se indica en la tabla anterior y en `LICENSE.txt`.
+## Tecnología
 
----
+- HTML5, CSS3 (sin frameworks), JavaScript vanilla — sin build step ni dependencias `npm`.
+- Fuentes: **Lora**, **DM Sans** y **Prata** vía Google Fonts.
+- Smooth scroll con [Lenis 1.1.18](https://github.com/darkroomengineering/lenis) servido localmente desde `vendor/lenis.min.js` (sin dependencias de CDN externos).
+- Tema claro/oscuro con persistencia en `localStorage` y respeto a `prefers-color-scheme` y `prefers-reduced-motion`.
+- i18n ES/EN con switch en el header y persistencia en `localStorage`.
 
-## Aviso legal
+## Ejecutar localmente
 
-- Proyecto de portafolio educativo sin afiliación institucional.
-- No representa ni sustituye al sitio oficial de la Biblioteca Palafoxiana.
-- El material visual del sitio oficial se reproduce bajo uso educativo legítimo; cualquier titular puede solicitar su retirada abriendo un issue.
-- Las imágenes de Wikimedia Commons reproducen obras del dominio público (anteriores a 1700).
-- La atribución de todos los recursos se detalla en este README y en `LICENSE.txt`.
+Los `assets/` ya están en el repositorio. Solo hace falta un servidor estático:
 
-Para información oficial, visitas, catálogo o solicitudes formales:  
-**<http://www.palafoxiana.com>** — Biblioteca Palafoxiana, 5 Oriente 5, 2.º piso, Centro, Puebla, México.
+```bash
+python3 -m http.server 8080
+```
+
+Y abrir <http://localhost:8080>.
+
+## Estado y limitaciones
+
+- **Demo conceptual estática**: sin backend.
+- **El formulario de contacto NO envía nada.** Está señalizado como demo y los textos lo aclaran.
+- **No** está vinculada al catálogo real, al sistema de reservas ni a ninguna API institucional.
+- **No** está pensada para producción.
+
+## Aviso legal resumido
+
+- Fan project / ejercicio académico, sin afiliación.
+- No representa ni sustituye al sitio oficial.
+- El material visual está bajo licencias abiertas atribuidas en `NOTICE`. Cumple la atribución si reutilizas.
+- A petición del titular retiraré cualquier recurso.
+
+Para información oficial, eventos, catálogo o solicitudes formales:
+**<http://www.palafoxiana.com>** — Biblioteca Palafoxiana, 5 Oriente 5, 2º piso, Centro, Puebla, México.
