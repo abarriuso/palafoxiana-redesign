@@ -1,18 +1,12 @@
-<div align="center">
-
 # Biblioteca Palafoxiana
 
-### Rediseño conceptual del sitio web de la primera biblioteca pública de América
+*Rediseño conceptual de la primera biblioteca pública de América*
 
-[![Live Demo](https://img.shields.io/badge/LIVE_DEMO-abarriuso.github.io-blue?style=for-the-badge)](https://abarriuso.github.io/palafoxiana-redesign/)
-[![Licencia MIT](https://img.shields.io/badge/Código-MIT-green?style=for-the-badge)](LICENSE)
-[![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat&logo=html5&logoColor=white)](#stack)
-[![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat&logo=css3&logoColor=white)](#stack)
-[![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=javascript&logoColor=black)](#stack)
+[Demo en vivo](https://abarriuso.github.io/palafoxiana-redesign/) · [Sitio oficial](http://www.palafoxiana.com) · [Licencia MIT](LICENSE)
 
-> ⚠️ **Proyecto educativo de portafolio** — Sin afiliación, patrocinio ni autorización de la Biblioteca Palafoxiana, del Gobierno del Estado de Puebla, ni de UNESCO.
+---
 
-</div>
+> **Proyecto educativo de portafolio.** Sin afiliación, patrocinio ni autorización de la Biblioteca Palafoxiana, del Gobierno del Estado de Puebla, ni de UNESCO.
 
 ---
 
@@ -21,15 +15,6 @@
 | Original | Rediseño |
 |:---:|:---:|
 | ![Original](screenshot-original.png) | ![Rediseño](screenshot-rework.png) |
-
----
-
-## Links
-
-| | |
-|---|---|
-| **Live demo** | [abarriuso.github.io/palafoxiana-redesign](https://abarriuso.github.io/palafoxiana-redesign/) |
-| **Sitio oficial** | [palafoxiana.com](http://www.palafoxiana.com) |
 
 ---
 
