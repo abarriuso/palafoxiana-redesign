@@ -323,10 +323,16 @@ function applyTheme(isDark){
 }
 
 /* ── Language ────────────────────────────────────────── */
+/* ── Language (cached DOM queries) ─────────────────── */
+let cachedLangBtns = null;
+let cachedI18nEls = null;
+let cachedI18nPlaceholderEls = null;
+
 function initLanguage(){
   const stored = safeGet(STORAGE.lang) || 'es';
 
-  document.querySelectorAll('.lang-btn').forEach(btn => {
+  cachedLangBtns = Array.from(document.querySelectorAll('.lang-btn'));
+  cachedLangBtns.forEach(btn => {
     btn.addEventListener('click', () => {
       if (btn.dataset.lang !== document.documentElement.lang){
         setLanguage(btn.dataset.lang);
@@ -341,26 +347,27 @@ function setLanguage(lang){
   safeSet(STORAGE.lang, lang);
   document.documentElement.lang = lang;
 
-  document.querySelectorAll('.lang-btn').forEach(btn => {
+  if (!cachedLangBtns) cachedLangBtns = Array.from(document.querySelectorAll('.lang-btn'));
+  cachedLangBtns.forEach(btn => {
     const active = btn.dataset.lang === lang;
     btn.classList.toggle('active', active);
     btn.setAttribute('aria-pressed', String(active));
   });
 
+  if (!cachedI18nEls) cachedI18nEls = Array.from(document.querySelectorAll('[data-i18n]'));
+  if (!cachedI18nPlaceholderEls) cachedI18nPlaceholderEls = Array.from(document.querySelectorAll('[data-i18n-placeholder]'));
+
   const t = translations[lang] || translations.es;
-  document.querySelectorAll('[data-i18n]').forEach(el => {
+  cachedI18nEls.forEach(el => {
     const value = t[el.dataset.i18n];
     if (value === undefined) return;
-    // Use innerHTML only for translations that contain actual HTML tags;
-    // textContent for everything else avoids potential XSS if the source
-    // of translations ever changes.
     if (/<[a-z]/i.test(value)) {
       el.innerHTML = value;
     } else {
       el.textContent = value;
     }
   });
-  document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+  cachedI18nPlaceholderEls.forEach(el => {
     const value = t[el.dataset.i18nPlaceholder];
     if (value !== undefined) el.setAttribute('placeholder', value);
   });
@@ -471,31 +478,41 @@ function initMobileMenu(){
 
 /* ── Lenis smooth scroll ─────────────────────────────── */
 let lenis = null;
+let lenisRafId = null;
+let lenisRunning = false;
 function initLenis(){
   if (PREFERS_REDUCED_MOTION) return;
-  if (typeof window.Lenis !== 'function') return; // CDN no cargó
+  if (typeof window.Lenis !== 'function') return;
 
   lenis = new window.Lenis({
     duration: 1.1,
     easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
     smoothWheel: true,
-    smoothTouch: false, // móvil mantiene el scroll nativo (más natural)
+    smoothTouch: false,
     wheelMultiplier: 1,
     touchMultiplier: 1.4,
   });
 
   function raf(time){
     lenis.raf(time);
-    requestAnimationFrame(raf);
+    if (lenisRunning) lenisRafId = requestAnimationFrame(raf);
   }
-  requestAnimationFrame(raf);
 
-  // Si abrimos el lightbox o el menú móvil, paramos Lenis para que el body
-  // no compita con el overlay scrolleable
+  lenisRunning = true;
+  lenisRafId = requestAnimationFrame(raf);
+
   const stopWhen = ['lightbox-open'];
   const observer = new MutationObserver(() => {
     const blocked = stopWhen.some(c => document.body.classList.contains(c));
-    if (blocked) lenis.stop(); else lenis.start();
+    if (blocked) {
+      lenisRunning = false;
+      if (lenisRafId) { cancelAnimationFrame(lenisRafId); lenisRafId = null; }
+      lenis.stop();
+    } else if (!lenisRunning) {
+      lenisRunning = true;
+      lenis.start();
+      lenisRafId = requestAnimationFrame(raf);
+    }
   });
   observer.observe(document.body, { attributes: true, attributeFilter: ['class'] });
 }
