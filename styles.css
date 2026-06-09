@@ -6,10 +6,10 @@
 */
 :root{
   /* tono parchment cálido y unificado — sin alternar por sección */
-  --bg:#f3eee2;
-  --bg-alt:#ede7d6;
-  --bg-alt-2:#f0eadb;
-  --bg-elev:#faf5e8;
+  --bg:#ffffff;
+  --bg-alt:#f5f3ef;
+  --bg-alt-2:#f8f6f2;
+  --bg-elev:#fafafa;
 
   --text:#15110d;
   --text-2:#332d24;

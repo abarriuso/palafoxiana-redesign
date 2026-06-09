@@ -264,7 +264,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initSmoothScroll();
   initScrollFx();
   initCounters();
-  initParallax();
   initCollectionTabs();
   initContactForm();
   initFooterYear();
@@ -608,26 +607,6 @@ function animateNumber(el){
   };
 
   requestAnimationFrame(tick);
-}
-
-/* ── Hero parallax ───────────────────────────────────── */
-function initParallax(){
-  if (PREFERS_REDUCED_MOTION) return;
-  const img = document.querySelector('.hero-img');
-  if (!img) return;
-
-  let ticking = false;
-  window.addEventListener('scroll', () => {
-    if (ticking) return;
-    requestAnimationFrame(() => {
-      const y = window.scrollY;
-      if (y < window.innerHeight * 1.2){
-        img.style.transform = `translate3d(0, ${y * 0.28}px, 0) scale(1.05)`;
-      }
-      ticking = false;
-    });
-    ticking = true;
-  }, { passive: true });
 }
 
 /* ── Footer year ─────────────────────────────────────── */
