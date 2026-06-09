@@ -1,0 +1,40 @@
+THIRD-PARTY CONTENT NOTICE
+==========================
+
+The MIT License in the LICENSE file applies ONLY to the source code authored
+by the copyright holder — that is, the HTML, CSS, JavaScript, and Markdown
+documentation in this repository.
+
+It does NOT extend to the following assets:
+
+  Photographs
+  -----------
+  Photographs of the library, its hall, shelving, and interiors located in
+  the `assets/` folder (filenames `MG_*.jpg`, `interior_*.webp`,
+  `frenteinterior*.jpg`, `puerta_*.jpg`, `fachada*`, `grabdo-palafox*`).
+  These are © Biblioteca Palafoxiana / Gobierno del Estado de Puebla and are
+  reproduced here for educational/portfolio purposes only.
+
+  Historical Reproductions
+  ------------------------
+  Reproductions of incunabula, manuscripts, and printed books in `assets/`
+  (filenames `liber_chronicarum.jpg`, `vesalius_*.jpg`, `codex_*.jpg`,
+  `erasmo_*.jpg`, `quijote_*.jpg`, `libros*.jpg`, `palafox_libro_*.jpg`).
+  These remain © their respective copyright holders. Many of the underlying
+  works are in the public domain, but the specific photographic reproductions
+  are not necessarily so.
+
+  Institutional Texts
+  -------------------
+  Texts describing the library, its history, its collection, addresses,
+  opening hours, and emblematic works, which are based on content published
+  at http://www.palafoxiana.com and remain © their respective owners.
+
+  Name and Marks
+  --------------
+  The "Biblioteca Palafoxiana" name, logotype (`assets/logo.jpg`), and all
+  institutional marks.
+
+No license is granted over those assets and texts. Their inclusion in this
+repository is for educational/portfolio purposes only and they will be removed
+on request by the copyright holder.
