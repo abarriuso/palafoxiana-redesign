@@ -1132,9 +1132,8 @@ header.scrolled{
 
 .historia-figure img{
   width:100%;
-  height:220px;
-  object-fit:cover;
-  object-position:center;
+  height:auto;
+  object-fit:contain;
   display:block;
   border-radius:2px;
   margin-bottom:.5rem;
@@ -1143,18 +1142,16 @@ header.scrolled{
 
 
 .timeline{
-  --tl-line-x:var(--sp-6);
-  --tl-dot-r:7px;
   margin-top:var(--sp-10);
   margin-left:var(--sp-8);
-  padding-left:calc(var(--tl-line-x) + var(--tl-dot-r) + var(--sp-4));
+  padding-left:44px;
   position:relative;
 }
 
 .timeline::before{
   content:'';
   position:absolute;
-  left:var(--tl-line-x);
+  left:1.5rem;
   top:0;
   bottom:0;
   width:2px;
@@ -1172,7 +1169,7 @@ header.scrolled{
 .timeline-item::before{
   content:'';
   position:absolute;
-  left:calc(var(--tl-line-x) - var(--tl-dot-r));
+  left:calc(1.5rem - 7px);
   width:14px;
   height:14px;
   border-radius:50%;
@@ -2339,7 +2336,9 @@ footer{
     grid-template-columns:1fr;
     gap:var(--sp-4);
   }
-  .timeline{ --tl-line-x:0.5rem; padding-left:calc(0.5rem + 7px + var(--sp-4)); margin-top:var(--sp-4); }
+  .timeline{ padding-left:31px; margin-top:var(--sp-4); }
+  .timeline::before{ left:0.5rem; }
+  .timeline-item::before{ left:calc(0.5rem - 7px); }
   .timeline-item{ margin-bottom:var(--sp-3); }
   .main-nav a{ padding:var(--sp-3) var(--sp-4); font-size:.7rem; }
   .dropdown-toggle{ padding:var(--sp-3) var(--sp-4); }
