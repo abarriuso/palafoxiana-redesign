@@ -12,6 +12,7 @@ import {
   formatCount,
   lookup,
   hasHtml,
+  safeSetHTML,
   isHoneypotTriggered,
   computeScrollProgress,
   isScrolled,
@@ -401,7 +402,7 @@ function setLanguage(lang) {
     // Solo usamos innerHTML cuando la traducción contiene marcado
     // intencional (ej. <strong>). El resto va por textContent.
     if (hasHtml(value)) {
-      el.innerHTML = value;
+      safeSetHTML(el, value);
     } else {
       el.textContent = value;
     }
@@ -947,7 +948,7 @@ function initLightbox() {
 
     // Focus trap: keep Tab cycling within the lightbox controls
     if (e.key === 'Tab') {
-      const focusable = [btnClose, btnPrev, btnNext];
+      const focusable = [btnClose, btnPrev, imgEl, btnNext];
       const first = focusable[0];
       const last  = focusable[focusable.length - 1];
       if (e.shiftKey) {

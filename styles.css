@@ -71,6 +71,10 @@ html{
   scroll-behavior:smooth;
 }
 
+@supports(padding:max(0px)){
+  body{ padding:max(0px,env(safe-area-inset-bottom)); }
+}
+
 /* Lenis: cuando está activo se encarga del scroll suave por JS,
    así evitamos que CSS scroll-behavior duplique la animación */
 html.lenis,
@@ -171,6 +175,10 @@ section.section-dark + section{
 }
 [data-theme="dark"] .section-dark{
   background:#050505;
+}
+
+.section-dark .btn-primary{
+  --on-accent:#fff;
 }
 
 .section-header{
@@ -469,9 +477,9 @@ header.scrolled{
   display:inline-flex;
   align-items:center;
   justify-content:center;
-  width:32px;
-  height:32px;
-  padding:0;
+  min-width:44px;
+  min-height:44px;
+  padding:6px;
   background:transparent;
   border:none;
   cursor:pointer;
@@ -678,6 +686,11 @@ header.scrolled{
 }
 
 .lang-btn{
+  min-width:44px;
+  min-height:44px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
   padding:.4rem .75rem;
   font-family:var(--font-sans);
   font-size:.65rem;
@@ -706,8 +719,8 @@ header.scrolled{
 /* Theme toggle — botón circular editorial, un solo ícono visible */
 .toggle-switch{
   position:relative;
-  width:36px;
-  height:36px;
+  min-width:44px;
+  min-height:44px;
   cursor:pointer;
   border-radius:50%;
   display:inline-flex;
@@ -829,19 +842,7 @@ header.scrolled{
   flex-direction:column;
 }
 
-.hero-img{
-  max-width:280px;
-  max-height:400px;
-  width:auto;
-  height:auto;
-  object-fit:contain;
-  filter:none;
-  margin:1.5rem auto 3rem;
-  display:block;
-  border:1px solid var(--border-strong);
-  box-shadow:0 10px 28px rgb(0,0,0,.12);
-  border-radius:2px;
-}
+
 
 .hero-content{
   position:relative;
@@ -988,9 +989,9 @@ header.scrolled{
   padding-top:1rem;
   border-top:1px solid var(--border);
   font-family:var(--font-serif);
-  font-size:.7rem;
+  font-size:.8rem;
   letter-spacing:.05em;
-  color:var(--text-muted) !important;
+  color:var(--text-2) !important;
   font-style:italic;
 }
 
@@ -1077,14 +1078,7 @@ header.scrolled{
   color:var(--text-2);
 }
 
-.interior-img{
-  width:100%;
-  max-height:380px;
-  aspect-ratio:4/3;
-  object-fit:cover;
-  object-position:center;
-  border-radius:2px;
-}
+
 
 .imagen-caption{
   font-family:var(--font-sans);
@@ -1122,22 +1116,7 @@ header.scrolled{
   margin-bottom:.5rem;
 }
 
-.historia-portrait{
-  width:100%;
-  height:auto;
-  object-fit:contain;
-  object-position:center;
-  border-radius:2px;
-  margin-bottom:.5rem;
-}
 
-.historia-figure .interior-img{
-  width:100%;
-  height:auto;
-  aspect-ratio:4/3;
-  object-fit:cover;
-  margin-bottom:.5rem;
-}
 
 .timeline{
   margin-top:2.5rem;
@@ -2315,21 +2294,9 @@ footer{
   }
 }
 
-@media (max-width:768px){
-  .hero-img{
-    max-width:260px;
-    max-height:380px;
-  }
-}
-
 @media (max-width:600px){
   section            { padding:2rem 1rem; }
 
-  .hero-img{
-    max-width:200px;
-    max-height:290px;
-    margin:0.75rem auto;
-  }
   .hero-content{
     padding:1.5rem 1rem;
   }
@@ -2395,7 +2362,7 @@ footer{
   .hero-year{ font-size:.6rem; }
   .hero-title{ font-size:clamp(1.6rem, 8vw, 2.2rem); margin-bottom:0.75rem; }
   .hero-subtitle{ font-size:.9rem; margin-bottom:0.75rem; }
-  .hero-location{ font-size:.55rem; }
+  .hero-location{ font-size:.75rem; }
 
   .info-grid{ grid-template-columns:repeat(2, 1fr); gap:1rem; }
   .info-card h3{ font-size:.9rem; margin:.75rem 0 .4rem; }
