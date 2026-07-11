@@ -1112,6 +1112,15 @@ header.scrolled{
   flex-direction:column;
 }
 
+.historia-figure img{
+  width:100%;
+  height:auto;
+  object-fit:contain;
+  display:block;
+  border-radius:2px;
+  margin-bottom:.5rem;
+}
+
 .historia-portrait{
   width:100%;
   height:auto;
