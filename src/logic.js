@@ -94,6 +94,25 @@ export function hasHtml(value) {
 }
 
 /**
+ * Inserta HTML de forma segura, eliminando tags que no están en la whitelist.
+ * @param {Element} el
+ * @param {string} html
+ */
+export function safeSetHTML(el, html) {
+  const ALLOWED = ['STRONG', 'BR', 'A', 'EM'];
+  const tmp = document.createElement('div');
+  tmp.innerHTML = html;
+  el.textContent = '';
+  for (const child of tmp.childNodes) {
+    if (child.nodeType === 3) {
+      el.appendChild(child.cloneNode(true));
+    } else if (child.nodeType === 1 && ALLOWED.includes(child.tagName)) {
+      el.appendChild(child.cloneNode(true));
+    }
+  }
+}
+
+/**
  * Comprueba si el campo honeypot fue rellenado por un bot.
  * @param {string} value
  * @returns {boolean}

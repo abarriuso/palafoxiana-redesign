@@ -8,6 +8,7 @@ import {
   formatCount,
   lookup,
   hasHtml,
+  safeSetHTML,
   isHoneypotTriggered,
   computeScrollProgress,
   isScrolled,
@@ -133,5 +134,26 @@ describe('computeScrollProgress / isScrolled', () => {
     expect(isScrolled(61)).toBe(true);
     expect(isScrolled(60)).toBe(false);
     expect(isScrolled(10)).toBe(false);
+  });
+});
+
+describe('safeSetHTML', () => {
+  it('allows whitelisted tags (strong, a, br, em)', () => {
+    const el = document.createElement('div');
+    safeSetHTML(el, '<strong>bold</strong> and <em>italic</em>');
+    expect(el.innerHTML).toContain('<strong>');
+    expect(el.innerHTML).toContain('<em>');
+  });
+  it('strips non-whitelisted tags', () => {
+    const el = document.createElement('div');
+    safeSetHTML(el, '<script>alert(1)</script><img src=x onerror=alert(1)><strong>safe</strong>');
+    expect(el.innerHTML).not.toContain('<script>');
+    expect(el.innerHTML).not.toContain('<img');
+    expect(el.innerHTML).toContain('<strong>safe</strong>');
+  });
+  it('handles plain text without HTML', () => {
+    const el = document.createElement('div');
+    safeSetHTML(el, 'plain text');
+    expect(el.textContent).toBe('plain text');
   });
 });
