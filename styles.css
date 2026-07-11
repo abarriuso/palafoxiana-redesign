@@ -900,6 +900,7 @@ header.scrolled{
   letter-spacing:.05em;
   line-height:1.2;
   color:var(--text);
+  margin-top:2.5rem;
   margin-bottom:1.5rem;
 }
 
