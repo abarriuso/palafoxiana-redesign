@@ -1144,9 +1144,10 @@ header.scrolled{
 
 .timeline{
   --tl-line-x:var(--sp-6);
+  --tl-dot-r:7px;
   margin-top:var(--sp-10);
   margin-left:var(--sp-8);
-  padding-left:var(--sp-12);
+  padding-left:calc(var(--tl-line-x) + var(--tl-dot-r) + var(--sp-4));
   position:relative;
 }
 
@@ -1171,7 +1172,7 @@ header.scrolled{
 .timeline-item::before{
   content:'';
   position:absolute;
-  left:calc(var(--tl-line-x) - 7px);
+  left:calc(var(--tl-line-x) - var(--tl-dot-r));
   width:14px;
   height:14px;
   border-radius:50%;
@@ -2338,7 +2339,7 @@ footer{
     grid-template-columns:1fr;
     gap:var(--sp-4);
   }
-  .timeline{ --tl-line-x:0.5rem; padding-left:var(--sp-4); margin-top:var(--sp-4); }
+  .timeline{ --tl-line-x:0.5rem; padding-left:calc(0.5rem + 7px + var(--sp-4)); margin-top:var(--sp-4); }
   .timeline-item{ margin-bottom:var(--sp-3); }
   .main-nav a{ padding:var(--sp-3) var(--sp-4); font-size:.7rem; }
   .dropdown-toggle{ padding:var(--sp-3) var(--sp-4); }
