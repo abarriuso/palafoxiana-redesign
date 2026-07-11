@@ -1,17 +1,54 @@
-/* ============================================================
-   Biblioteca Palafoxiana — script.js
-   ============================================================ */
+// ============================================================
+//  Biblioteca Palafoxiana — script.js (módulo ES)
+//  Encapsulado en módulo: sin contaminación de window.
+//  La lógica pura vive en ./src/logic.js (testeable con Vitest).
+// ============================================================
+import {
+  resolveTheme,
+  shouldShowCard,
+  computeOverflow,
+  wrapIndex,
+  parseCountTarget,
+  formatCount,
+  lookup,
+  hasHtml,
+  isHoneypotTriggered,
+  computeScrollProgress,
+  isScrolled,
+} from './src/logic.js';
 
-const PREFERS_REDUCED_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+/* ── Constantes (números mágicos nombrados) ──────────────── */
+const SCROLL_HEADER_THRESHOLD = 60;   // px para encoger el header
+const COUNTER_DURATION        = 1600; // ms de la animación de contadores
+const SUBMIT_SIM_DELAY        = 1200; // ms de la simulación de envío
+const FEEDBACK_HIDE_MS        = 6000; // ms antes de ocultar el feedback
+
+const PREFERS_REDUCED_MOTION =
+  typeof window !== 'undefined' &&
+  window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const PREFERS_DARK =
+  typeof window !== 'undefined' &&
+  window.matchMedia('(prefers-color-scheme: dark)').matches;
 
 const STORAGE = {
   lang:  'palafoxiana.lang',
   theme: 'palafoxiana.theme',
 };
 
-function safeGet(key)      { try { return localStorage.getItem(key); }    catch { return null; } }
-function safeSet(key, val) { try { localStorage.setItem(key, val); }       catch { /* noop */ } }
-function safeRemove(key)   { try { localStorage.removeItem(key); }         catch { /* noop */ } }
+/* Wrappers de localStorage a prueba de entornos sin almacenamiento
+   (modo privado, cuota llena, navegadores restrictivos). */
+function safeGet(key) {
+  try { return localStorage.getItem(key); }
+  catch (e) { console.warn('storage unavailable (get)', e); return null; }
+}
+function safeSet(key, val) {
+  try { localStorage.setItem(key, val); }
+  catch (e) { console.warn('storage unavailable (set)', e); }
+}
+function safeRemove(key) {
+  try { localStorage.removeItem(key); }
+  catch (e) { console.warn('storage unavailable (remove)', e); }
+}
 
 const translations = {
   es: {
@@ -30,7 +67,7 @@ const translations = {
     'nav.books':             'Publicaciones',
     'nav.books-abeja':       'La Abeja Poblana ↗',
     'nav.books-gaceta':      'Gaceta Literaria ↗',
-    'nav.books-digital':     'Digitalizaciones ↗',
+    'nav.books-digital':      'Digitalizaciones ↗',
     'nav.books-pubs':        'Publicaciones ↗',
     'nav.books-galleries':   'Galerías ↗',
     'nav.guide':             'Guía',
@@ -271,37 +308,37 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /* ── Theme ───────────────────────────────────────────── */
-function initTheme(){
+function initTheme() {
   const toggle = document.getElementById('theme-toggle');
   if (!toggle) return;
 
-  // Migrate legacy storage keys
+  // Migrate legacy storage keys (primera versión del sitio)
   const legacyDark = safeGet('darkMode');
   const legacyLang = safeGet('lang');
-  if (legacyDark !== null && safeGet(STORAGE.theme) === null){
+  if (legacyDark !== null && safeGet(STORAGE.theme) === null) {
     safeSet(STORAGE.theme, legacyDark === 'true' ? 'dark' : 'light');
     safeRemove('darkMode');
   }
-  if (legacyLang !== null && safeGet(STORAGE.lang) === null){
+  if (legacyLang !== null && safeGet(STORAGE.lang) === null) {
     safeSet(STORAGE.lang, legacyLang);
     safeRemove('lang');
   }
 
   const stored = safeGet(STORAGE.theme);
-  const isDark = stored
-    ? stored === 'dark'
-    : window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const isDark = resolveTheme(stored, PREFERS_DARK);
 
   applyTheme(isDark);
   toggle.checked = isDark;
+  toggle.setAttribute('aria-checked', String(isDark));
 
   toggle.addEventListener('change', () => {
     applyTheme(toggle.checked);
     safeSet(STORAGE.theme, toggle.checked ? 'dark' : 'light');
+    toggle.setAttribute('aria-checked', String(toggle.checked));
   });
 }
 
-function applyTheme(isDark){
+function applyTheme(isDark) {
   const root = document.documentElement;
   // 1. Desactivamos transitions y ocultamos los 1px que viven en capas
   //    compositadas (header sticky, secciones con transform). Esas capas
@@ -310,8 +347,10 @@ function applyTheme(isDark){
   //    al pasar de claro a oscuro.
   root.classList.add('no-theme-transition', 'theme-swap');
   root.setAttribute('data-theme', isDark ? 'dark' : 'light');
-  document.querySelector('meta[name="theme-color"]')
-    ?.setAttribute('content', isDark ? '#0e0d0b' : '#f3eee2');
+  const themeMeta = document.querySelector('meta[name="theme-color"]');
+  if (themeMeta) {
+    themeMeta.setAttribute('content', isDark ? '#0e0d0b' : '#f3eee2');
+  }
   // 2. Forzamos reflow y esperamos dos rAF para que el compositor tenga
   //    la textura nueva antes de restaurar los pseudo-elementos.
   void root.offsetHeight;
@@ -323,18 +362,17 @@ function applyTheme(isDark){
 }
 
 /* ── Language ────────────────────────────────────────── */
-/* ── Language (cached DOM queries) ─────────────────── */
 let cachedLangBtns = null;
 let cachedI18nEls = null;
 let cachedI18nPlaceholderEls = null;
 
-function initLanguage(){
+function initLanguage() {
   const stored = safeGet(STORAGE.lang) || 'es';
 
   cachedLangBtns = Array.from(document.querySelectorAll('.lang-btn'));
   cachedLangBtns.forEach(btn => {
     btn.addEventListener('click', () => {
-      if (btn.dataset.lang !== document.documentElement.lang){
+      if (btn.dataset.lang !== document.documentElement.lang) {
         setLanguage(btn.dataset.lang);
       }
     });
@@ -343,7 +381,7 @@ function initLanguage(){
   setLanguage(stored);
 }
 
-function setLanguage(lang){
+function setLanguage(lang) {
   safeSet(STORAGE.lang, lang);
   document.documentElement.lang = lang;
 
@@ -357,26 +395,27 @@ function setLanguage(lang){
   if (!cachedI18nEls) cachedI18nEls = Array.from(document.querySelectorAll('[data-i18n]'));
   if (!cachedI18nPlaceholderEls) cachedI18nPlaceholderEls = Array.from(document.querySelectorAll('[data-i18n-placeholder]'));
 
-  const t = translations[lang] || translations.es;
   cachedI18nEls.forEach(el => {
-    const value = t[el.dataset.i18n];
+    const value = lookup(translations, lang, el.dataset.i18n);
     if (value === undefined) return;
-    if (/<[a-z]/i.test(value)) {
+    // Solo usamos innerHTML cuando la traducción contiene marcado
+    // intencional (ej. <strong>). El resto va por textContent.
+    if (hasHtml(value)) {
       el.innerHTML = value;
     } else {
       el.textContent = value;
     }
   });
   cachedI18nPlaceholderEls.forEach(el => {
-    const value = t[el.dataset.i18nPlaceholder];
+    const value = lookup(translations, lang, el.dataset.i18nPlaceholder);
     if (value !== undefined) el.setAttribute('placeholder', value);
   });
 
   document.dispatchEvent(new CustomEvent('languagechange', { detail: { lang } }));
 }
 
-/* los menús desplegables */
-function initDropdowns(){
+/* ── Dropdowns (escritorio) ───────────────────────────── */
+function initDropdowns() {
   const items = document.querySelectorAll('.has-dropdown');
   if (!items.length) return;
 
@@ -416,8 +455,9 @@ function initDropdowns(){
     });
   });
 
+  // Cierra al hacer click fuera
   document.addEventListener('click', (e) => {
-    if (!e.target.closest('.has-dropdown')){
+    if (!e.target.closest('.has-dropdown')) {
       items.forEach(item => {
         item.classList.remove('open');
         const toggle = item.querySelector('.dropdown-toggle');
@@ -425,10 +465,20 @@ function initDropdowns(){
       });
     }
   });
+
+  // Cierra con Escape
+  document.addEventListener('keydown', (e) => {
+    if (e.key !== 'Escape') return;
+    items.forEach(item => {
+      item.classList.remove('open');
+      const toggle = item.querySelector('.dropdown-toggle');
+      if (toggle) toggle.setAttribute('aria-expanded', 'false');
+    });
+  });
 }
 
-/* menú hamburguesa en móvil */
-function initMobileMenu(){
+/* ── Menú hamburguesa (móvil) ─────────────────────────── */
+function initMobileMenu() {
   const toggle = document.querySelector('.menu-toggle');
   const nav    = document.querySelector('.main-nav');
   if (!toggle || !nav) return;
@@ -476,11 +526,11 @@ function initMobileMenu(){
   });
 }
 
-/* ── Lenis smooth scroll ─────────────────────────────── */
+/* ── Lenis smooth scroll ──────────────────────────────── */
 let lenis = null;
 let lenisRafId = null;
 let lenisRunning = false;
-function initLenis(){
+function initLenis() {
   if (PREFERS_REDUCED_MOTION) return;
   if (typeof window.Lenis !== 'function') return;
 
@@ -493,7 +543,7 @@ function initLenis(){
     touchMultiplier: 1.4,
   });
 
-  function raf(time){
+  function raf(time) {
     lenis.raf(time);
     if (lenisRunning) lenisRafId = requestAnimationFrame(raf);
   }
@@ -501,6 +551,7 @@ function initLenis(){
   lenisRunning = true;
   lenisRafId = requestAnimationFrame(raf);
 
+  // El bucle se detiene solo cuando el lightbox está abierto.
   const stopWhen = ['lightbox-open'];
   const observer = new MutationObserver(() => {
     const blocked = stopWhen.some(c => document.body.classList.contains(c));
@@ -517,17 +568,17 @@ function initLenis(){
   observer.observe(document.body, { attributes: true, attributeFilter: ['class'] });
 }
 
-/* ── Smooth scroll para enlaces de anclaje ───────────── */
-function initSmoothScroll(){
+/* ── Smooth scroll para enlaces de anclaje ────────────── */
+function initSmoothScroll() {
   document.querySelectorAll('a[href^="#"]').forEach(a => {
-    a.addEventListener('click', function (e){
+    a.addEventListener('click', function (e) {
       const href = this.getAttribute('href');
       if (href === '#' || href.length < 2) return;
       const target = document.querySelector(href);
       if (!target) return;
       e.preventDefault();
 
-      if (lenis){
+      if (lenis) {
         const headerH = document.querySelector('header')?.offsetHeight || 0;
         lenis.scrollTo(target, { offset: -headerH, duration: 1.2 });
       } else {
@@ -541,7 +592,7 @@ function initSmoothScroll(){
 }
 
 /* ── Scroll effects (single rAF for progress · header shrink) ── */
-function initScrollFx(){
+function initScrollFx() {
   const progress = document.getElementById('scroll-progress');
   const header   = document.querySelector('header');
 
@@ -551,14 +602,14 @@ function initScrollFx(){
     const y    = window.scrollY;
     const docH = document.documentElement.scrollHeight - window.innerHeight;
 
-    if (progress) progress.style.width = docH > 0 ? (y / docH * 100) + '%' : '0';
-    if (header)   header.classList.toggle('scrolled', y > 60);
+    if (progress) progress.style.width = computeScrollProgress(y, docH) + '%';
+    if (header)   header.classList.toggle('scrolled', isScrolled(y, SCROLL_HEADER_THRESHOLD));
 
     ticking = false;
   };
 
   window.addEventListener('scroll', () => {
-    if (!ticking){
+    if (!ticking) {
       requestAnimationFrame(update);
       ticking = true;
     }
@@ -566,10 +617,11 @@ function initScrollFx(){
 
   update();
 
-  // Scroll-triggered fade-ins (one-shot)
+  // Scroll-triggered fade-ins (one-shot). El contenido es visible por
+  // defecto (sin clase .js no se oculta); aquí solo se anima.
   const fadeObs = new IntersectionObserver(entries => {
     entries.forEach(e => {
-      if (e.isIntersecting){
+      if (e.isIntersecting) {
         e.target.classList.add('visible');
         fadeObs.unobserve(e.target);
       }
@@ -580,7 +632,7 @@ function initScrollFx(){
 }
 
 /* ── Animated counters (ease-out-cubic) ──────────────── */
-function initCounters(){
+function initCounters() {
   const nums = document.querySelectorAll('.stat-num');
   if (!nums.length) return;
 
@@ -601,25 +653,22 @@ function initCounters(){
   nums.forEach(el => obs.observe(el));
 }
 
-function animateNumber(el){
-  const original  = (el.dataset.target || el.textContent).trim();
-  const hasSuffix = original.endsWith('+');
-  const raw       = parseInt(original.replace(/[^0-9]/g, ''), 10);
+function animateNumber(el) {
+  const { raw, hasSuffix } = parseCountTarget(el.dataset.target || el.textContent);
   if (!raw) return;
 
-  if (PREFERS_REDUCED_MOTION){
-    el.textContent = raw.toLocaleString('es-MX') + (hasSuffix ? '+' : '');
+  if (PREFERS_REDUCED_MOTION) {
+    el.textContent = formatCount(raw, hasSuffix);
     return;
   }
 
-  const dur   = 1600;
   const start = performance.now();
 
   const tick = now => {
-    const t    = Math.min((now - start) / dur, 1);
+    const t    = Math.min((now - start) / COUNTER_DURATION, 1);
     const ease = 1 - Math.pow(1 - t, 3);
     const val  = Math.round(ease * raw);
-    el.textContent = val.toLocaleString('es-MX') + (hasSuffix ? '+' : '');
+    el.textContent = formatCount(val, hasSuffix);
     if (t < 1) requestAnimationFrame(tick);
   };
 
@@ -627,13 +676,13 @@ function animateNumber(el){
 }
 
 /* ── Footer year ─────────────────────────────────────── */
-function initFooterYear(){
+function initFooterYear() {
   const el = document.getElementById('footer-year');
   if (el) el.textContent = new Date().getFullYear();
 }
 
-/* el formulario de contacto */
-function initContactForm(){
+/* ── Formulario de contacto ──────────────────────────── */
+function initContactForm() {
   const form = document.getElementById('contact-form');
   if (!form) return;
 
@@ -643,21 +692,26 @@ function initContactForm(){
   const honeypot  = form.querySelector('input[name="website"]');
   if (!submitBtn || !submitLbl) return;
 
-  // Apply translated placeholders
+  // Placeholders iniciales (setLanguage ya los reaplica al cambiar idioma)
   applyPlaceholders();
-  document.addEventListener('languagechange', applyPlaceholders);
+
+  let feedbackTimer = null;
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
     // Spam check — bots fill hidden field
-    if (honeypot && honeypot.value){
+    if (isHoneypotTriggered(honeypot && honeypot.value)) {
       showFeedback('success'); // pretend success
       return;
     }
 
-    if (!form.checkValidity()){
+    // Limpia errores previos antes de validar
+    form.querySelectorAll('[aria-invalid="true"]').forEach(el => el.removeAttribute('aria-invalid'));
+
+    if (!form.checkValidity()) {
       form.reportValidity();
+      markInvalidFields(form);
       return;
     }
 
@@ -665,14 +719,14 @@ function initContactForm(){
     submitBtn.classList.add('loading');
     submitBtn.disabled = true;
     const originalLabel = submitLbl.textContent;
-    submitLbl.textContent = dict('contact.submit-loading') || 'Sending…';
+    submitLbl.textContent = dict('contact.submit-loading') || 'Enviando…';
 
-    try{
+    try {
       // Simulate API call — replace with real fetch() in production
-      await new Promise(r => setTimeout(r, 1200));
+      await new Promise(r => setTimeout(r, SUBMIT_SIM_DELAY));
       form.reset();
       showFeedback('success');
-    } catch (err){
+    } catch {
       showFeedback('error');
     } finally {
       submitBtn.classList.remove('loading');
@@ -681,19 +735,26 @@ function initContactForm(){
     }
   });
 
-  function showFeedback(type){
+  function markInvalidFields(f) {
+    f.querySelectorAll('input, select, textarea').forEach(el => {
+      if (!el.checkValidity()) el.setAttribute('aria-invalid', 'true');
+    });
+  }
+
+  function showFeedback(type) {
     if (!feedback) return;
+    if (feedbackTimer) clearTimeout(feedbackTimer);
     feedback.className = 'form-feedback ' + type;
     feedback.textContent = dict(`contact.${type}`) || '';
-    if (type === 'success'){
-      setTimeout(() => {
+    if (type === 'success') {
+      feedbackTimer = setTimeout(() => {
         feedback.className = 'form-feedback';
         feedback.textContent = '';
-      }, 6000);
+      }, FEEDBACK_HIDE_MS);
     }
   }
 
-  function applyPlaceholders(){
+  function applyPlaceholders() {
     form.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
       const value = dict(el.dataset.i18nPlaceholder);
       if (value) el.setAttribute('placeholder', value);
@@ -701,16 +762,16 @@ function initContactForm(){
   }
 }
 
-function dict(key){
+function dict(key) {
   const lang = document.documentElement.lang || 'es';
   return (translations[lang] || translations.es)[key];
 }
 
-/* filtro de colección */
-function initCollectionTabs(){
+/* ── Filtro de colección (tabs) ──────────────────────── */
+function initCollectionTabs() {
   const BOOKS_LIMIT = 4;
-  const tabs  = document.querySelectorAll('.tab-btn');
-  const cards = document.querySelectorAll('.book-card');
+  const tabs  = Array.from(document.querySelectorAll('.tab-btn'));
+  const cards = Array.from(document.querySelectorAll('.book-card'));
   const grid  = document.getElementById('books-grid');
   const moreBtn = document.getElementById('books-show-more');
   const moreWrap = moreBtn ? moreBtn.parentElement : null;
@@ -718,28 +779,25 @@ function initCollectionTabs(){
 
   // Marca .over-limit las cards visibles que excedan el límite y
   // muestra/oculta el botón "mostrar más" según haga falta.
-  function applyLimit(){
+  function applyLimit() {
     let visibleCount = 0;
-    let overflow = 0;
     cards.forEach(card => {
-      if (card.classList.contains('hidden')){
+      if (card.classList.contains('hidden')) {
         card.classList.remove('over-limit');
         return;
       }
       visibleCount++;
-      if (visibleCount > BOOKS_LIMIT){
+      if (visibleCount > BOOKS_LIMIT) {
         card.classList.add('over-limit');
-        overflow++;
       } else {
         card.classList.remove('over-limit');
       }
     });
-    if (moreWrap){
-      moreWrap.style.display = overflow > 0 ? 'flex' : 'none';
-    }
+    const overflow = computeOverflow(visibleCount, BOOKS_LIMIT);
+    if (moreWrap) moreWrap.style.display = overflow > 0 ? 'flex' : 'none';
   }
 
-  tabs.forEach(tab => {
+  tabs.forEach((tab, idx) => {
     tab.addEventListener('click', () => {
       const filter = tab.dataset.tab;
 
@@ -748,17 +806,17 @@ function initCollectionTabs(){
         t.classList.toggle('active', active);
         t.setAttribute('aria-selected', String(active));
       });
+      if (grid) grid.setAttribute('aria-labelledby', tab.id);
 
       cards.forEach(card => {
-        const cats = (card.dataset.category || '').split(' ');
-        const show = filter === 'todos' || cats.includes(filter);
+        const show = shouldShowCard(card.dataset.category || '', filter);
         card.classList.toggle('hidden', !show);
       });
 
       // al cambiar de filtro, replegamos y recalculamos el límite
-      if (grid){
+      if (grid) {
         grid.classList.add('collapsed');
-        if (moreBtn){
+        if (moreBtn) {
           moreBtn.setAttribute('aria-expanded', 'false');
           const span = moreBtn.querySelector('span');
           if (span) span.textContent = dict('collection.show-more');
@@ -767,10 +825,20 @@ function initCollectionTabs(){
       }
       applyLimit();
     });
+
+    // Navegación por flechas (patrón APG de tabs)
+    tab.addEventListener('keydown', (e) => {
+      if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+      e.preventDefault();
+      const dir = e.key === 'ArrowRight' ? 1 : -1;
+      const next = tabs[(idx + dir + tabs.length) % tabs.length];
+      next.focus();
+      next.click();
+    });
   });
 
   // botón mostrar más / menos
-  if (moreBtn && grid){
+  if (moreBtn && grid) {
     moreBtn.addEventListener('click', () => {
       const isCollapsed = grid.classList.toggle('collapsed');
       moreBtn.setAttribute('aria-expanded', String(!isCollapsed));
@@ -779,21 +847,12 @@ function initCollectionTabs(){
     });
   }
 
-  // actualizar texto del botón al cambiar idioma
-  document.addEventListener('languagechange', () => {
-    if (!moreBtn || !grid) return;
-    const span = moreBtn.querySelector('span');
-    if (span) span.textContent = dict(
-      grid.classList.contains('collapsed') ? 'collection.show-more' : 'collection.show-less'
-    );
-  });
-
   // estado inicial
   applyLimit();
 }
 
 /* ── Lightbox de la galería ──────────────────────────── */
-function initLightbox(){
+function initLightbox() {
   const grid     = document.getElementById('gallery-grid');
   const lightbox = document.getElementById('lightbox');
   if (!grid || !lightbox) return;
@@ -807,6 +866,8 @@ function initLightbox(){
   const btnClose = document.getElementById('lightbox-close');
   const btnPrev  = document.getElementById('lightbox-prev');
   const btnNext  = document.getElementById('lightbox-next');
+  const headerEl = document.querySelector('header');
+  const footerEl = document.querySelector('footer');
 
   const sources = items.map(btn => {
     const img = btn.querySelector('img');
@@ -816,7 +877,12 @@ function initLightbox(){
   let current = 0;
   let lastTrigger = null;
 
-  function render(){
+  // Aisla el fondo (header/footer) cuando el diálogo modal está abierto.
+  function setBackgroundInert(on) {
+    [headerEl, footerEl].forEach(el => { if (el) el.inert = on; });
+  }
+
+  function render() {
     const { src, alt } = sources[current];
     imgEl.src = src;
     imgEl.alt = alt;
@@ -824,26 +890,28 @@ function initLightbox(){
     counter.textContent = `${current + 1} / ${sources.length}`;
   }
 
-  function open(index, trigger){
-    current = ((index % sources.length) + sources.length) % sources.length;
+  function open(index, trigger) {
+    current = wrapIndex(index, sources.length);
     lastTrigger = trigger || null;
     render();
     lightbox.classList.add('open');
     lightbox.setAttribute('aria-hidden', 'false');
     document.body.classList.add('lightbox-open');
+    setBackgroundInert(true);
     btnClose.focus();
   }
 
-  function close(){
+  function close() {
     lightbox.classList.remove('open');
     lightbox.setAttribute('aria-hidden', 'true');
     document.body.classList.remove('lightbox-open');
+    setBackgroundInert(false);
     imgEl.removeAttribute('src');
     if (lastTrigger) lastTrigger.focus();
   }
 
-  function step(delta){
-    current = (current + delta + sources.length) % sources.length;
+  function step(delta) {
+    current = wrapIndex(current + delta, sources.length);
     render();
   }
 
@@ -854,20 +922,12 @@ function initLightbox(){
   // botón mostrar más / menos
   const moreBtn  = document.getElementById('gallery-show-more');
   const moreWrap = moreBtn ? moreBtn.parentElement : null;
-  if (moreBtn && moreWrap){
+  if (moreBtn && moreWrap) {
     moreBtn.addEventListener('click', () => {
       const isCollapsed = grid.classList.toggle('collapsed');
       moreBtn.setAttribute('aria-expanded', String(!isCollapsed));
       const span = moreBtn.querySelector('span');
       if (span) span.textContent = dict(isCollapsed ? 'gallery.show-more' : 'gallery.show-less');
-    });
-
-    // actualizar texto al cambiar idioma
-    document.addEventListener('languagechange', () => {
-      const span = moreBtn.querySelector('span');
-      if (span) span.textContent = dict(
-        grid.classList.contains('collapsed') ? 'gallery.show-more' : 'gallery.show-less'
-      );
     });
   }
 

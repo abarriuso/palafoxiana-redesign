@@ -1,0 +1,36 @@
+{
+  "name": "palafoxiana",
+  "version": "1.0.0",
+  "description": "> ⚠️ **Proyecto educativo de portafolio.** Sin afiliación, patrocinio ni autorización de la Biblioteca Palafoxiana, del Gobierno del Estado de Puebla, ni de UNESCO.",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "vitest",
+    "test:run": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "lint": "eslint . && stylelint \"styles.css\" \"src/**/*.css\"",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abarriuso/palafoxiana-redesign.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/abarriuso/palafoxiana-redesign/issues"
+  },
+  "homepage": "https://github.com/abarriuso/palafoxiana-redesign#readme",
+  "devDependencies": {
+    "@eslint/js": "^9.18.0",
+    "eslint": "^9.18.0",
+    "jsdom": "^26.0.0",
+    "prettier": "^3.4.2",
+    "sharp": "0.34.5",
+    "stylelint": "^16.13.2",
+    "stylelint-config-standard": "^38.0.0",
+    "vitest": "^3.0.0"
+  }
+}

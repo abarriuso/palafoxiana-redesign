@@ -3,18 +3,87 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes" />
-  <meta name="theme-color" content="#ffffff" />
-  <link rel="icon" type="image/png" href="favicon.ico" />
   <title>Biblioteca Palafoxiana | Primera Biblioteca Pública de América</title>
-  <meta name="description" content="Descubre la Biblioteca Palafoxiana en Puebla, México. Fundada en 1646 por el obispo Juan de Palafox y Mendoza. Patrimonio UNESCO." />
+  <meta name="description" content="Biblioteca Palafoxiana en Puebla, México: la primera biblioteca pública de América. Fundada en 1646 por Juan de Palafox y Mendoza. Visita, horarios y acervo. Patrimonio UNESCO." />
+  <meta name="robots" content="index, follow, max-image-preview:large" />
+  <link rel="canonical" href="https://www.palafoxiana.com/" />
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#0e0d0b" media="(prefers-color-scheme: dark)" />
+  <link rel="icon" type="image/x-icon" href="favicon.ico" />
+
+  <!-- Anti-FOUC: fija el tema (OS o guardado) antes del primer paint.
+       Imprescindible inline; el CSP permite 'unsafe-inline' en script-src. -->
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem('palafoxiana.theme');
+        if (t !== 'light' && t !== 'dark') {
+          t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+        document.documentElement.setAttribute('data-theme', t);
+      } catch (e) { /* localStorage bloqueado: queda light por defecto */ }
+      document.documentElement.classList.add('js');
+    })();
+  </script>
+
+  <!-- Estilos (carga estándar: sin JS inline, compatible con CSP estricta) -->
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="fonts/fonts.css" />
+
+  <!-- Preload de fuentes críticas (above-the-fold) -->
+  <link rel="preload" as="font" type="font/woff2" href="fonts/Prata-400-normal-latin.woff2" crossorigin />
+  <link rel="preload" as="font" type="font/woff2" href="fonts/Lora-400-normal-latin.woff2" crossorigin />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="es_MX" />
+  <meta property="og:site_name" content="Biblioteca Palafoxiana" />
+  <meta property="og:title" content="Biblioteca Palafoxiana | Primera Biblioteca Pública de América" />
+  <meta property="og:description" content="La primera biblioteca pública de América. Fundada en 1646 en Puebla, México. Visita, horarios y acervo. Patrimonio UNESCO." />
+  <meta property="og:url" content="https://www.palafoxiana.com/" />
+  <meta property="og:image" content="https://www.palafoxiana.com/assets/puerta_hq.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="803" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Biblioteca Palafoxiana | Primera Biblioteca Pública de América" />
+  <meta name="twitter:description" content="La primera biblioteca pública de América. Fundada en 1646 en Puebla, México. Patrimonio UNESCO." />
+  <meta name="twitter:image" content="https://www.palafoxiana.com/assets/puerta_hq.jpg" />
 
   <link rel="preload" as="image" href="assets/puerta_hq.jpg" fetchpriority="high" />
 
-  <link rel="preload" href="styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
-  <noscript><link rel="stylesheet" href="styles.css" /></noscript>
+  <!-- Datos estructurados -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Library",
+    "name": "Biblioteca Palafoxiana",
+    "description": "Primera biblioteca pública de América, fundada en 1646 en Puebla, México. Patrimonio de la Humanidad (UNESCO, Memoria del Mundo 2005).",
+    "url": "https://www.palafoxiana.com/",
+    "image": "https://www.palafoxiana.com/assets/puerta_hq.jpg",
+    "telephone": "+52 222 232 3483",
+    "openingHours": "Tu-Su 10:00-18:00",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "5 Oriente Núm. 5, 2º piso",
+      "addressLocality": "Puebla",
+      "addressRegion": "Puebla",
+      "postalCode": "72000",
+      "addressCountry": "MX"
+    },
+    "founder": { "@type": "Person", "name": "Juan de Palafox y Mendoza" },
+    "foundingDate": "1646",
+    "sameAs": [
+      "https://twitter.com/BPalafoxiana",
+      "https://facebook.com/Biblio.Palafoxiana",
+      "https://instagram.com/b.palafoxiana"
+    ]
+  }
+  </script>
 
-  <link rel="preload" href="fonts/fonts.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
-  <noscript><link rel="stylesheet" href="fonts/fonts.css" /></noscript>
+  <!-- Content Security Policy (meta-tag: GitHub Pages no permite headers HTTP) -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; base-uri 'none'; form-action 'self'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests" />
 
   <script src="vendor/lenis.min.js" defer></script>
 </head>
@@ -28,7 +97,11 @@
 <header role="banner">
   <div class="header-container">
     <a href="#hero" class="logo" aria-label="Biblioteca Palafoxiana — Inicio">
-      <img src="assets/logo.jpg" alt="Biblioteca Palafoxiana" class="logo-img" width="242" height="50" />
+      <picture>
+  <source type="image/avif" srcset="assets/logo-400.avif 400w, assets/logo-800.avif 800w, assets/logo-1200.avif 1200w" sizes="(max-width:600px) 100vw, 50vw" />
+  <source type="image/webp" srcset="assets/logo-400.webp 400w, assets/logo-800.webp 800w, assets/logo-1200.webp 1200w" sizes="(max-width:600px) 100vw, 50vw" />
+  <img src="assets/logo-1200.jpg" alt="Biblioteca Palafoxiana" width="242" height="50" decoding="async" />
+</picture>
     </a>
 
     <button class="menu-toggle" aria-label="Abrir menú" aria-expanded="false" id="menu-toggle">
@@ -37,45 +110,45 @@
       <span></span>
     </button>
 
-    <nav class="main-nav" id="main-nav">
+    <nav class="main-nav" id="main-nav" aria-label="Principal">
       <ul class="nav-list">
         <li><a href="#hero" data-i18n="nav.home">Inicio</a></li>
         <li class="has-dropdown">
           <a href="#visitar" data-i18n="nav.services">Visitar</a>
-          <button class="dropdown-toggle" aria-expanded="false" aria-label="Mostrar más"></button>
-          <ul class="dropdown-menu">
+          <button class="dropdown-toggle" aria-expanded="false" aria-controls="dd-visitar" aria-label="Mostrar submenú de Visitar"></button>
+          <ul class="dropdown-menu" id="dd-visitar">
             <li><a href="#visitar" data-i18n="nav.services-visitors">Para visitantes</a></li>
-            <li><a href="http://www.palafoxiana.com/investigadores/" target="_blank" rel="noopener" data-i18n="nav.services-research">Investigadores ↗</a></li>
+            <li><a href="https://www.palafoxiana.com/investigadores/" target="_blank" rel="noopener noreferrer" data-i18n="nav.services-research">Investigadores ↗</a></li>
           </ul>
         </li>
         <li class="has-dropdown">
           <a href="#historia" data-i18n="nav.history">Historia</a>
-          <button class="dropdown-toggle" aria-expanded="false" aria-label="Mostrar más"></button>
-          <ul class="dropdown-menu">
+          <button class="dropdown-toggle" aria-expanded="false" aria-controls="dd-historia" aria-label="Mostrar submenú de Historia"></button>
+          <ul class="dropdown-menu" id="dd-historia">
             <li><a href="#historia" data-i18n="nav.history-library">Biblioteca</a></li>
             <li><a href="#acervo" data-i18n="nav.history-acervo">Colección</a></li>
-            <li><a href="http://www.palafoxiana.com/juan-de-palafox/" target="_blank" rel="noopener" data-i18n="nav.history-palafox">Juan de Palafox ↗</a></li>
+            <li><a href="https://www.palafoxiana.com/juan-de-palafox/" target="_blank" rel="noopener noreferrer" data-i18n="nav.history-palafox">Juan de Palafox ↗</a></li>
           </ul>
         </li>
         <li><a href="#contacto" data-i18n="nav.contact">Contacto</a></li>
-        <li><a href="http://www.palafoxiana.com/catalogo/" target="_blank" rel="noopener" data-i18n="nav.catalog">Catálogo ↗</a></li>
-        <li><a href="http://www.palafoxiana.com/eventos/" target="_blank" rel="noopener" data-i18n="nav.events">Actividades ↗</a></li>
+        <li><a href="https://www.palafoxiana.com/catalogo/" target="_blank" rel="noopener noreferrer" data-i18n="nav.catalog">Catálogo ↗</a></li>
+        <li><a href="https://www.palafoxiana.com/eventos/" target="_blank" rel="noopener noreferrer" data-i18n="nav.events">Actividades ↗</a></li>
         <li class="has-dropdown">
-          <a href="http://www.palafoxiana.com/publicaciones/" data-i18n="nav.books" target="_blank" rel="noopener">Publicaciones</a>
-          <button class="dropdown-toggle" aria-expanded="false" aria-label="Mostrar más"></button>
-          <ul class="dropdown-menu">
-            <li><a href="http://www.palafoxiana.com/la-abeja-poblana/" target="_blank" rel="noopener" data-i18n="nav.books-abeja">La Abeja Poblana ↗</a></li>
-            <li><a href="http://www.palafoxiana.com/gaceta-literaria-alzate/" target="_blank" rel="noopener" data-i18n="nav.books-gaceta">Gaceta Literaria ↗</a></li>
-            <li><a href="http://www.palafoxiana.com/digitalizaciones/" target="_blank" rel="noopener" data-i18n="nav.books-digital">Digitalizaciones ↗</a></li>
-            <li><a href="http://www.palafoxiana.com/publicaciones/" target="_blank" rel="noopener" data-i18n="nav.books-pubs">Publicaciones ↗</a></li>
-            <li><a href="http://www.palafoxiana.com/galerias/" target="_blank" rel="noopener" data-i18n="nav.books-galleries">Galerías ↗</a></li>
+          <a href="https://www.palafoxiana.com/publicaciones/" data-i18n="nav.books" target="_blank" rel="noopener noreferrer">Publicaciones</a>
+          <button class="dropdown-toggle" aria-expanded="false" aria-controls="dd-publicaciones" aria-label="Mostrar submenú de Publicaciones"></button>
+          <ul class="dropdown-menu" id="dd-publicaciones">
+            <li><a href="https://www.palafoxiana.com/la-abeja-poblana/" target="_blank" rel="noopener noreferrer" data-i18n="nav.books-abeja">La Abeja Poblana ↗</a></li>
+            <li><a href="https://www.palafoxiana.com/gaceta-literaria-alzate/" target="_blank" rel="noopener noreferrer" data-i18n="nav.books-gaceta">Gaceta Literaria ↗</a></li>
+            <li><a href="https://www.palafoxiana.com/digitalizaciones/" target="_blank" rel="noopener noreferrer" data-i18n="nav.books-digital">Digitalizaciones ↗</a></li>
+            <li><a href="https://www.palafoxiana.com/publicaciones/" target="_blank" rel="noopener noreferrer" data-i18n="nav.books-pubs">Publicaciones ↗</a></li>
+            <li><a href="https://www.palafoxiana.com/galerias/" target="_blank" rel="noopener noreferrer" data-i18n="nav.books-galleries">Galerías ↗</a></li>
           </ul>
         </li>
         <li class="has-dropdown">
-          <a href="http://www.palafoxiana.com/guia/" data-i18n="nav.guide" target="_blank" rel="noopener">Guía</a>
-          <button class="dropdown-toggle" aria-expanded="false" aria-label="Mostrar más"></button>
-          <ul class="dropdown-menu">
-            <li><a href="http://www.palafoxiana.com/guia/" target="_blank" rel="noopener" data-i18n="nav.guide-app">App ↗</a></li>
+          <a href="https://www.palafoxiana.com/guia/" data-i18n="nav.guide" target="_blank" rel="noopener noreferrer">Guía</a>
+          <button class="dropdown-toggle" aria-expanded="false" aria-controls="dd-guia" aria-label="Mostrar submenú de Guía"></button>
+          <ul class="dropdown-menu" id="dd-guia">
+            <li><a href="https://www.palafoxiana.com/guia/" target="_blank" rel="noopener noreferrer" data-i18n="nav.guide-app">App ↗</a></li>
           </ul>
         </li>
       </ul>
@@ -88,8 +161,8 @@
         <button class="lang-btn"        data-lang="en" aria-pressed="false">EN</button>
       </div>
 
-      <label class="toggle-switch" aria-label="Modo oscuro">
-        <input type="checkbox" id="theme-toggle">
+      <label class="toggle-switch">
+        <input type="checkbox" id="theme-toggle" role="switch" aria-checked="false" aria-label="Modo oscuro">
         <span class="toggle-slider" aria-hidden="true">
           <svg class="toggle-icon moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/>
@@ -122,7 +195,11 @@
       <span class="hero-rule"></span>
     </div>
 
-    <img src="assets/puerta_hq.jpg" alt="Puerta histórica de la Biblioteca Palafoxiana" class="hero-img" width="1200" height="803" />
+    <picture>
+  <source type="image/avif" srcset="assets/puerta_hq-400.avif 400w, assets/puerta_hq-800.avif 800w, assets/puerta_hq-1200.avif 1200w" sizes="100vw" />
+  <source type="image/webp" srcset="assets/puerta_hq-400.webp 400w, assets/puerta_hq-800.webp 800w, assets/puerta_hq-1200.webp 1200w" sizes="100vw" />
+  <img src="assets/puerta_hq-1200.jpg" alt="Puerta histórica de la Biblioteca Palafoxiana" width="1200" height="803" fetchpriority="high" decoding="async" />
+</picture>
 
     <h1 class="hero-title" data-i18n="hero.title">
       Biblioteca<br>Palafoxiana
@@ -169,7 +246,7 @@
         </svg>
         <h3 data-i18n="visit.location">Ubicación</h3>
         <p data-i18n="visit.location-detail">5 Oriente Núm. 5, 2º piso<br>Casa de Cultura, Centro, Puebla</p>
-        <a href="https://maps.google.com/?q=Biblioteca+Palafoxiana,+5+Oriente+5,+Puebla" target="_blank" rel="noopener" class="info-link" data-i18n="visit.location-link">Cómo llegar →</a>
+        <a href="https://maps.google.com/?q=Biblioteca+Palafoxiana,+5+Oriente+5,+Puebla" target="_blank" rel="noopener noreferrer" class="info-link" data-i18n="visit.location-link">Cómo llegar →</a>
       </article>
 
       <article class="info-card">
@@ -197,7 +274,7 @@
 
     <div class="visit-cta">
       <a href="#contacto" class="btn-primary" data-i18n="visit.cta">Solicitar visita guiada</a>
-      <p class="visit-cta-note" data-i18n="visit.cta-note">Grupos a partir de 5 personas — reserva con 48 h de anticipación</p>
+      <p class="visit-cta-note" data-i18n="visit.cta-note">Visitas guiadas gratuitas — consulta disponibilidad</p>
     </div>
 
   </div>
@@ -251,15 +328,27 @@
 
     <div class="historia-image">
       <figure class="historia-figure">
-        <img src="assets/grabdo-palafox375x566_oj8s4c.jpg" alt="Juan de Palafox y Mendoza, fundador de la Biblioteca Palafoxiana" class="historia-portrait" width="424" height="587" loading="lazy" />
+        <picture>
+  <source type="image/avif" srcset="assets/grabdo-palafox375x566_oj8s4c-400.avif 400w, assets/grabdo-palafox375x566_oj8s4c-800.avif 800w, assets/grabdo-palafox375x566_oj8s4c-1200.avif 1200w" sizes="(max-width:600px) 100vw, 50vw" />
+  <source type="image/webp" srcset="assets/grabdo-palafox375x566_oj8s4c-400.webp 400w, assets/grabdo-palafox375x566_oj8s4c-800.webp 800w, assets/grabdo-palafox375x566_oj8s4c-1200.webp 1200w" sizes="(max-width:600px) 100vw, 50vw" />
+  <img src="assets/grabdo-palafox375x566_oj8s4c-1200.jpg" alt="Juan de Palafox y Mendoza, fundador de la Biblioteca Palafoxiana" width="424" height="587" loading="lazy" decoding="async" />
+</picture>
         <figcaption class="imagen-caption">Juan de Palafox · 1646</figcaption>
       </figure>
       <figure class="historia-figure">
-        <img src="assets/frenteinterior450x300_obxdad.jpg" alt="Sala principal de la Biblioteca Palafoxiana con estanterías de cedro original de 43 metros" class="interior-img" width="1200" height="264" loading="lazy" />
+        <picture>
+  <source type="image/avif" srcset="assets/frenteinterior450x300_obxdad-400.avif 400w, assets/frenteinterior450x300_obxdad-800.avif 800w, assets/frenteinterior450x300_obxdad-1200.avif 1200w" sizes="(max-width:600px) 100vw, 50vw" />
+  <source type="image/webp" srcset="assets/frenteinterior450x300_obxdad-400.webp 400w, assets/frenteinterior450x300_obxdad-800.webp 800w, assets/frenteinterior450x300_obxdad-1200.webp 1200w" sizes="(max-width:600px) 100vw, 50vw" />
+  <img src="assets/frenteinterior450x300_obxdad-1200.jpg" alt="Sala principal de la Biblioteca Palafoxiana con estanterías de cedro original de 43 metros" width="1200" height="264" loading="lazy" decoding="async" />
+</picture>
         <figcaption class="imagen-caption">Sala Principal</figcaption>
       </figure>
       <figure class="historia-figure">
-        <img src="assets/interior_1.webp" alt="Estanterías de cedro original de la Biblioteca Palafoxiana" class="interior-img" width="1200" height="800" loading="lazy" />
+        <picture>
+  <source type="image/avif" srcset="assets/interior_1-400.avif 400w, assets/interior_1-800.avif 800w, assets/interior_1-1200.avif 1200w" sizes="(max-width:600px) 100vw, 50vw" />
+  <source type="image/webp" srcset="assets/interior_1-400.webp 400w, assets/interior_1-800.webp 800w, assets/interior_1-1200.webp 1200w" sizes="(max-width:600px) 100vw, 50vw" />
+  <img src="assets/interior_1-1200.webp" alt="Estanterías de cedro original de la Biblioteca Palafoxiana" width="1200" height="800" loading="lazy" decoding="async" />
+</picture>
         <figcaption class="imagen-caption">Estanterías · Cedro</figcaption>
       </figure>
     </div>
@@ -278,66 +367,146 @@
       <div class="section-rule"></div>
     </div>
 
-    <div class="gallery-grid collapsed" id="gallery-grid" role="list">
-      <button type="button" class="gallery-item" data-index="0" role="listitem" aria-label="Abrir galería en la imagen 1">
-        <img src="assets/MG_2220.jpg" alt="Sala principal de la Biblioteca Palafoxiana" loading="lazy" width="1200" height="801" />
+    <div class="gallery-grid collapsed" id="gallery-grid">
+      <button type="button" class="gallery-item" data-index="0" aria-label="Abrir galería en la imagen 1">
+        <picture>
+  <source type="image/avif" srcset="assets/MG_2220-400.avif 400w, assets/MG_2220-800.avif 800w, assets/MG_2220-1200.avif 1200w" sizes="(max-width:600px) 50vw, (max-width:1024px) 33vw, 280px" />
+  <source type="image/webp" srcset="assets/MG_2220-400.webp 400w, assets/MG_2220-800.webp 800w, assets/MG_2220-1200.webp 1200w" sizes="(max-width:600px) 50vw, (max-width:1024px) 33vw, 280px" />
+  <img src="assets/MG_2220-1200.jpg" alt="Sala principal de la Biblioteca Palafoxiana" width="1200" height="801" loading="lazy" decoding="async" />
+</picture>
       </button>
-      <button type="button" class="gallery-item" data-index="1" role="listitem" aria-label="Abrir galería en la imagen 2">
-        <img src="assets/MG_2221.jpg" alt="Estantería de cedro de la Biblioteca Palafoxiana" loading="lazy" width="1200" height="801" />
+      <button type="button" class="gallery-item" data-index="1" aria-label="Abrir galería en la imagen 2">
+        <picture>
+  <source type="image/avif" srcset="assets/MG_2221-400.avif 400w, assets/MG_2221-800.avif 800w, assets/MG_2221-1200.avif 1200w" sizes="(max-width:600px) 50vw, (max-width:1024px) 33vw, 280px" />
+  <source type="image/webp" srcset="assets/MG_2221-400.webp 400w, assets/MG_2221-800.webp 800w, assets/MG_2221-1200.webp 1200w" sizes="(max-width:600px) 50vw, (max-width:1024px) 33vw, 280px" />
+  <img src="assets/MG_2221-1200.jpg" alt="Estantería de cedro de la Biblioteca Palafoxiana" width="1200" height="801" loading="lazy" decoding="async" />
+</picture>
       </button>
-      <button type="button" class="gallery-item" data-index="2" role="listitem" aria-label="Abrir galería en la imagen 3">
-        <img src="assets/MG_2224.jpg" alt="Vista de la sala principal" loading="lazy" width="1200" height="801" />
+      <button type="button" class="gallery-item" data-index="2" aria-label="Abrir galería en la imagen 3">
+        <picture>
+  <source type="image/avif" srcset="assets/MG_2224-400.avif 400w, assets/MG_2224-800.avif 800w, assets/MG_2224-1200.avif 1200w" sizes="(max-width:600px) 50vw, (max-width:1024px) 33vw, 280px" />
+  <source type="image/webp" srcset="assets/MG_2224-400.webp 400w, assets/MG_2224-800.webp 800w, assets/MG_2224-1200.webp 1200w" sizes="(max-width:600px) 50vw, (max-width:1024px) 33vw, 280px" />
+  <img src="assets/MG_2224-1200.jpg" alt="Vista de la sala principal" width="1200" height="801" loading="lazy" decoding="async" />
+</picture>
       </button>
-      <button type="button" class="gallery-item" data-index="3" role="listitem" aria-label="Abrir galería en la imagen 4">
-        <img src="assets/MG_2234.jpg" alt="Detalle de encuadernaciones antiguas" loading="lazy" width="1200" height="801" />
+      <button type="button" class="gallery-item" data-index="3" aria-label="Abrir galería en la imagen 4">
+        <picture>
+  <source type="image/avif" srcset="assets/MG_2234-400.avif 400w, assets/MG_2234-800.avif 800w, assets/MG_2234-1200.avif 1200w" sizes="(max-width:600px) 50vw, (max-width:1024px) 33vw, 280px" />
+  <source type="image/webp" srcset="assets/MG_2234-400.webp 400w, assets/MG_2234-800.webp 800w, assets/MG_2234-1200.webp 1200w" sizes="(max-width:600px) 50vw, (max-width:1024px) 33vw, 280px" />
+  <img src="assets/MG_2234-1200.jpg" alt="Detalle de encuadernaciones antiguas" width="1200" height="801" loading="lazy" decoding="async" />
+</picture>
       </button>
-      <button type="button" class="gallery-item" data-index="4" role="listitem" aria-label="Abrir galería en la imagen 5">
-        <img src="assets/MG_2235.jpg" alt="Colección de libros históricos" loading="lazy" width="1200" height="801" />
+      <button type="button" class="gallery-item" data-index="4" aria-label="Abrir galería en la imagen 5">
+        <picture>
+  <source type="image/avif" srcset="assets/MG_2235-400.avif 400w, assets/MG_2235-800.avif 800w, assets/MG_2235-1200.avif 1200w" sizes="(max-width:600px) 50vw, (max-width:1024px) 33vw, 280px" />
+  <source type="image/webp" srcset="assets/MG_2235-400.webp 400w, assets/MG_2235-800.webp 800w, assets/MG_2235-1200.webp 1200w" sizes="(max-width:600px) 50vw, (max-width:1024px) 33vw, 280px" />
+  <img src="assets/MG_2235-1200.jpg" alt="Colección de libros históricos" width="1200" height="801" loading="lazy" decoding="async" />
+</picture>
       </button>
-      <button type="button" class="gallery-item" data-index="5" role="listitem" aria-label="Abrir galería en la imagen 6">
-        <img src="assets/MG_2237.jpg" alt="Anaqueles de la biblioteca" loading="lazy" width="1200" height="801" />
+      <button type="button" class="gallery-item" data-index="5" aria-label="Abrir galería en la imagen 6">
+        <picture>
+  <source type="image/avif" srcset="assets/MG_2237-400.avif 400w, assets/MG_2237-800.avif 800w, assets/MG_2237-1200.avif 1200w" sizes="(max-width:600px) 50vw, (max-width:1024px) 33vw, 280px" />
+  <source type="image/webp" srcset="assets/MG_2237-400.webp 400w, assets/MG_2237-800.webp 800w, assets/MG_2237-1200.webp 1200w" sizes="(max-width:600px) 50vw, (max-width:1024px) 33vw, 280px" />
+  <img src="assets/MG_2237-1200.jpg" alt="Anaqueles de la biblioteca" width="1200" height="801" loading="lazy" decoding="async" />
+</picture>
       </button>
-      <button type="button" class="gallery-item" data-index="6" role="listitem" aria-label="Abrir galería en la imagen 7">
-        <img src="assets/MG_2278.jpg" alt="Detalle arquitectónico de la sala" loading="lazy" width="1200" height="801" />
+      <button type="button" class="gallery-item" data-index="6" aria-label="Abrir galería en la imagen 7">
+        <picture>
+  <source type="image/avif" srcset="assets/MG_2278-400.avif 400w, assets/MG_2278-800.avif 800w, assets/MG_2278-1200.avif 1200w" sizes="(max-width:600px) 50vw, (max-width:1024px) 33vw, 280px" />
+  <source type="image/webp" srcset="assets/MG_2278-400.webp 400w, assets/MG_2278-800.webp 800w, assets/MG_2278-1200.webp 1200w" sizes="(max-width:600px) 50vw, (max-width:1024px) 33vw, 280px" />
+  <img src="assets/MG_2278-1200.jpg" alt="Detalle arquitectónico de la sala" width="1200" height="801" loading="lazy" decoding="async" />
+</picture>
       </button>
-      <button type="button" class="gallery-item" data-index="7" role="listitem" aria-label="Abrir galería en la imagen 8">
-        <img src="assets/MG_2283.jpg" alt="Estantes con volúmenes antiguos" loading="lazy" width="1200" height="801" />
+      <button type="button" class="gallery-item" data-index="7" aria-label="Abrir galería en la imagen 8">
+        <picture>
+  <source type="image/avif" srcset="assets/MG_2283-400.avif 400w, assets/MG_2283-800.avif 800w, assets/MG_2283-1200.avif 1200w" sizes="(max-width:600px) 50vw, (max-width:1024px) 33vw, 280px" />
+  <source type="image/webp" srcset="assets/MG_2283-400.webp 400w, assets/MG_2283-800.webp 800w, assets/MG_2283-1200.webp 1200w" sizes="(max-width:600px) 50vw, (max-width:1024px) 33vw, 280px" />
+  <img src="assets/MG_2283-1200.jpg" alt="Estantes con volúmenes antiguos" width="1200" height="801" loading="lazy" decoding="async" />
+</picture>
       </button>
-      <button type="button" class="gallery-item" data-index="8" role="listitem" aria-label="Abrir galería en la imagen 9">
-        <img src="assets/MG_2285.jpg" alt="Sala lateral de lectura" loading="lazy" width="1200" height="801" />
+      <button type="button" class="gallery-item" data-index="8" aria-label="Abrir galería en la imagen 9">
+        <picture>
+  <source type="image/avif" srcset="assets/MG_2285-400.avif 400w, assets/MG_2285-800.avif 800w, assets/MG_2285-1200.avif 1200w" sizes="(max-width:600px) 50vw, (max-width:1024px) 33vw, 280px" />
+  <source type="image/webp" srcset="assets/MG_2285-400.webp 400w, assets/MG_2285-800.webp 800w, assets/MG_2285-1200.webp 1200w" sizes="(max-width:600px) 50vw, (max-width:1024px) 33vw, 280px" />
+  <img src="assets/MG_2285-1200.jpg" alt="Sala lateral de lectura" width="1200" height="801" loading="lazy" decoding="async" />
+</picture>
       </button>
-      <button type="button" class="gallery-item" data-index="9" role="listitem" aria-label="Abrir galería en la imagen 10">
-        <img src="assets/MG_2286.jpg" alt="Detalle de talla en madera de los estantes" loading="lazy" width="1200" height="789" />
+      <button type="button" class="gallery-item" data-index="9" aria-label="Abrir galería en la imagen 10">
+        <picture>
+  <source type="image/avif" srcset="assets/MG_2286-400.avif 400w, assets/MG_2286-800.avif 800w, assets/MG_2286-1200.avif 1200w" sizes="(max-width:600px) 50vw, (max-width:1024px) 33vw, 280px" />
+  <source type="image/webp" srcset="assets/MG_2286-400.webp 400w, assets/MG_2286-800.webp 800w, assets/MG_2286-1200.webp 1200w" sizes="(max-width:600px) 50vw, (max-width:1024px) 33vw, 280px" />
+  <img src="assets/MG_2286-1200.jpg" alt="Detalle de talla en madera de los estantes" width="1200" height="789" loading="lazy" decoding="async" />
+</picture>
       </button>
-      <button type="button" class="gallery-item" data-index="10" role="listitem" aria-label="Abrir galería en la imagen 11">
-        <img src="assets/MG_2298.jpg" alt="Vista de la nave central" loading="lazy" width="1200" height="787" />
+      <button type="button" class="gallery-item" data-index="10" aria-label="Abrir galería en la imagen 11">
+        <picture>
+  <source type="image/avif" srcset="assets/MG_2298-400.avif 400w, assets/MG_2298-800.avif 800w, assets/MG_2298-1200.avif 1200w" sizes="(max-width:600px) 50vw, (max-width:1024px) 33vw, 280px" />
+  <source type="image/webp" srcset="assets/MG_2298-400.webp 400w, assets/MG_2298-800.webp 800w, assets/MG_2298-1200.webp 1200w" sizes="(max-width:600px) 50vw, (max-width:1024px) 33vw, 280px" />
+  <img src="assets/MG_2298-1200.jpg" alt="Vista de la nave central" width="1200" height="787" loading="lazy" decoding="async" />
+</picture>
       </button>
-      <button type="button" class="gallery-item" data-index="11" role="listitem" aria-label="Abrir galería en la imagen 12">
-        <img src="assets/MG_2304.jpg" alt="Detalle ornamental de la biblioteca" loading="lazy" width="1200" height="789" />
+      <button type="button" class="gallery-item" data-index="11" aria-label="Abrir galería en la imagen 12">
+        <picture>
+  <source type="image/avif" srcset="assets/MG_2304-400.avif 400w, assets/MG_2304-800.avif 800w, assets/MG_2304-1200.avif 1200w" sizes="(max-width:600px) 50vw, (max-width:1024px) 33vw, 280px" />
+  <source type="image/webp" srcset="assets/MG_2304-400.webp 400w, assets/MG_2304-800.webp 800w, assets/MG_2304-1200.webp 1200w" sizes="(max-width:600px) 50vw, (max-width:1024px) 33vw, 280px" />
+  <img src="assets/MG_2304-1200.jpg" alt="Detalle ornamental de la biblioteca" width="1200" height="789" loading="lazy" decoding="async" />
+</picture>
       </button>
-      <button type="button" class="gallery-item" data-index="12" role="listitem" aria-label="Abrir galería en la imagen 13">
-        <img src="assets/MG_2306.jpg" alt="Volúmenes encuadernados en piel" loading="lazy" width="1200" height="801" />
+      <button type="button" class="gallery-item" data-index="12" aria-label="Abrir galería en la imagen 13">
+        <picture>
+  <source type="image/avif" srcset="assets/MG_2306-400.avif 400w, assets/MG_2306-800.avif 800w, assets/MG_2306-1200.avif 1200w" sizes="(max-width:600px) 50vw, (max-width:1024px) 33vw, 280px" />
+  <source type="image/webp" srcset="assets/MG_2306-400.webp 400w, assets/MG_2306-800.webp 800w, assets/MG_2306-1200.webp 1200w" sizes="(max-width:600px) 50vw, (max-width:1024px) 33vw, 280px" />
+  <img src="assets/MG_2306-1200.jpg" alt="Volúmenes encuadernados en piel" width="1200" height="801" loading="lazy" decoding="async" />
+</picture>
       </button>
-      <button type="button" class="gallery-item" data-index="13" role="listitem" aria-label="Abrir galería en la imagen 14">
-        <img src="assets/MG_2308.jpg" alt="Estanterías en tres niveles" loading="lazy" width="1200" height="801" />
+      <button type="button" class="gallery-item" data-index="13" aria-label="Abrir galería en la imagen 14">
+        <picture>
+  <source type="image/avif" srcset="assets/MG_2308-400.avif 400w, assets/MG_2308-800.avif 800w, assets/MG_2308-1200.avif 1200w" sizes="(max-width:600px) 50vw, (max-width:1024px) 33vw, 280px" />
+  <source type="image/webp" srcset="assets/MG_2308-400.webp 400w, assets/MG_2308-800.webp 800w, assets/MG_2308-1200.webp 1200w" sizes="(max-width:600px) 50vw, (max-width:1024px) 33vw, 280px" />
+  <img src="assets/MG_2308-1200.jpg" alt="Estanterías en tres niveles" width="1200" height="801" loading="lazy" decoding="async" />
+</picture>
       </button>
-      <button type="button" class="gallery-item" data-index="14" role="listitem" aria-label="Abrir galería en la imagen 15">
-        <img src="assets/MG_2309.jpg" alt="Detalle de la estantería de cedro" loading="lazy" width="1200" height="801" />
+      <button type="button" class="gallery-item" data-index="14" aria-label="Abrir galería en la imagen 15">
+        <picture>
+  <source type="image/avif" srcset="assets/MG_2309-400.avif 400w, assets/MG_2309-800.avif 800w, assets/MG_2309-1200.avif 1200w" sizes="(max-width:600px) 50vw, (max-width:1024px) 33vw, 280px" />
+  <source type="image/webp" srcset="assets/MG_2309-400.webp 400w, assets/MG_2309-800.webp 800w, assets/MG_2309-1200.webp 1200w" sizes="(max-width:600px) 50vw, (max-width:1024px) 33vw, 280px" />
+  <img src="assets/MG_2309-1200.jpg" alt="Detalle de la estantería de cedro" width="1200" height="801" loading="lazy" decoding="async" />
+</picture>
       </button>
-      <button type="button" class="gallery-item" data-index="15" role="listitem" aria-label="Abrir galería en la imagen 16">
-        <img src="assets/MG_2310.jpg" alt="Volúmenes antiguos en su lugar original" loading="lazy" width="1200" height="801" />
+      <button type="button" class="gallery-item" data-index="15" aria-label="Abrir galería en la imagen 16">
+        <picture>
+  <source type="image/avif" srcset="assets/MG_2310-400.avif 400w, assets/MG_2310-800.avif 800w, assets/MG_2310-1200.avif 1200w" sizes="(max-width:600px) 50vw, (max-width:1024px) 33vw, 280px" />
+  <source type="image/webp" srcset="assets/MG_2310-400.webp 400w, assets/MG_2310-800.webp 800w, assets/MG_2310-1200.webp 1200w" sizes="(max-width:600px) 50vw, (max-width:1024px) 33vw, 280px" />
+  <img src="assets/MG_2310-1200.jpg" alt="Volúmenes antiguos en su lugar original" width="1200" height="801" loading="lazy" decoding="async" />
+</picture>
       </button>
-      <button type="button" class="gallery-item" data-index="16" role="listitem" aria-label="Abrir galería en la imagen 17">
-        <img src="assets/MG_2337.jpg" alt="Vista parcial de la sala principal" loading="lazy" width="1200" height="801" />
+      <button type="button" class="gallery-item" data-index="16" aria-label="Abrir galería en la imagen 17">
+        <picture>
+  <source type="image/avif" srcset="assets/MG_2337-400.avif 400w, assets/MG_2337-800.avif 800w, assets/MG_2337-1200.avif 1200w" sizes="(max-width:600px) 50vw, (max-width:1024px) 33vw, 280px" />
+  <source type="image/webp" srcset="assets/MG_2337-400.webp 400w, assets/MG_2337-800.webp 800w, assets/MG_2337-1200.webp 1200w" sizes="(max-width:600px) 50vw, (max-width:1024px) 33vw, 280px" />
+  <img src="assets/MG_2337-1200.jpg" alt="Vista parcial de la sala principal" width="1200" height="801" loading="lazy" decoding="async" />
+</picture>
       </button>
-      <button type="button" class="gallery-item" data-index="17" role="listitem" aria-label="Abrir galería en la imagen 18">
-        <img src="assets/MG_2338.jpg" alt="Detalle del acervo histórico" loading="lazy" width="1200" height="801" />
+      <button type="button" class="gallery-item" data-index="17" aria-label="Abrir galería en la imagen 18">
+        <picture>
+  <source type="image/avif" srcset="assets/MG_2338-400.avif 400w, assets/MG_2338-800.avif 800w, assets/MG_2338-1200.avif 1200w" sizes="(max-width:600px) 50vw, (max-width:1024px) 33vw, 280px" />
+  <source type="image/webp" srcset="assets/MG_2338-400.webp 400w, assets/MG_2338-800.webp 800w, assets/MG_2338-1200.webp 1200w" sizes="(max-width:600px) 50vw, (max-width:1024px) 33vw, 280px" />
+  <img src="assets/MG_2338-1200.jpg" alt="Detalle del acervo histórico" width="1200" height="801" loading="lazy" decoding="async" />
+</picture>
       </button>
-      <button type="button" class="gallery-item" data-index="18" role="listitem" aria-label="Abrir galería en la imagen 19">
-        <img src="assets/MG_2346.jpg" alt="Panorámica de la biblioteca" loading="lazy" width="1200" height="801" />
+      <button type="button" class="gallery-item" data-index="18" aria-label="Abrir galería en la imagen 19">
+        <picture>
+  <source type="image/avif" srcset="assets/MG_2346-400.avif 400w, assets/MG_2346-800.avif 800w, assets/MG_2346-1200.avif 1200w" sizes="(max-width:600px) 50vw, (max-width:1024px) 33vw, 280px" />
+  <source type="image/webp" srcset="assets/MG_2346-400.webp 400w, assets/MG_2346-800.webp 800w, assets/MG_2346-1200.webp 1200w" sizes="(max-width:600px) 50vw, (max-width:1024px) 33vw, 280px" />
+  <img src="assets/MG_2346-1200.jpg" alt="Panorámica de la biblioteca" width="1200" height="801" loading="lazy" decoding="async" />
+</picture>
       </button>
-      <button type="button" class="gallery-item" data-index="19" role="listitem" aria-label="Abrir galería en la imagen 20">
-        <img src="assets/MG_2348.jpg" alt="Sala principal y estantes laterales" loading="lazy" width="1200" height="801" />
+      <button type="button" class="gallery-item" data-index="19" aria-label="Abrir galería en la imagen 20">
+        <picture>
+  <source type="image/avif" srcset="assets/MG_2348-400.avif 400w, assets/MG_2348-800.avif 800w, assets/MG_2348-1200.avif 1200w" sizes="(max-width:600px) 50vw, (max-width:1024px) 33vw, 280px" />
+  <source type="image/webp" srcset="assets/MG_2348-400.webp 400w, assets/MG_2348-800.webp 800w, assets/MG_2348-1200.webp 1200w" sizes="(max-width:600px) 50vw, (max-width:1024px) 33vw, 280px" />
+  <img src="assets/MG_2348-1200.jpg" alt="Sala principal y estantes laterales" width="1200" height="801" loading="lazy" decoding="async" />
+</picture>
       </button>
     </div>
 
@@ -404,122 +573,154 @@
     </div>
 
     <div class="collection-tabs" role="tablist" aria-label="Filtrar colección por categoría">
-      <button class="tab-btn active" data-tab="todos"     role="tab" aria-selected="true"  aria-controls="books-grid" data-i18n="tab.todos">Todos</button>
-      <button class="tab-btn"        data-tab="incunable" role="tab" aria-selected="false" aria-controls="books-grid" data-i18n="tab.incunable">Incunables</button>
-      <button class="tab-btn"        data-tab="libros"    role="tab" aria-selected="false" aria-controls="books-grid" data-i18n="tab.libros">Libros impresos</button>
+      <button id="tab-todos"     class="tab-btn active" data-tab="todos"     role="tab" aria-selected="true"  aria-controls="books-grid" data-i18n="tab.todos">Todos</button>
+      <button id="tab-incunable" class="tab-btn"        data-tab="incunable" role="tab" aria-selected="false" aria-controls="books-grid" data-i18n="tab.incunable">Incunables</button>
+      <button id="tab-libros"    class="tab-btn"        data-tab="libros"    role="tab" aria-selected="false" aria-controls="books-grid" data-i18n="tab.libros">Libros impresos</button>
     </div>
 
-    <div class="books-grid collapsed" id="books-grid" role="tabpanel">
+    <div class="books-grid collapsed" id="books-grid" role="tabpanel" aria-labelledby="tab-todos">
 
 
       <article class="book-card" data-category="incunable">
         <div class="book-img-wrap">
-          <img src="assets/libros_hq.jpg" alt="Los Nueve Libros de la Historia, edición incunable de 1473" loading="lazy" width="1067" height="1600" />
+          <picture>
+  <source type="image/avif" srcset="assets/libros_hq-400.avif 400w, assets/libros_hq-800.avif 800w, assets/libros_hq-1200.avif 1200w" sizes="(max-width:600px) 50vw, (max-width:1024px) 33vw, 240px" />
+  <source type="image/webp" srcset="assets/libros_hq-400.webp 400w, assets/libros_hq-800.webp 800w, assets/libros_hq-1200.webp 1200w" sizes="(max-width:600px) 50vw, (max-width:1024px) 33vw, 240px" />
+  <img src="assets/libros_hq-1200.jpg" alt="Los Nueve Libros de la Historia, edición incunable de 1473" width="1067" height="1600" loading="lazy" decoding="async" />
+</picture>
         </div>
         <div class="book-meta">
           <div class="book-meta-top">
             <span class="book-cat-badge" data-i18n="badge.incunable">Incunable</span>
             <span class="book-year-tag">1473</span>
           </div>
-          <h4>Los Nueve Libros de la Historia</h4>
+          <h3>Los Nueve Libros de la Historia</h3>
           <p class="book-author">Heródoto de Halicarnaso</p>
         </div>
       </article>
 
       <article class="book-card" data-category="incunable">
         <div class="book-img-wrap">
-          <img src="assets/liber_chronicarum.jpg" alt="Liber Chronicarum o Crónica de Núremberg, impreso por Antón Koberger en 1493" loading="lazy" width="1200" height="900" />
+          <picture>
+  <source type="image/avif" srcset="assets/liber_chronicarum-400.avif 400w, assets/liber_chronicarum-800.avif 800w, assets/liber_chronicarum-1200.avif 1200w" sizes="(max-width:600px) 50vw, (max-width:1024px) 33vw, 240px" />
+  <source type="image/webp" srcset="assets/liber_chronicarum-400.webp 400w, assets/liber_chronicarum-800.webp 800w, assets/liber_chronicarum-1200.webp 1200w" sizes="(max-width:600px) 50vw, (max-width:1024px) 33vw, 240px" />
+  <img src="assets/liber_chronicarum-1200.jpg" alt="Liber Chronicarum o Crónica de Núremberg, impreso por Antón Koberger en 1493" width="1200" height="900" loading="lazy" decoding="async" />
+</picture>
         </div>
         <div class="book-meta">
           <div class="book-meta-top">
             <span class="book-cat-badge" data-i18n="badge.incunable">Incunable</span>
             <span class="book-year-tag">1493</span>
           </div>
-          <h4>Liber Chronicarum</h4>
+          <h3>Liber Chronicarum</h3>
           <p class="book-author">Hartmann Schedel · imp. A. Koberger</p>
         </div>
       </article>
 
       <article class="book-card" data-category="libros teologia">
         <div class="book-img-wrap">
-          <img src="assets/palafox_libro_18.jpg" alt="Biblia Políglota de Amberes, Benito Arias Montaño, 1569–1573" loading="lazy" width="640" height="985" />
+          <picture>
+  <source type="image/avif" srcset="assets/palafox_libro_18-400.avif 400w, assets/palafox_libro_18-800.avif 800w, assets/palafox_libro_18-1200.avif 1200w" sizes="(max-width:600px) 50vw, (max-width:1024px) 33vw, 240px" />
+  <source type="image/webp" srcset="assets/palafox_libro_18-400.webp 400w, assets/palafox_libro_18-800.webp 800w, assets/palafox_libro_18-1200.webp 1200w" sizes="(max-width:600px) 50vw, (max-width:1024px) 33vw, 240px" />
+  <img src="assets/palafox_libro_18-1200.jpg" alt="Biblia Políglota de Amberes, Benito Arias Montaño, 1569–1573" width="640" height="985" loading="lazy" decoding="async" />
+</picture>
         </div>
         <div class="book-meta">
           <div class="book-meta-top">
             <span class="book-cat-badge" data-i18n="badge.teologia">Teología</span>
             <span class="book-year-tag">1569</span>
           </div>
-          <h4>Biblia Políglota (Biblia Regia)</h4>
+          <h3>Biblia Políglota (Biblia Regia)</h3>
           <p class="book-author">Benito Arias Montaño · 8 vols.</p>
         </div>
       </article>
 
       <article class="book-card" data-category="libros ciencia">
         <div class="book-img-wrap">
-          <img src="assets/vesalius_fabrica.jpg" alt="De Humani Corporis Fabrica, Andrés Vesalio, impreso en Basilea por Ioannes Oporini en 1543" loading="lazy" width="1119" height="1459" />
+          <picture>
+  <source type="image/avif" srcset="assets/vesalius_fabrica-400.avif 400w, assets/vesalius_fabrica-800.avif 800w, assets/vesalius_fabrica-1200.avif 1200w" sizes="(max-width:600px) 50vw, (max-width:1024px) 33vw, 240px" />
+  <source type="image/webp" srcset="assets/vesalius_fabrica-400.webp 400w, assets/vesalius_fabrica-800.webp 800w, assets/vesalius_fabrica-1200.webp 1200w" sizes="(max-width:600px) 50vw, (max-width:1024px) 33vw, 240px" />
+  <img src="assets/vesalius_fabrica-1200.jpg" alt="De Humani Corporis Fabrica, Andrés Vesalio, impreso en Basilea por Ioannes Oporini en 1543" width="1119" height="1459" loading="lazy" decoding="async" />
+</picture>
         </div>
         <div class="book-meta">
           <div class="book-meta-top">
             <span class="book-cat-badge" data-i18n="badge.ciencia">Ciencia</span>
             <span class="book-year-tag">1543</span>
           </div>
-          <h4>De Humani Corporis Fabrica</h4>
+          <h3>De Humani Corporis Fabrica</h3>
           <p class="book-author">Andrés Vesalio</p>
         </div>
       </article>
 
       <article class="book-card" data-category="libros">
         <div class="book-img-wrap">
-          <img src="assets/codex_mendoza.jpg" alt="Vocabulario en lengua castellana y mexicana, Fray Alonso de Molina, 1571" loading="lazy" width="736" height="1077" />
+          <picture>
+  <source type="image/avif" srcset="assets/codex_mendoza-400.avif 400w, assets/codex_mendoza-800.avif 800w, assets/codex_mendoza-1200.avif 1200w" sizes="(max-width:600px) 50vw, (max-width:1024px) 33vw, 240px" />
+  <source type="image/webp" srcset="assets/codex_mendoza-400.webp 400w, assets/codex_mendoza-800.webp 800w, assets/codex_mendoza-1200.webp 1200w" sizes="(max-width:600px) 50vw, (max-width:1024px) 33vw, 240px" />
+  <img src="assets/codex_mendoza-1200.jpg" alt="Vocabulario en lengua castellana y mexicana, Fray Alonso de Molina, 1571" width="736" height="1077" loading="lazy" decoding="async" />
+</picture>
         </div>
         <div class="book-meta">
           <div class="book-meta-top">
             <span class="book-cat-badge" data-i18n="badge.libros">Libro impreso</span>
             <span class="book-year-tag">1571</span>
           </div>
-          <h4>Vocabulario en lengua castellana y mexicana</h4>
+          <h3>Vocabulario en lengua castellana y mexicana</h3>
           <p class="book-author">Fr. Alonso de Molina · imp. A. de Espinosa</p>
         </div>
       </article>
 
       <article class="book-card" data-category="libros teologia">
         <div class="book-img-wrap">
-          <img src="assets/libros.jpg" alt="Doctrina Christiana en lengua mexicana y española, Fray Juan de la Anunciación, 1575" loading="lazy" width="300" height="450" />
+          <picture>
+  <source type="image/avif" srcset="assets/libros-400.avif 400w, assets/libros-800.avif 800w, assets/libros-1200.avif 1200w" sizes="(max-width:600px) 50vw, (max-width:1024px) 33vw, 240px" />
+  <source type="image/webp" srcset="assets/libros-400.webp 400w, assets/libros-800.webp 800w, assets/libros-1200.webp 1200w" sizes="(max-width:600px) 50vw, (max-width:1024px) 33vw, 240px" />
+  <img src="assets/libros-1200.jpg" alt="Doctrina Christiana en lengua mexicana y española, Fray Juan de la Anunciación, 1575" width="300" height="450" loading="lazy" decoding="async" />
+</picture>
         </div>
         <div class="book-meta">
           <div class="book-meta-top">
             <span class="book-cat-badge" data-i18n="badge.teologia">Teología</span>
             <span class="book-year-tag">1575</span>
           </div>
-          <h4>Doctrina Christiana</h4>
+          <h3>Doctrina Christiana</h3>
           <p class="book-author">Fr. Juan de la Anunciación · imp. P. Balli</p>
         </div>
       </article>
 
       <article class="book-card" data-category="libros literatura">
         <div class="book-img-wrap">
-          <img src="assets/erasmo_locura.jpg" alt="Moriae Encomium o Elogio de la Locura, Erasmo de Róterdam, edición temprana del siglo XVI" loading="lazy" width="900" height="675" />
+          <picture>
+  <source type="image/avif" srcset="assets/erasmo_locura-400.avif 400w, assets/erasmo_locura-800.avif 800w, assets/erasmo_locura-1200.avif 1200w" sizes="(max-width:600px) 50vw, (max-width:1024px) 33vw, 240px" />
+  <source type="image/webp" srcset="assets/erasmo_locura-400.webp 400w, assets/erasmo_locura-800.webp 800w, assets/erasmo_locura-1200.webp 1200w" sizes="(max-width:600px) 50vw, (max-width:1024px) 33vw, 240px" />
+  <img src="assets/erasmo_locura-1200.jpg" alt="Moriae Encomium o Elogio de la Locura, Erasmo de Róterdam, edición temprana del siglo XVI" width="900" height="675" loading="lazy" decoding="async" />
+</picture>
         </div>
         <div class="book-meta">
           <div class="book-meta-top">
             <span class="book-cat-badge" data-i18n="badge.literatura">Literatura</span>
             <span class="book-year-tag">s. XVI</span>
           </div>
-          <h4>Moriae Encomium</h4>
+          <h3>Moriae Encomium</h3>
           <p class="book-author">Erasmo de Róterdam</p>
         </div>
       </article>
 
       <article class="book-card" data-category="libros literatura">
         <div class="book-img-wrap">
-          <img src="assets/quijote_1605.jpg" alt="Edición temprana de Don Quijote de la Mancha, Miguel de Cervantes, siglo XVII" loading="lazy" width="762" height="1167" />
+          <picture>
+  <source type="image/avif" srcset="assets/quijote_1605-400.avif 400w, assets/quijote_1605-800.avif 800w, assets/quijote_1605-1200.avif 1200w" sizes="(max-width:600px) 50vw, (max-width:1024px) 33vw, 240px" />
+  <source type="image/webp" srcset="assets/quijote_1605-400.webp 400w, assets/quijote_1605-800.webp 800w, assets/quijote_1605-1200.webp 1200w" sizes="(max-width:600px) 50vw, (max-width:1024px) 33vw, 240px" />
+  <img src="assets/quijote_1605-1200.jpg" alt="Edición temprana de Don Quijote de la Mancha, Miguel de Cervantes, siglo XVII" width="762" height="1167" loading="lazy" decoding="async" />
+</picture>
         </div>
         <div class="book-meta">
           <div class="book-meta-top">
             <span class="book-cat-badge" data-i18n="badge.literatura">Literatura</span>
             <span class="book-year-tag">s. XVII</span>
           </div>
-          <h4>Don Quijote de la Mancha</h4>
+          <h3>Don Quijote de la Mancha</h3>
           <p class="book-author">Miguel de Cervantes</p>
         </div>
       </article>
@@ -579,9 +780,9 @@
         <div class="contact-item">
           <span class="contact-label" data-i18n="contact.social-label">Síguenos</span>
           <ul class="social-list" role="list">
-            <li><a href="https://twitter.com/BPalafoxiana"  target="_blank" rel="noopener">@BPalafoxiana</a></li>
-            <li><a href="https://facebook.com/Biblio.Palafoxiana" target="_blank" rel="noopener">Biblio.Palafoxiana</a></li>
-            <li><a href="https://instagram.com/b.palafoxiana" target="_blank" rel="noopener">b.palafoxiana</a></li>
+            <li><a href="https://twitter.com/BPalafoxiana"  target="_blank" rel="noopener noreferrer">@BPalafoxiana</a></li>
+            <li><a href="https://facebook.com/Biblio.Palafoxiana" target="_blank" rel="noopener noreferrer">Biblio.Palafoxiana</a></li>
+            <li><a href="https://instagram.com/b.palafoxiana" target="_blank" rel="noopener noreferrer">b.palafoxiana</a></li>
           </ul>
         </div>
 
@@ -693,25 +894,29 @@
     <!-- Central section: Logo, tagline, social, nav links -->
     <div class="footer-center-section">
 
-      <img src="assets/logo.jpg" alt="Biblioteca Palafoxiana" class="footer-logo-img" width="242" height="50" loading="lazy" />
+      <picture>
+  <source type="image/avif" srcset="assets/logo-400.avif 400w, assets/logo-800.avif 800w, assets/logo-1200.avif 1200w" sizes="(max-width:600px) 100vw, 50vw" />
+  <source type="image/webp" srcset="assets/logo-400.webp 400w, assets/logo-800.webp 800w, assets/logo-1200.webp 1200w" sizes="(max-width:600px) 100vw, 50vw" />
+  <img src="assets/logo-1200.jpg" alt="Biblioteca Palafoxiana" width="242" height="50" loading="lazy" decoding="async" />
+</picture>
 
       <p class="footer-tagline" data-i18n="footer.subtitle">
         Patrimonio UNESCO · Memoria del Mundo
       </p>
 
       <!-- Social links -->
-      <div class="footer-social" role="list" aria-label="Síguenos">
-        <a href="https://twitter.com/BPalafoxiana" target="_blank" rel="noopener" role="listitem" aria-label="Twitter / X">
+      <div class="footer-social" aria-label="Síguenos">
+        <a href="https://twitter.com/BPalafoxiana" target="_blank" rel="noopener noreferrer" aria-label="Twitter / X">
           <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
             <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
           </svg>
         </a>
-        <a href="https://facebook.com/Biblio.Palafoxiana" target="_blank" rel="noopener" role="listitem" aria-label="Facebook">
+        <a href="https://facebook.com/Biblio.Palafoxiana" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
           <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
             <path d="M13.5 22v-8.4h2.83l.42-3.29H13.5V8.2c0-.95.27-1.6 1.63-1.6h1.74V3.66c-.85-.09-1.7-.13-2.55-.13-2.53 0-4.26 1.55-4.26 4.39v2.4H7.25v3.29h2.81V22z"/>
           </svg>
         </a>
-        <a href="https://instagram.com/b.palafoxiana" target="_blank" rel="noopener" role="listitem" aria-label="Instagram">
+        <a href="https://instagram.com/b.palafoxiana" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
             <rect x="3" y="3" width="18" height="18" rx="4.5"/>
             <circle cx="12" cy="12" r="3.8"/>
@@ -768,7 +973,7 @@
 
 </footer>
 
-<script src="script.js" defer></script>
+<script type="module" src="script.js"></script>
 
 </body>
 </html>

@@ -2,7 +2,7 @@
 
 *Rediseño conceptual de la primera biblioteca pública de América*
 
-[Demo en vivo](https://abarriuso.github.io/palafoxiana-redesign/) · [Sitio oficial](http://www.palafoxiana.com) · [Licencia MIT](LICENSE)
+[Demo en vivo](https://abarriuso.github.io/palafoxiana-redesign/) · [Sitio oficial](https://www.palafoxiana.com) · [Licencia MIT](LICENSE)
 
 ---
 
@@ -28,8 +28,8 @@ HTML5 semántico + ARIA    ·    CSS3 vanilla (0 dependencias)    ·    JavaScri
 |---|---|---|
 | **Fuentes** | Lora · DM Sans · Prata | Self-hosted woff2 — 0 requests a Google Fonts |
 | **Smooth scroll** | [Lenis 1.1.18](https://github.com/darkroomengineering/lenis) | Servido localmente desde `vendor/` |
-| **Imágenes** | Sharp (WebP + JPEG) | 33 archivos, 5 MB total optimizados |
-| **Build** | Ninguno | Sin npm, sin webpack, sin build step |
+| **Imágenes** | Sharp (AVIF + WebP, 3 anchos) | 33 fuentes → 231 variantes responsive |
+| **Build** | npm (dev) | Solo para tests/lint y optimización de imágenes |
 
 ---
 
@@ -53,12 +53,12 @@ HTML5 semántico + ARIA    ·    CSS3 vanilla (0 dependencias)    ·    JavaScri
 
 | Métrica | Antes | Después |
 |---|---|---|
-| Imágenes | 246 MB | **5 MB** (-98%) |
+| Imágenes | JPG sin optimizar | **AVIF/WebP responsive** (~−74% peso servido) |
 | CLS | Sin dimensiones | **0** (width/height en todas) |
 | LCP | Sin preload | **Hero precargada** + fetchpriority |
 | Fonts | Google Fonts CDN | **Self-hosted** woff2 |
-| CSS | Render-blocking | **Async loading** |
-| Lenis rAF | Loop infinito | **Se detiene** cuando no hay scroll |
+| CSS | — | **Carga estándar** (stylesheet) |
+| Lenis rAF | Loop infinito | **Se detiene al abrir el lightbox** |
 
 </details>
 
@@ -66,11 +66,23 @@ HTML5 semántico + ARIA    ·    CSS3 vanilla (0 dependencias)    ·    JavaScri
 <summary><strong>Accesibilidad</strong></summary>
 
 - Skip link al contenido principal
-- Roles ARIA (`banner`, `main`, `contentinfo`, `dialog`)
-- `aria-label`, `aria-expanded`, `aria-hidden` en interactivos
-- Focus trap en lightbox
-- Respeto a `prefers-reduced-motion`
+- Roles ARIA (`banner`, `main`, `contentinfo`, `dialog`, `tablist`/`tab`/`tabpanel`)
+- Navegación por teclado completa: dropdowns con `aria-controls` + cierre con Escape, tabs con flechas, lightbox con focus trap y `inert` de fondo
+- `role="switch"` + `aria-checked` en el toggle de tema
+- `aria-invalid` en errores de formulario
+- Contraste AA, `:focus-visible`, `forced-colors` y `prefers-reduced-motion`
+- Contenido visible sin JS (progressive enhancement)
 - Alt text descriptivo en todas las imágenes
+
+</details>
+
+<details>
+<summary><strong>Seguridad</strong></summary>
+
+- Content Security Policy (meta-tag, compatible con GitHub Pages)
+- Fuentes e imágenes self-hosted (0 requests a terceros en runtime)
+- `rel="noopener noreferrer"` en todos los enlaces externos
+- Honeypot anti-spam en el formulario (demo, sin backend)
 
 </details>
 
@@ -86,10 +98,19 @@ HTML5 semántico + ARIA    ·    CSS3 vanilla (0 dependencias)    ·    JavaScri
 ├── fonts/             9 fuentes woff2 self-hosted
 ├── vendor/
 │   └── lenis.min.js   Smooth scroll library
-├── index.html         HTML semántico + ARIA
+├── index.html         HTML semántico + ARIA + CSP + JSON-LD
 ├── styles.css         ~2,400 líneas CSS vanilla
-├── script.js          ~900 líneas JS vanilla
+├── script.js          Módulo ES (lógica en src/logic.js)
+├── src/
+│   └── logic.js        Lógica pura testeable (Vitest)
+├── tests/
+│   ├── logic.test.js   Tests unitarios de la lógica
+│   └── i18n.test.js    Cobertura de claves de traducción
+├── vendor/
+│   └── lenis.min.js   Smooth scroll library
 ├── favicon.ico        Generado desde el logo
+├── robots.txt         Reglas para crawlers
+├── sitemap.xml        Mapa del sitio
 ├── LICENSE            MIT
 └── NOTICE             Attribution de imágenes
 ```
@@ -117,6 +138,6 @@ python3 -m http.server 8080
 <div align="center">
 
 **Para información oficial, eventos, catálogo o solicitudes formales:**
-[palafoxiana.com](http://www.palafoxiana.com) — 5 Oriente 5, 2º piso, Centro, Puebla, México
+[palafoxiana.com](https://www.palafoxiana.com) — 5 Oriente 5, 2º piso, Centro, Puebla, México
 
 </div>
