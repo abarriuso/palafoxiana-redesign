@@ -104,10 +104,6 @@ const translations = {
     'history.p1':    'En 1646 el obispo de Puebla <strong>Juan de Palafox y Mendoza</strong> donó al seminario su colección personal de 5,000 volúmenes, con la condición de que cualquier persona que supiera leer pudiera consultarla. Fue el acto fundacional de la primera biblioteca pública de América.',
     'history.p2':    'En 1773 el obispo <strong>Francisco Fabián y Fuero</strong> levantó la sala principal de <strong>43 metros de longitud</strong> con sus tres niveles de estantería en cedro y ayacahuite. Una estructura monumental que perdura como testigo de cuatro siglos de historia y conocimiento acumulado.',
     'history.p3':    'El acervo creció a través de los siglos, alcanzando hoy más de 45,000 volúmenes distribuidos en 54 materias y catorce idiomas. Fue declarada Monumento Histórico en 1981 y reconocida por la UNESCO como Memoria del Mundo en 2005.',
-    'timeline.1646': 'Donación de Palafox',
-    'timeline.1773': 'Recinto de Fabián y Fuero',
-    'timeline.1981': 'Monumento Histórico',
-    'timeline.2005': 'UNESCO · Memoria del Mundo',
 
     /* gallery */
     'gallery.tag':       'Galería',
@@ -224,10 +220,6 @@ const translations = {
     'history.p1':    'In 1646 Bishop <strong>Juan de Palafox y Mendoza</strong> donated his personal collection of 5,000 volumes to the seminary, on the condition that any literate person could consult it. It was the founding act of the first public library in the Americas.',
     'history.p2':    'In 1773 Bishop <strong>Francisco Fabián y Fuero</strong> built the main reading hall, <strong>43 metres long</strong>, with three levels of cedar and ayacahuite shelving — a monumental structure that endures as witness to four centuries of history and accumulated knowledge.',
     'history.p3':    'The collection grew across the centuries, now holding more than 45,000 volumes across 54 subjects and fourteen languages. Declared a National Historic Monument in 1981 and recognised by UNESCO as Memory of the World in 2005.',
-    'timeline.1646': 'Palafox donation',
-    'timeline.1773': 'Fabián y Fuero hall',
-    'timeline.1981': 'Historic Monument',
-    'timeline.2005': 'UNESCO · Memory of the World',
 
     /* gallery */
     'gallery.tag':       'Gallery',

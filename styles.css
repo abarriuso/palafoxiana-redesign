@@ -1141,58 +1141,6 @@ header.scrolled{
 
 
 
-.timeline{
-  margin-top:var(--sp-10);
-  margin-left:var(--sp-8);
-  padding-left:44px;
-  position:relative;
-}
-
-.timeline::before{
-  content:'';
-  position:absolute;
-  left:1.5rem;
-  top:0;
-  bottom:0;
-  width:2px;
-  background:var(--accent);
-}
-
-.timeline-item{
-  position:relative;
-  display:flex;
-  align-items:center;
-  gap:var(--sp-6);
-  margin-bottom:var(--sp-16);
-}
-
-.timeline-item::before{
-  content:'';
-  position:absolute;
-  left:calc(1.5rem - 7px);
-  width:14px;
-  height:14px;
-  border-radius:50%;
-  background:var(--accent);
-  z-index:10;
-  box-shadow:0 0 0 4px var(--bg);
-}
-
-.timeline-year{
-  font-family:var(--font-sans);
-  font-weight:700;
-  font-size:1rem;
-  color:var(--accent);
-  min-width:3rem;
-  flex-shrink:0;
-}
-
-.timeline-desc{
-  font-size:.95rem;
-  color:var(--text-2);
-  font-weight:400;
-}
-
 /* ── 10. Collection (stats · tabs · books) ───────────── */
 .stats-row{
   display:flex;
@@ -2336,10 +2284,6 @@ footer{
     grid-template-columns:1fr;
     gap:var(--sp-4);
   }
-  .timeline{ padding-left:31px; margin-top:var(--sp-4); }
-  .timeline::before{ left:0.5rem; }
-  .timeline-item::before{ left:calc(0.5rem - 7px); }
-  .timeline-item{ margin-bottom:var(--sp-3); }
   .main-nav a{ padding:var(--sp-3) var(--sp-4); font-size:.7rem; }
   .dropdown-toggle{ padding:var(--sp-3) var(--sp-4); }
   .main-nav .dropdown-menu a{
