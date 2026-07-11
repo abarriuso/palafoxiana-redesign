@@ -1109,8 +1109,9 @@ header.scrolled{
 
 .historia-figure img{
   width:100%;
-  height:auto;
-  object-fit:contain;
+  height:220px;
+  object-fit:cover;
+  object-position:center;
   display:block;
   border-radius:2px;
   margin-bottom:.5rem;
