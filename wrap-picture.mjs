@@ -12,7 +12,7 @@ const SIZES = {
 };
 
 function categoryFor(src) {
-  if (src.includes('puerta_hq')) return 'hero';
+  if (src.includes('palafoxiana-hero')) return 'hero';
   if (src.includes('logo')) return 'logo';
   if (/MG_\d+/.test(src)) return 'gallery';
   if (['libros_hq', 'liber_chronicarum', 'palafox_libro_18', 'vesalius_fabrica', 'codex_mendoza', 'libros', 'erasmo_locura', 'quijote_1605']
