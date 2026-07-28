@@ -94,20 +94,36 @@ export function hasHtml(value) {
 }
 
 /**
- * Inserta HTML de forma segura, eliminando tags que no están en la whitelist.
+ * Inserta HTML de forma segura, eliminando tags que no están en la whitelist
+ * y limpiando atributos peligrosos.
  * @param {Element} el
  * @param {string} html
  */
 export function safeSetHTML(el, html) {
-  const ALLOWED = ['STRONG', 'BR', 'A', 'EM'];
+  const ALLOWED_TAGS = ['STRONG', 'BR', 'A', 'EM'];
+  /** Atributos permitidos por tag */
+  const ALLOWED_ATTRS = {
+    A: ['href', 'target', 'rel', 'class', 'data-i18n'],
+  };
+  const HREF_RE = /^(https?:\/\/|mailto:|tel:|#)/i;
+
   const tmp = document.createElement('div');
   tmp.innerHTML = html;
   el.textContent = '';
   for (const child of tmp.childNodes) {
     if (child.nodeType === 3) {
       el.appendChild(child.cloneNode(true));
-    } else if (child.nodeType === 1 && ALLOWED.includes(child.tagName)) {
-      el.appendChild(child.cloneNode(true));
+    } else if (child.nodeType === 1 && ALLOWED_TAGS.includes(child.tagName)) {
+      const clone = el.ownerDocument.createElement(child.tagName);
+      const allowed = ALLOWED_ATTRS[child.tagName] || [];
+      for (const attr of allowed) {
+        const val = child.getAttribute(attr);
+        if (val === null) continue;
+        if (attr === 'href' && !HREF_RE.test(val)) continue;
+        clone.setAttribute(attr, val);
+      }
+      clone.textContent = child.textContent;
+      el.appendChild(clone);
     }
   }
 }

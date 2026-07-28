@@ -15,8 +15,14 @@
   <meta name="theme-color" content="#0e0d0b" media="(prefers-color-scheme: dark)" />
   <link rel="icon" type="image/x-icon" href="favicon.ico" />
 
-  <!-- Anti-FOUC: fija el tema (OS o guardado) antes del primer paint.
-       Imprescindible inline; el CSP permite 'unsafe-inline' en script-src. -->
+  <!-- Anti-FOUC: fija colores base y tema antes del primer paint.
+       El CSS inline garantiza que el fondo y texto se vean aunque JS falle.
+       El CSP permite 'unsafe-inline' en style-src (excepto el script). -->
+  <style>
+    :root { background: #faf6ef; color: #1e1a16; }
+    [data-theme="dark"] { background: #0e0d0b; color: #e8e2d8; }
+  </style>
+
   <script>
     (function () {
       try {
@@ -712,7 +718,7 @@
 
     <div class="contacto-form">
 
-      <form id="contact-form" novalidate>
+      <form id="contact-form" action="#" method="post" novalidate>
 
         <div class="form-row">
           <div class="form-group">
