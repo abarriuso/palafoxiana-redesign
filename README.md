@@ -2,6 +2,12 @@
 
 *Rediseño conceptual de la primera biblioteca pública de América*
 
+[![Deploy](https://github.com/abarriuso/palafoxiana-redesign/actions/workflows/deploy.yml/badge.svg)](https://github.com/abarriuso/palafoxiana-redesign/actions/workflows/deploy.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green)](LICENSE)
+[![HTML](https://img.shields.io/badge/HTML-Semantic-%23E34F26?logo=html5)](https://developer.mozilla.org/en-US/docs/Web/HTML)
+[![CSS](https://img.shields.io/badge/CSS-Vanilla-%231572B6?logo=css3)](https://developer.mozilla.org/en-US/docs/Web/CSS)
+[![JS](https://img.shields.io/badge/JS-Vanilla-%23F7DF1E?logo=javascript)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+
 [Demo en vivo](https://abarriuso.github.io/palafoxiana-redesign/) · [Sitio oficial](https://www.palafoxiana.com) · [Licencia MIT](LICENSE)
 
 ---
