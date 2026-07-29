@@ -35,7 +35,7 @@ HTML5 semántico + ARIA    ·    CSS3 vanilla (0 dependencias)    ·    JavaScri
 | **Fuentes** | Lora · DM Sans · Prata | Self-hosted woff2 — 0 requests a Google Fonts |
 | **Smooth scroll** | [Lenis 1.1.18](https://github.com/darkroomengineering/lenis) | Servido localmente desde `vendor/` |
 | **Imágenes** | Sharp (AVIF + WebP, 3 anchos) | 33 fuentes → 231 variantes responsive |
-| **Build** | npm (dev) | Solo para tests/lint y optimización de imágenes |
+| **Build** | pnpm (dev) | Solo para tests/lint y optimización de imágenes |
 
 ---
 

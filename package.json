@@ -1,7 +1,7 @@
 {
   "name": "palafoxiana",
   "version": "1.0.0",
-  "description": "> ⚠️ **Proyecto educativo de portafolio.** Sin afiliación, patrocinio ni autorización de la Biblioteca Palafoxiana, del Gobierno del Estado de Puebla, ni de UNESCO.",
+  "description": "Rediseño conceptual (portafolio educativo) de la web de la Biblioteca Palafoxiana. HTML, CSS y JavaScript sin dependencias en runtime. Sin afiliación con la institución.",
   "private": true,
   "type": "module",
   "scripts": {
