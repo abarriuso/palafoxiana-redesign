@@ -4,9 +4,6 @@
 
 [![Deploy](https://github.com/abarriuso/palafoxiana-redesign/actions/workflows/deploy.yml/badge.svg)](https://github.com/abarriuso/palafoxiana-redesign/actions/workflows/deploy.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green)](LICENSE)
-[![HTML](https://img.shields.io/badge/HTML-Semantic-%23E34F26?logo=html5)](https://developer.mozilla.org/en-US/docs/Web/HTML)
-[![CSS](https://img.shields.io/badge/CSS-Vanilla-%231572B6?logo=css3)](https://developer.mozilla.org/en-US/docs/Web/CSS)
-[![JS](https://img.shields.io/badge/JS-Vanilla-%23F7DF1E?logo=javascript)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 
 [Demo en vivo](https://abarriuso.github.io/palafoxiana-redesign/) · [Sitio oficial](https://www.palafoxiana.com) · [Licencia MIT](LICENSE)
 
@@ -112,8 +109,6 @@ HTML5 semántico + ARIA    ·    CSS3 vanilla (0 dependencias)    ·    JavaScri
 ├── tests/
 │   ├── logic.test.js   Tests unitarios de la lógica
 │   └── i18n.test.js    Cobertura de claves de traducción
-├── vendor/
-│   └── lenis.min.js   Smooth scroll library
 ├── favicon.ico        Generado desde el logo
 ├── robots.txt         Reglas para crawlers
 ├── sitemap.xml        Mapa del sitio
@@ -141,9 +136,5 @@ python3 -m http.server 8080
 
 ---
 
-<div align="center">
-
-**Para información oficial, eventos, catálogo o solicitudes formales:**
-[palafoxiana.com](https://www.palafoxiana.com) — 5 Oriente 5, 2º piso, Centro, Puebla, México
-
-</div>
+Para información oficial, eventos, catálogo o solicitudes formales:
+[palafoxiana.com](https://www.palafoxiana.com) — 5 Oriente 5, 2º piso, Centro, Puebla, México.
