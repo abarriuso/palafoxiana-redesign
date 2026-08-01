@@ -15,14 +15,14 @@ importers:
   .:
     devDependencies:
       '@eslint/js':
-        specifier: ^9.18.0
-        version: 9.39.4
+        specifier: ^9.39.5
+        version: 9.39.5
       eslint:
         specifier: ^9.18.0
-        version: 9.39.4(supports-color@7.2.0)
+        version: 9.39.4
       jsdom:
         specifier: ^26.0.0
-        version: 26.1.0(supports-color@7.2.0)
+        version: 26.1.0
       prettier:
         specifier: ^3.4.2
         version: 3.9.5
@@ -31,13 +31,13 @@ importers:
         version: 0.35.3
       stylelint:
         specifier: ^16.13.2
-        version: 16.26.1(supports-color@7.2.0)
+        version: 16.26.1
       stylelint-config-standard:
         specifier: ^38.0.0
-        version: 38.0.0(stylelint@16.26.1(supports-color@7.2.0))
+        version: 38.0.0(stylelint@16.26.1)
       vitest:
         specifier: ^3.0.0
-        version: 3.2.7(jsdom@26.1.0(supports-color@7.2.0))(supports-color@7.2.0)
+        version: 3.2.7(jsdom@26.1.0)
 
 packages:
 
@@ -297,6 +297,10 @@ packages:
 
   '@eslint/js@9.39.4':
     resolution: {integrity: sha512-nE7DEIchvtiFTwBw4Lfbu59PG+kCofhjsKaCWzxTpt4lfRjRMqG6uMBzKXuEcyXhOHoUp9riAm7/aWYGhXZ9cw==}
+    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+
+  '@eslint/js@9.39.5':
+    resolution: {integrity: sha512-QywQuszQh77pIXCsq998c8hbhSTI/azTty1Z6N53dmAudKHhy573j3yvRLsX2BSp8YpLtoCEG8E9DJe+8zUh4A==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
   '@eslint/object-schema@2.1.7':
@@ -1768,17 +1772,17 @@ snapshots:
   '@esbuild/win32-x64@0.28.1':
     optional: true
 
-  '@eslint-community/eslint-utils@4.9.1(eslint@9.39.4(supports-color@7.2.0))':
+  '@eslint-community/eslint-utils@4.9.1(eslint@9.39.4)':
     dependencies:
-      eslint: 9.39.4(supports-color@7.2.0)
+      eslint: 9.39.4
       eslint-visitor-keys: 3.4.3
 
   '@eslint-community/regexpp@4.12.2': {}
 
-  '@eslint/config-array@0.21.2(supports-color@7.2.0)':
+  '@eslint/config-array@0.21.2':
     dependencies:
       '@eslint/object-schema': 2.1.7
-      debug: 4.4.3(supports-color@7.2.0)
+      debug: 4.4.3
       minimatch: 3.1.5
     transitivePeerDependencies:
       - supports-color
@@ -1791,10 +1795,10 @@ snapshots:
     dependencies:
       '@types/json-schema': 7.0.15
 
-  '@eslint/eslintrc@3.3.5(supports-color@7.2.0)':
+  '@eslint/eslintrc@3.3.5':
     dependencies:
       ajv: 6.15.0
-      debug: 4.4.3(supports-color@7.2.0)
+      debug: 4.4.3
       espree: 10.4.0
       globals: 14.0.0
       ignore: 5.3.2
@@ -1806,6 +1810,8 @@ snapshots:
       - supports-color
 
   '@eslint/js@9.39.4': {}
+
+  '@eslint/js@9.39.5': {}
 
   '@eslint/object-schema@2.1.7': {}
 
@@ -2204,11 +2210,9 @@ snapshots:
       whatwg-mimetype: 4.0.0
       whatwg-url: 14.2.0
 
-  debug@4.4.3(supports-color@7.2.0):
+  debug@4.4.3:
     dependencies:
       ms: 2.1.3
-    optionalDependencies:
-      supports-color: 7.2.0
 
   decimal.js@10.6.0: {}
 
@@ -2274,14 +2278,14 @@ snapshots:
 
   eslint-visitor-keys@4.2.1: {}
 
-  eslint@9.39.4(supports-color@7.2.0):
+  eslint@9.39.4:
     dependencies:
-      '@eslint-community/eslint-utils': 4.9.1(eslint@9.39.4(supports-color@7.2.0))
+      '@eslint-community/eslint-utils': 4.9.1(eslint@9.39.4)
       '@eslint-community/regexpp': 4.12.2
-      '@eslint/config-array': 0.21.2(supports-color@7.2.0)
+      '@eslint/config-array': 0.21.2
       '@eslint/config-helpers': 0.4.2
       '@eslint/core': 0.17.0
-      '@eslint/eslintrc': 3.3.5(supports-color@7.2.0)
+      '@eslint/eslintrc': 3.3.5
       '@eslint/js': 9.39.4
       '@eslint/plugin-kit': 0.4.1
       '@humanfs/node': 0.16.8
@@ -2291,7 +2295,7 @@ snapshots:
       ajv: 6.15.0
       chalk: 4.1.2
       cross-spawn: 7.0.6
-      debug: 4.4.3(supports-color@7.2.0)
+      debug: 4.4.3
       escape-string-regexp: 4.0.0
       eslint-scope: 8.4.0
       eslint-visitor-keys: 4.2.1
@@ -2443,17 +2447,17 @@ snapshots:
 
   html-tags@3.3.1: {}
 
-  http-proxy-agent@7.0.2(supports-color@7.2.0):
+  http-proxy-agent@7.0.2:
     dependencies:
       agent-base: 7.1.4
-      debug: 4.4.3(supports-color@7.2.0)
+      debug: 4.4.3
     transitivePeerDependencies:
       - supports-color
 
-  https-proxy-agent@7.0.6(supports-color@7.2.0):
+  https-proxy-agent@7.0.6:
     dependencies:
       agent-base: 7.1.4
-      debug: 4.4.3(supports-color@7.2.0)
+      debug: 4.4.3
     transitivePeerDependencies:
       - supports-color
 
@@ -2500,14 +2504,14 @@ snapshots:
     dependencies:
       argparse: 2.0.1
 
-  jsdom@26.1.0(supports-color@7.2.0):
+  jsdom@26.1.0:
     dependencies:
       cssstyle: 4.6.0
       data-urls: 5.0.0
       decimal.js: 10.6.0
       html-encoding-sniffer: 4.0.0
-      http-proxy-agent: 7.0.2(supports-color@7.2.0)
-      https-proxy-agent: 7.0.6(supports-color@7.2.0)
+      http-proxy-agent: 7.0.2
+      https-proxy-agent: 7.0.6
       is-potential-custom-element-name: 1.0.1
       nwsapi: 2.2.24
       parse5: 7.3.0
@@ -2803,16 +2807,16 @@ snapshots:
     dependencies:
       js-tokens: 9.0.1
 
-  stylelint-config-recommended@16.0.0(stylelint@16.26.1(supports-color@7.2.0)):
+  stylelint-config-recommended@16.0.0(stylelint@16.26.1):
     dependencies:
-      stylelint: 16.26.1(supports-color@7.2.0)
+      stylelint: 16.26.1
 
-  stylelint-config-standard@38.0.0(stylelint@16.26.1(supports-color@7.2.0)):
+  stylelint-config-standard@38.0.0(stylelint@16.26.1):
     dependencies:
-      stylelint: 16.26.1(supports-color@7.2.0)
-      stylelint-config-recommended: 16.0.0(stylelint@16.26.1(supports-color@7.2.0))
+      stylelint: 16.26.1
+      stylelint-config-recommended: 16.0.0(stylelint@16.26.1)
 
-  stylelint@16.26.1(supports-color@7.2.0):
+  stylelint@16.26.1:
     dependencies:
       '@csstools/css-parser-algorithms': 3.0.5(@csstools/css-tokenizer@3.0.4)
       '@csstools/css-syntax-patches-for-csstree': 1.1.6(css-tree@3.2.1)
@@ -2825,7 +2829,7 @@ snapshots:
       cosmiconfig: 9.0.2
       css-functions-list: 3.3.3
       css-tree: 3.2.1
-      debug: 4.4.3(supports-color@7.2.0)
+      debug: 4.4.3
       fast-glob: 3.3.3
       fastest-levenshtein: 1.0.16
       file-entry-cache: 11.1.5
@@ -2924,10 +2928,10 @@ snapshots:
 
   util-deprecate@1.0.2: {}
 
-  vite-node@3.2.4(supports-color@7.2.0):
+  vite-node@3.2.4:
     dependencies:
       cac: 6.7.14
-      debug: 4.4.3(supports-color@7.2.0)
+      debug: 4.4.3
       es-module-lexer: 1.7.0
       pathe: 2.0.3
       vite: 7.3.6
@@ -2956,7 +2960,7 @@ snapshots:
     optionalDependencies:
       fsevents: 2.3.3
 
-  vitest@3.2.7(jsdom@26.1.0(supports-color@7.2.0))(supports-color@7.2.0):
+  vitest@3.2.7(jsdom@26.1.0):
     dependencies:
       '@types/chai': 5.2.3
       '@vitest/expect': 3.2.7
@@ -2967,7 +2971,7 @@ snapshots:
       '@vitest/spy': 3.2.7
       '@vitest/utils': 3.2.7
       chai: 5.3.3
-      debug: 4.4.3(supports-color@7.2.0)
+      debug: 4.4.3
       expect-type: 1.4.0
       magic-string: 0.30.21
       pathe: 2.0.3
@@ -2979,10 +2983,10 @@ snapshots:
       tinypool: 1.1.1
       tinyrainbow: 2.0.0
       vite: 7.3.6
-      vite-node: 3.2.4(supports-color@7.2.0)
+      vite-node: 3.2.4
       why-is-node-running: 2.3.0
     optionalDependencies:
-      jsdom: 26.1.0(supports-color@7.2.0)
+      jsdom: 26.1.0
     transitivePeerDependencies:
       - jiti
       - less

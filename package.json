@@ -24,7 +24,7 @@
   },
   "homepage": "https://github.com/abarriuso/palafoxiana-redesign#readme",
   "devDependencies": {
-    "@eslint/js": "^9.18.0",
+    "@eslint/js": "^9.39.5",
     "eslint": "^9.18.0",
     "jsdom": "^26.0.0",
     "prettier": "^3.4.2",
