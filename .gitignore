@@ -1,1 +1,55 @@
+# RENOMBRAR A .gitignore al copiarlo al repo.
+#
+# El .gitignore de palafoxiana-redesign tenía una sola línea (node_modules/),
+# mientras que los de Analemas y melanoma son completos. Esto lo iguala.
+
+# Dependencias
 node_modules/
+
+# Artefactos de build
+dist/
+build/
+.cache/
+
+# Entorno y secretos
+.env
+.env.*
+.env.local
+secrets.*
+credentials.*
+
+# Claves y certificados
+*.key
+*.pem
+*.cert
+*.p12
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editores
+.vscode/
+.idea/
+*.suo
+*.user
+
+# Herramientas locales
+.claude/
+
+# Temporales y copias de seguridad
+*.tmp
+*.bak
+*.swp
+
+# Logs
+*.log
+logs/
+
+# Comprimidos
+*.zip
+*.tar.gz
+
+# Cobertura de tests
+coverage/
