@@ -13,11 +13,12 @@
 
 ---
 
-## Capturas
+## Ver el rediseño
 
-| Original | Rediseño |
-|:---:|:---:|
-| ![Original](screenshot-original.png) | ![Rediseño](screenshot-rework.png) |
+**[→ Demo en vivo](https://abarriuso.github.io/palafoxiana-redesign/)** · [Sitio original](https://www.palafoxiana.com/)
+
+> La demo se publica con `noindex`: es un rediseño conceptual y no debe competir en
+> buscadores con el sitio oficial de la institución.
 
 ---
 

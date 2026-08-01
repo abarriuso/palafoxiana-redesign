@@ -1,0 +1,44 @@
+# CI que NO existía. El repo tenía 30 tests de vitest y lint configurado,
+# pero ningún workflow los ejecutaba: solo había deploy.yml, así que se
+# publicaba a producción sin validar nada.
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lint-and-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+
+      - name: Lint (eslint + stylelint)
+        run: pnpm lint
+
+      - name: Tests (vitest)
+        run: pnpm test:run
