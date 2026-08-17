@@ -1,0 +1,8 @@
+# Terceros: no reformatear código vendorizado
+vendor/
+
+# Generados
+pnpm-lock.yaml
+dist/
+node_modules/
+coverage/

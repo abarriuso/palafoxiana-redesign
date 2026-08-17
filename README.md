@@ -2,6 +2,9 @@
 
 *Rediseño conceptual de la primera biblioteca pública de América*
 
+[![Deploy](https://github.com/abarriuso/palafoxiana-redesign/actions/workflows/deploy.yml/badge.svg)](https://github.com/abarriuso/palafoxiana-redesign/actions/workflows/deploy.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green)](LICENSE)
+
 [Demo en vivo](https://abarriuso.github.io/palafoxiana-redesign/) · [Sitio oficial](https://www.palafoxiana.com) · [Licencia MIT](LICENSE)
 
 ---
@@ -10,11 +13,12 @@
 
 ---
 
-## Capturas
+## Ver el rediseño
 
-| Original | Rediseño |
-|:---:|:---:|
-| ![Original](screenshot-original.png) | ![Rediseño](screenshot-rework.png) |
+**[→ Demo en vivo](https://abarriuso.github.io/palafoxiana-redesign/)** · [Sitio original](https://www.palafoxiana.com/)
+
+> La demo se publica con `noindex`: es un rediseño conceptual y no debe competir en
+> buscadores con el sitio oficial de la institución.
 
 ---
 
@@ -29,7 +33,7 @@ HTML5 semántico + ARIA    ·    CSS3 vanilla (0 dependencias)    ·    JavaScri
 | **Fuentes** | Lora · DM Sans · Prata | Self-hosted woff2 — 0 requests a Google Fonts |
 | **Smooth scroll** | [Lenis 1.1.18](https://github.com/darkroomengineering/lenis) | Servido localmente desde `vendor/` |
 | **Imágenes** | Sharp (AVIF + WebP, 3 anchos) | 33 fuentes → 231 variantes responsive |
-| **Build** | npm (dev) | Solo para tests/lint y optimización de imágenes |
+| **Build** | pnpm (dev) | Solo para tests/lint y optimización de imágenes |
 
 ---
 
@@ -106,8 +110,6 @@ HTML5 semántico + ARIA    ·    CSS3 vanilla (0 dependencias)    ·    JavaScri
 ├── tests/
 │   ├── logic.test.js   Tests unitarios de la lógica
 │   └── i18n.test.js    Cobertura de claves de traducción
-├── vendor/
-│   └── lenis.min.js   Smooth scroll library
 ├── favicon.ico        Generado desde el logo
 ├── robots.txt         Reglas para crawlers
 ├── sitemap.xml        Mapa del sitio
@@ -135,9 +137,5 @@ python3 -m http.server 8080
 
 ---
 
-<div align="center">
-
-**Para información oficial, eventos, catálogo o solicitudes formales:**
-[palafoxiana.com](https://www.palafoxiana.com) — 5 Oriente 5, 2º piso, Centro, Puebla, México
-
-</div>
+Para información oficial, eventos, catálogo o solicitudes formales:
+[palafoxiana.com](https://www.palafoxiana.com) — 5 Oriente 5, 2º piso, Centro, Puebla, México.
