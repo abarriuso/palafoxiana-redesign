@@ -1,3 +1,17 @@
 allowBuilds:
-  esbuild: set this to true or false
-  sharp: set this to true or false
+  esbuild: true
+  sharp: true
+
+minimumReleaseAgeExclude:
+  - brace-expansion@1.1.17
+
+# Fuerza versiones parcheadas de dependencias transitivas vulnerables
+# (reportadas por Dependabot/pnpm audit), sin subir de major las
+# dependencias directas que las arrastran. La línea 1.x de
+# brace-expansion se queda en su último parche (1.1.17) porque
+# minimatch@3.x (usado por eslint) rompe si se fuerza la mayor 5.x.
+overrides:
+  fast-uri@<3.1.4: ^3.1.4
+  postcss@<8.5.18: ^8.5.18
+  brace-expansion@<1.1.17: ^1.1.17
+  brace-expansion@>=2.0.0 <5.0.8: ^5.0.8
