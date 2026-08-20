@@ -340,10 +340,16 @@ function applyTheme(isDark) {
   //    al pasar de claro a oscuro.
   root.classList.add('no-theme-transition', 'theme-swap');
   root.setAttribute('data-theme', isDark ? 'dark' : 'light');
-  const themeMeta = document.querySelector('meta[name="theme-color"]');
-  if (themeMeta) {
-    themeMeta.setAttribute('content', isDark ? '#0e0d0b' : '#f3eee2');
-  }
+  // Con toggle manual, la barra del navegador debe seguir la elección del
+  // usuario y no la preferencia del SO. Quitamos el `media` de los metas
+  // (que sólo servía para el primer paint sin JS) y fijamos el color activo
+  // en todos ellos; si no, en un SO oscuro el meta dark seguiría ganando al
+  // pasar a claro.
+  const themeMetas = document.querySelectorAll('meta[name="theme-color"]');
+  themeMetas.forEach(meta => {
+    meta.removeAttribute('media');
+    meta.setAttribute('content', isDark ? '#0e0d0b' : '#f3eee2');
+  });
   // 2. Forzamos reflow y esperamos dos rAF para que el compositor tenga
   //    la textura nueva antes de restaurar los pseudo-elementos.
   void root.offsetHeight;
