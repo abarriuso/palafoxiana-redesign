@@ -2,6 +2,10 @@ allowBuilds:
   esbuild: true
   sharp: true
 
+# No instalar versiones publicadas hace menos de 24 h. Cuando le roban la
+# cuenta a un mantenedor de npm, el paquete malicioso suele estar publicado
+# unas pocas horas hasta que lo retiran; esperar cubre esa ventana.
+minimumReleaseAge: 1440
 minimumReleaseAgeExclude:
   - brace-expansion@1.1.18
 
