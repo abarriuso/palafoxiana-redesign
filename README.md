@@ -111,8 +111,7 @@ HTML5 semántico + ARIA    ·    CSS3 vanilla (0 dependencias)    ·    JavaScri
 │   ├── logic.test.js   Tests unitarios de la lógica
 │   └── i18n.test.js    Cobertura de claves de traducción
 ├── favicon.ico        Generado desde el logo
-├── robots.txt         Reglas para crawlers
-├── sitemap.xml        Mapa del sitio
+├── robots.txt         Reglas para crawlers (noindex)
 ├── LICENSE            MIT
 └── NOTICE             Attribution de imágenes
 ```
