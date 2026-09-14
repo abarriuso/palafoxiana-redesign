@@ -24,13 +24,13 @@
   },
   "homepage": "https://github.com/abarriuso/palafoxiana-redesign#readme",
   "devDependencies": {
-    "@eslint/js": "^9.18.0",
-    "eslint": "^9.18.0",
-    "jsdom": "^26.0.0",
-    "prettier": "^3.4.2",
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.10.0",
+    "jsdom": "^30.0.1",
+    "prettier": "^3.9.6",
     "sharp": "0.35.4",
     "stylelint": "^16.13.2",
-    "stylelint-config-standard": "^38.0.0",
+    "stylelint-config-standard": "^40.0.0",
     "vitest": "^4.1.11"
   }
 }
