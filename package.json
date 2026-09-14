@@ -29,7 +29,7 @@
     "jsdom": "^30.0.1",
     "prettier": "^3.9.6",
     "sharp": "0.35.4",
-    "stylelint": "^16.13.2",
+    "stylelint": "^17.15.0",
     "stylelint-config-standard": "^40.0.0",
     "vitest": "^4.1.11"
   }
