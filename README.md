@@ -20,6 +20,12 @@
 > La demo se publica con `noindex`: es un rediseño conceptual y no debe competir en
 > buscadores con el sitio oficial de la institución.
 
+## Capturas
+
+| Escritorio | Móvil |
+|:---:|:---:|
+| ![Rediseño Palafoxiana en escritorio](docs/screenshots/palafoxiana-redesign-desktop.png) | ![Rediseño Palafoxiana en móvil](docs/screenshots/palafoxiana-redesign-mobile.png) |
+
 ---
 
 ## Stack
