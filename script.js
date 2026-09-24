@@ -16,6 +16,7 @@ import {
   isHoneypotTriggered,
   computeScrollProgress,
   isScrolled,
+  pickLanguage,
 } from './src/logic.js';
 
 /* ── Constantes (números mágicos nombrados) ──────────────── */
@@ -366,7 +367,7 @@ let cachedI18nEls = null;
 let cachedI18nPlaceholderEls = null;
 
 function initLanguage() {
-  const stored = safeGet(STORAGE.lang) || 'es';
+  const stored = pickLanguage(safeGet(STORAGE.lang), window.navigator.language);
 
   cachedLangBtns = Array.from(document.querySelectorAll('.lang-btn'));
   cachedLangBtns.forEach(btn => {
