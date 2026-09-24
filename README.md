@@ -1,45 +1,47 @@
 # Biblioteca Palafoxiana
 
-*Rediseño conceptual de la primera biblioteca pública de América*
+*A concept redesign for the first public library in the Americas*
 
 [![Deploy](https://github.com/abarriuso/palafoxiana-redesign/actions/workflows/deploy.yml/badge.svg)](https://github.com/abarriuso/palafoxiana-redesign/actions/workflows/deploy.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green)](LICENSE)
 
-[Demo en vivo](https://abarriuso.github.io/palafoxiana-redesign/) · [Sitio oficial](https://www.palafoxiana.com) · [Licencia MIT](LICENSE)
+**English** · [Español](README.es.md)
+
+[Live demo](https://abarriuso.github.io/palafoxiana-redesign/) · [Official site](https://www.palafoxiana.com) · [MIT licence](LICENSE)
 
 ---
 
-> **Proyecto educativo de portafolio.** Sin afiliación, patrocinio ni autorización de la Biblioteca Palafoxiana, del Gobierno del Estado de Puebla, ni de UNESCO.
+> **Educational portfolio project.** Not affiliated with, sponsored or authorised by the Biblioteca Palafoxiana, the Government of the State of Puebla or UNESCO.
 
 ---
 
-## Ver el rediseño
+## See the redesign
 
-**[→ Demo en vivo](https://abarriuso.github.io/palafoxiana-redesign/)** · [Sitio original](https://www.palafoxiana.com/)
+**[→ Live demo](https://abarriuso.github.io/palafoxiana-redesign/)** · [Original site](https://www.palafoxiana.com/)
 
-> La demo se publica con `noindex`: es un rediseño conceptual y no debe competir en
-> buscadores con el sitio oficial de la institución.
+> The demo is published with `noindex`: it is a concept redesign and should not
+> compete in search engines with the institution's official site.
 
-## Capturas
+## Screenshots
 
-| Escritorio | Móvil |
+| Desktop | Mobile |
 |:---:|:---:|
-| ![Rediseño Palafoxiana en escritorio](docs/screenshots/palafoxiana-redesign-desktop.png) | ![Rediseño Palafoxiana en móvil](docs/screenshots/palafoxiana-redesign-mobile.png) |
+| ![Palafoxiana redesign on desktop](docs/screenshots/palafoxiana-redesign-desktop.png) | ![Palafoxiana redesign on mobile](docs/screenshots/palafoxiana-redesign-mobile.png) |
 
 ---
 
 ## Stack
 
 ```
-HTML5 semántico + ARIA    ·    CSS3 vanilla (0 dependencias)    ·    JavaScript vanilla (0 bundlers)
+Semantic HTML5 + ARIA    ·    Vanilla CSS3 (0 dependencies)    ·    Vanilla JavaScript (0 bundlers)
 ```
 
-| Componente | Tecnología | Detalle |
+| Component | Technology | Detail |
 |---|---|---|
-| **Fuentes** | Lora · DM Sans · Prata | Self-hosted woff2 — 0 requests a Google Fonts |
-| **Smooth scroll** | [Lenis 1.1.18](https://github.com/darkroomengineering/lenis) | Servido localmente desde `vendor/` |
-| **Imágenes** | Sharp (AVIF + WebP, 3 anchos) | 33 fuentes → 231 variantes responsive |
-| **Build** | pnpm (dev) | Solo para tests/lint y optimización de imágenes |
+| **Fonts** | Lora · DM Sans · Prata | Self-hosted woff2 — no requests to Google Fonts |
+| **Smooth scroll** | [Lenis 1.1.18](https://github.com/darkroomengineering/lenis) | Served locally from `vendor/` |
+| **Images** | Sharp | AVIF and WebP at three widths, with a JPEG fallback |
+| **Tooling** | pnpm (dev only) | Tests, lint and image optimisation |
 
 ---
 
@@ -48,83 +50,79 @@ HTML5 semántico + ARIA    ·    CSS3 vanilla (0 dependencias)    ·    JavaScri
 <details>
 <summary><strong>UI / UX</strong></summary>
 
-- Tema claro / oscuro — persistencia en `localStorage`, respeta `prefers-color-scheme`
-- i18n ES / EN — traducciones completas con switch en header
-- Galería lightbox — 20 fotos, navegación por teclado, swipe táctil y flechas
-- Scroll animado — fade-in con IntersectionObserver
-- Contadores animados — ease-out-cubic en las estadísticas
-- Menú responsive — hamburger en móvil, dropdowns en desktop
-- Formulario — validación HTML5, honeypot anti-spam, feedback visual
+- Light / dark theme — saved in `localStorage`, follows `prefers-color-scheme`
+- ES / EN i18n — full translations with a switch in the header
+- Lightbox gallery — 20 photos, keyboard navigation, touch swipe and arrows
+- Animated scroll — fade-in with IntersectionObserver
+- Animated counters — ease-out-cubic on the statistics
+- Responsive menu — hamburger on mobile, dropdowns on desktop
+- Form — HTML5 validation, anti-spam honeypot, visual feedback
 
 </details>
 
 <details>
 <summary><strong>Performance</strong></summary>
 
-| Métrica | Antes | Después |
+| Metric | Before | After |
 |---|---|---|
-| Imágenes | JPG sin optimizar | **AVIF/WebP responsive** (~−74% peso servido) |
-| CLS | Sin dimensiones | **0** (width/height en todas) |
-| LCP | Sin preload | **Hero precargada** + fetchpriority |
+| Images | Unoptimised JPG | **Responsive AVIF/WebP** (~−74% bytes served) |
+| CLS | No dimensions | **0** (width/height on every image) |
+| LCP | No preload | **Hero preloaded** + fetchpriority |
 | Fonts | Google Fonts CDN | **Self-hosted** woff2 |
-| CSS | — | **Carga estándar** (stylesheet) |
-| Lenis rAF | Loop infinito | **Se detiene al abrir el lightbox** |
+| Lenis rAF | Endless loop | **Stops while the lightbox is open** |
 
 </details>
 
 <details>
-<summary><strong>Accesibilidad</strong></summary>
+<summary><strong>Accessibility</strong></summary>
 
-- Skip link al contenido principal
-- Roles ARIA (`banner`, `main`, `contentinfo`, `dialog`, `tablist`/`tab`/`tabpanel`)
-- Navegación por teclado completa: dropdowns con `aria-controls` + cierre con Escape, tabs con flechas, lightbox con focus trap y `inert` de fondo
-- `role="switch"` + `aria-checked` en el toggle de tema
-- `aria-invalid` en errores de formulario
-- Contraste AA, `:focus-visible`, `forced-colors` y `prefers-reduced-motion`
-- Contenido visible sin JS (progressive enhancement)
-- Alt text descriptivo en todas las imágenes
+- Skip link to the main content
+- ARIA roles (`banner`, `main`, `contentinfo`, `dialog`, `tablist`/`tab`/`tabpanel`)
+- Full keyboard navigation: dropdowns with `aria-controls` and Escape to close, tabs with arrow keys, lightbox with a focus trap and `inert` background
+- `role="switch"` + `aria-checked` on the theme toggle
+- `aria-invalid` on form errors
+- AA contrast, `:focus-visible`, `forced-colors` and `prefers-reduced-motion`
+- Content visible without JS (progressive enhancement)
+- Descriptive alt text on every image
 
 </details>
 
 <details>
-<summary><strong>Seguridad</strong></summary>
+<summary><strong>Security</strong></summary>
 
-- Content Security Policy (meta-tag, compatible con GitHub Pages)
-- Fuentes e imágenes self-hosted (0 requests a terceros en runtime)
-- `rel="noopener noreferrer"` en todos los enlaces externos
-- Honeypot anti-spam en el formulario (demo, sin backend)
+- Content Security Policy (meta tag, compatible with GitHub Pages)
+- Self-hosted fonts and images (no third-party requests at runtime)
+- `rel="noopener noreferrer"` on every external link
+- Anti-spam honeypot on the form (demo, no backend)
 
 </details>
 
 ---
 
-## Estructura
+## Layout
 
 ```
-├── assets/            33 imágenes optimizadas (WebP + JPEG)
-│   ├── MG_*.jpg       Galería de la biblioteca (20 fotos)
-│   ├── logo.jpg       Logotipo institucional
-│   └── ...            Incunables, retratos, interiores
-├── fonts/             9 fuentes woff2 self-hosted
+├── assets/            Optimised images (AVIF and WebP at three widths, JPEG fallback)
+├── fonts/             9 self-hosted woff2 fonts
 ├── vendor/
 │   └── lenis.min.js   Smooth scroll library
-├── index.html         HTML semántico + ARIA + CSP + JSON-LD
-├── styles.css         ~2,400 líneas CSS vanilla
-├── script.js          Módulo ES (lógica en src/logic.js)
+├── index.html         Semantic HTML + ARIA + CSP + JSON-LD
+├── styles.css         ~2,400 lines of vanilla CSS
+├── script.js          ES module (logic in src/logic.js)
 ├── src/
-│   └── logic.js        Lógica pura testeable (Vitest)
+│   └── logic.js       Pure, testable logic (Vitest)
 ├── tests/
-│   ├── logic.test.js   Tests unitarios de la lógica
-│   └── i18n.test.js    Cobertura de claves de traducción
-├── favicon.ico        Generado desde el logo
-├── robots.txt         Reglas para crawlers (noindex)
+│   ├── logic.test.js  Unit tests for the logic
+│   └── i18n.test.js   Translation key coverage
+├── favicon.ico        Generated from the logo
+├── robots.txt         Crawler rules (noindex)
 ├── LICENSE            MIT
-└── NOTICE             Attribution de imágenes
+└── NOTICE             Image and content attribution
 ```
 
 ---
 
-## Ejecutar localmente
+## Running it locally
 
 ```bash
 python3 -m http.server 8080
@@ -133,14 +131,14 @@ python3 -m http.server 8080
 
 ---
 
-## Licencia
+## Licence
 
-| Archivo | Licencia |
+| Files | Licence |
 |---|---|
-| Código (HTML, CSS, JS) | [MIT](LICENSE) |
-| Imágenes | CC BY-SA / Dominio público — ver [NOTICE](NOTICE) |
+| Code (HTML, CSS, JS) and documentation | [MIT](LICENSE) |
+| Photographs, historical reproductions, institutional texts, name and logo | Not covered by the MIT licence: © their owners, used for educational/portfolio purposes only — see [NOTICE](NOTICE) |
 
 ---
 
-Para información oficial, eventos, catálogo o solicitudes formales:
-[palafoxiana.com](https://www.palafoxiana.com) — 5 Oriente 5, 2º piso, Centro, Puebla, México.
+For official information, events, the catalogue or formal requests:
+[palafoxiana.com](https://www.palafoxiana.com) — 5 Oriente 5, 2nd floor, Centro, Puebla, Mexico.

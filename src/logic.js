@@ -18,6 +18,18 @@ export function resolveTheme(stored, prefersDark) {
 }
 
 /**
+ * Idioma inicial de la página: la elección guardada; si no la hay, el del
+ * navegador (español si empieza por "es", inglés en cualquier otro caso).
+ * @param {string|null} stored      Valor guardado ('es' | 'en' | null)
+ * @param {string} [browserLang]    navigator.language
+ * @returns {'es'|'en'}
+ */
+export function pickLanguage(stored, browserLang) {
+  if (stored === 'es' || stored === 'en') return stored;
+  return /^es\b/i.test(browserLang || '') ? 'es' : 'en';
+}
+
+/**
  * Indica si una tarjeta de libro debe mostrarse para un filtro dado.
  * @param {string} category Categorías separadas por espacios (p. ej. "libros teologia")
  * @param {string} filter   Filtro activo ('todos' | 'incunable' | 'libros' | ...)

@@ -1,7 +1,7 @@
 {
   "name": "palafoxiana",
   "version": "1.0.0",
-  "description": "Rediseño conceptual (portafolio educativo) de la web de la Biblioteca Palafoxiana. HTML, CSS y JavaScript sin dependencias en runtime. Sin afiliación con la institución.",
+  "description": "Concept redesign (educational portfolio) of the Biblioteca Palafoxiana website. HTML, CSS and JavaScript with no runtime dependencies. Not affiliated with the institution.",
   "private": true,
   "type": "module",
   "scripts": {

@@ -12,7 +12,27 @@ import {
   isHoneypotTriggered,
   computeScrollProgress,
   isScrolled,
+  pickLanguage,
 } from '../src/logic.js';
+
+describe('pickLanguage', () => {
+  it('keeps a saved choice', () => {
+    expect(pickLanguage('en', 'es-MX')).toBe('en');
+    expect(pickLanguage('es', 'en-US')).toBe('es');
+  });
+
+  it('follows the browser when nothing is saved', () => {
+    expect(pickLanguage(null, 'es-MX')).toBe('es');
+    expect(pickLanguage(null, 'es')).toBe('es');
+    expect(pickLanguage(null, 'en-GB')).toBe('en');
+    expect(pickLanguage(null, 'fr-FR')).toBe('en');
+    expect(pickLanguage(null, undefined)).toBe('en');
+  });
+
+  it('ignores an unknown saved value', () => {
+    expect(pickLanguage('de', 'es-ES')).toBe('es');
+  });
+});
 
 describe('resolveTheme', () => {
   it('returns true when stored is "dark"', () => {
