@@ -1,10 +1,4 @@
-# Despliegue a GitHub Pages, ahora condicionado a que lint y tests pasen.
-#
-# Cambios:
-#  1. Job `verify` previo (format:check + lint + test:run). Antes se publicaba
-#     sin ejecutar los 30 tests que ya existían en el repo.
-#  2. `permissions: {}` a nivel de workflow; `pages: write` solo en el job que
-#     publica.
+# Publishes only the site files, and only after lint and tests pass.
 name: Deploy to GitHub Pages
 
 on:
@@ -54,10 +48,15 @@ jobs:
 
       - uses: actions/configure-pages@v6
 
+      - name: Stage site files
+        run: |
+          mkdir _site
+          cp -r index.html styles.css script.js src assets fonts vendor favicon.ico robots.txt _site/
+
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v5
         with:
-          path: '.'
+          path: _site
 
   deploy:
     needs: build
