@@ -334,15 +334,22 @@ header.scrolled{
 
 /* logo y switch de tema */
 .logo{
+  min-width:0;
   transition:opacity var(--dur-md) var(--ease);
 }
 
-.logo-img,
-.footer-logo-img{
-  height:42px;
+/* Ancho fijo y alto automático: el logo conserva su proporción y, si falta
+   sitio, se reduce entero en vez de aplastarse. */
+.logo-img{
+  width:203px;
+  max-width:100%;
+  height:auto;
 }
 
-.footer-logo-img{ height:36px; }
+.footer-logo-img{
+  width:auto;
+  height:36px;
+}
 
 
 [data-theme="dark"] .logo-img,
@@ -568,6 +575,13 @@ header.scrolled{
              visibility var(--dur) var(--ease);
 }
 
+/* .main-nav ul pone en fila también los submenús; aquí van en columna */
+.main-nav .dropdown-menu{
+  flex-direction:column;
+  align-items:stretch;
+  gap:0;
+}
+
 /* flechita decorativa */
 .dropdown-menu::before{
   content:'';
@@ -618,8 +632,8 @@ header.scrolled{
   border-left-color:var(--accent);
 }
 
-/* ── Dropdown en menú móvil (≤960px) ────────────────── */
-@media (max-width:960px){
+/* ── Dropdown en menú móvil (≤1279px) ────────────────── */
+@media (width < 1280px){
 
   .has-dropdown{
     display:block;
@@ -691,6 +705,12 @@ header.scrolled{
     outline-offset:-2px;
     color:var(--accent);
   }
+}
+
+/* Portátiles (1280-1439px): el menú completo solo cabe compactado */
+@media (1280px <= width < 1440px){
+  .main-nav > ul > li > a{ padding:.65rem .5rem; letter-spacing:.06em; }
+  .logo-img{ width:174px; }
 }
 
 .header-controls{
@@ -2230,7 +2250,7 @@ footer{
   }
 }
 
-@media (max-width:960px){
+@media (width < 1280px){
   .menu-toggle{ display:flex; }
 
   .main-nav{ justify-content:flex-end; }
