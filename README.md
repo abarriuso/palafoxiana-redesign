@@ -99,6 +99,35 @@ Semantic HTML5 + ARIA    ·    Vanilla CSS3 (0 dependencies)    ·    Vanilla Ja
 
 ---
 
+## How it is built
+
+One HTML page, one stylesheet and one ES module; the logic that can be tested
+without a browser lives in `src/logic.js`.
+
+```mermaid
+flowchart LR
+  HTML["index.html<br/>semantic HTML · ARIA · CSP · JSON-LD<br/>content readable without JS"] --> JS["script.js<br/>ES module"]
+  HTML --> CSS["styles.css<br/>light / dark · forced-colors<br/>prefers-reduced-motion"]
+  JS --> LOGIC["src/logic.js<br/>pure functions"]
+  JS --> UI["theme · ES/EN · menus and dropdowns<br/>collection tabs · lightbox · counters<br/>contact form with honeypot"]
+  JS --> LENIS["vendor/lenis.min.js<br/>smooth scroll, paused in the lightbox"]
+  TESTS["tests/ (Vitest + jsdom)<br/>logic · translation keys"] -.-> LOGIC
+```
+
+Images are prepared once with Node and the result is committed; the deploy only
+copies the site files after lint and tests pass:
+
+```mermaid
+flowchart LR
+  SRC["Source photos<br/>JPEG / PNG"] --> OPT["optimize-images.mjs (sharp)<br/>AVIF q60 · WebP q75<br/>400 · 800 · 1200 px + JPEG"]
+  OPT --> WRAP["wrap-picture.mjs<br/>&lt;picture&gt; with sizes per image type"]
+  WRAP --> HTML["index.html"]
+  HTML --> CI["GitHub Actions<br/>ESLint · Stylelint · Vitest"]
+  CI -->|only the site files| PAGES["GitHub Pages<br/>noindex"]
+```
+
+---
+
 ## Layout
 
 ```
