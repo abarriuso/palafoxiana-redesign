@@ -1,5 +1,5 @@
 User-agent: *
 Disallow: /
 
-# Rediseño conceptual no oficial. No indexar.
-# Sitio oficial: https://www.palafoxiana.com/
+# Unofficial concept redesign. Do not index.
+# Official site: https://www.palafoxiana.com/
