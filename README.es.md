@@ -45,7 +45,7 @@ HTML5 semántico + ARIA    ·    CSS3 vanilla (0 dependencias)    ·    JavaScri
 
 ---
 
-## Features
+## Funcionalidades
 
 <details>
 <summary><strong>UI / UX</strong></summary>
@@ -96,6 +96,35 @@ HTML5 semántico + ARIA    ·    CSS3 vanilla (0 dependencias)    ·    JavaScri
 - Honeypot anti-spam en el formulario (demo, sin backend)
 
 </details>
+
+---
+
+## Cómo está hecho
+
+Una página HTML, una hoja de estilos y un módulo ES; la lógica que se puede
+probar sin navegador vive en `src/logic.js`.
+
+```mermaid
+flowchart LR
+  HTML["index.html<br/>HTML semántico · ARIA · CSP · JSON-LD<br/>contenido legible sin JS"] --> JS["script.js<br/>módulo ES"]
+  HTML --> CSS["styles.css<br/>claro / oscuro · forced-colors<br/>prefers-reduced-motion"]
+  JS --> LOGIC["src/logic.js<br/>funciones puras"]
+  JS --> UI["tema · ES/EN · menús y desplegables<br/>pestañas de colección · lightbox · contadores<br/>formulario con honeypot"]
+  JS --> LENIS["vendor/lenis.min.js<br/>scroll suave, pausado en el lightbox"]
+  TESTS["tests/ (Vitest + jsdom)<br/>lógica · claves de traducción"] -.-> LOGIC
+```
+
+Las imágenes se preparan una vez con Node y el resultado se versiona; el deploy
+solo copia los archivos de la web tras pasar lint y tests:
+
+```mermaid
+flowchart LR
+  SRC["Fotos originales<br/>JPEG / PNG"] --> OPT["optimize-images.mjs (sharp)<br/>AVIF q60 · WebP q75<br/>400 · 800 · 1200 px + JPEG"]
+  OPT --> WRAP["wrap-picture.mjs<br/>&lt;picture&gt; con sizes por tipo de imagen"]
+  WRAP --> HTML["index.html"]
+  HTML --> CI["GitHub Actions<br/>ESLint · Stylelint · Vitest"]
+  CI -->|solo los archivos de la web| PAGES["GitHub Pages<br/>noindex"]
+```
 
 ---
 
