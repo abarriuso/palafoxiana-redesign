@@ -23,3 +23,7 @@ overrides:
   source-map-js@<1.2.2: ^1.2.2
   undici@>=8.0.0 <8.12.2: ^8.12.2
   vite@>=7.0.0 <7.3.7: ^7.3.7
+  # minimatch (GHSA-g3hv-75wg-m249) solo tiene parche en la 11: la 10 que
+  # piden eslint 10 y @eslint/config-array no lo recibe. Se sube de major
+  # (excepción al criterio de arriba); lint y tests se comprobaron igual.
+  minimatch@>=7.0.0 <11.0.1: ^11.0.2
