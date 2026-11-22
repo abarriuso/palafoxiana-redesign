@@ -96,10 +96,13 @@ export function safeSetHTML(el, html) {
   };
   const HREF_RE = /^(https?:\/\/|mailto:|tel:|#)/i;
 
-  const tmp = document.createElement('div');
+  // <template> parsea sin ejecutar nada. En un <div>, aunque no esté en el
+  // documento, un <img onerror> empieza a cargar y su manejador se ejecuta
+  // antes de que el bucle de abajo lo descarte.
+  const tmp = document.createElement('template');
   tmp.innerHTML = html;
   el.textContent = '';
-  for (const child of tmp.childNodes) {
+  for (const child of tmp.content.childNodes) {
     if (child.nodeType === 3) {
       el.appendChild(child.cloneNode(true));
     } else if (child.nodeType === 1 && ALLOWED_TAGS.includes(child.tagName)) {
