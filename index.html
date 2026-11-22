@@ -90,7 +90,6 @@
     Rediseño conceptual con fines educativos. <strong>No es el sitio oficial</strong> de la Biblioteca Palafoxiana ni tiene relación con la institución.
     Sitio oficial: <a href="https://www.palafoxiana.com/" rel="noopener nofollow external" style="color:#fff;text-decoration:underline">palafoxiana.com</a>
   </div>
-<div class="scroll-progress" id="scroll-progress"></div>
 
 <a href="#main" class="skip-link">Saltar al contenido principal</a>
 
@@ -181,37 +180,30 @@
 
 <main id="main" tabindex="-1">
 
-<section id="hero" class="scroll-fade">
+<section id="hero">
 
   <div class="hero-content">
 
-    <div class="hero-badge" data-i18n="hero.badge">
-      UNESCO · Memoria del Mundo · 2005
+    <div class="hero-text">
+
+      <p class="hero-meta">
+        <span class="hero-year">1646</span>
+        <span class="hero-location" data-i18n="hero.location">Puebla, México</span>
+      </p>
+
+      <h1 class="hero-title" data-i18n="hero.title">Biblioteca<br>Palafoxiana</h1>
+
+      <p class="hero-subtitle" data-i18n="hero.subtitle">La primera biblioteca pública de América</p>
+
+      <p class="hero-badge" data-i18n="hero.badge">UNESCO · Memoria del Mundo · 2005</p>
+
     </div>
 
-    <div class="hero-year-line" aria-hidden="true">
-      <span class="hero-rule"></span>
-      <span class="hero-year">1646</span>
-      <span class="hero-rule"></span>
-    </div>
-
-    <picture>
-  <source type="image/avif" srcset="assets/palafoxiana-hero-400.avif 400w, assets/palafoxiana-hero-800.avif 800w, assets/palafoxiana-hero-1200.avif 1200w" sizes="100vw" />
-  <source type="image/webp" srcset="assets/palafoxiana-hero-400.webp 400w, assets/palafoxiana-hero-800.webp 800w, assets/palafoxiana-hero-1200.webp 1200w" sizes="100vw" />
+    <picture class="hero-media">
+  <source type="image/avif" srcset="assets/palafoxiana-hero-400.avif 400w, assets/palafoxiana-hero-800.avif 800w, assets/palafoxiana-hero-1200.avif 1200w" sizes="(max-width:768px) 100vw, 40vw" />
+  <source type="image/webp" srcset="assets/palafoxiana-hero-400.webp 400w, assets/palafoxiana-hero-800.webp 800w, assets/palafoxiana-hero-1200.webp 1200w" sizes="(max-width:768px) 100vw, 40vw" />
   <img src="assets/palafoxiana-hero-1200.jpg" alt="Nave principal de la Biblioteca Palafoxiana" width="1200" height="1800" fetchpriority="high" decoding="async" />
 </picture>
-
-    <h1 class="hero-title" data-i18n="hero.title">
-      Biblioteca<br>Palafoxiana
-    </h1>
-
-    <p class="hero-subtitle" data-i18n="hero.subtitle">
-      La primera biblioteca pública de América
-    </p>
-
-    <p class="hero-location" data-i18n="hero.location">
-      Puebla, México
-    </p>
 
   </div>
 
@@ -224,47 +216,29 @@
     <div class="section-header">
       <span class="section-tag" data-i18n="visit.tag">Visitar</span>
       <h2 data-i18n="visit.title">Planifica tu visita</h2>
-      <div class="section-rule"></div>
     </div>
 
     <div class="info-grid">
 
       <article class="info-card">
-        <svg class="info-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true">
-          <circle cx="12" cy="12" r="9"/>
-          <path d="M12 7v5l3 2"/>
-        </svg>
         <h3 data-i18n="visit.hours">Horarios</h3>
         <p data-i18n="visit.hours-detail">Martes a domingo<br>10:00 – 18:00 h</p>
         <p class="info-note" data-i18n="visit.hours-note">Lunes cerrado</p>
       </article>
 
       <article class="info-card">
-        <svg class="info-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true">
-          <path d="M12 22s7-7.5 7-13a7 7 0 1 0-14 0c0 5.5 7 13 7 13z"/>
-          <circle cx="12" cy="9" r="2.5"/>
-        </svg>
         <h3 data-i18n="visit.location">Ubicación</h3>
         <p data-i18n="visit.location-detail">5 Oriente Núm. 5, 2º piso<br>Casa de Cultura, Centro, Puebla</p>
         <a href="https://maps.google.com/?q=Biblioteca+Palafoxiana,+5+Oriente+5,+Puebla" target="_blank" rel="noopener noreferrer" class="info-link" data-i18n="visit.location-link">Cómo llegar →</a>
       </article>
 
       <article class="info-card">
-        <svg class="info-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true">
-          <path d="M3 9a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v2a2 2 0 0 0 0 4v2a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-2a2 2 0 0 0 0-4z"/>
-          <path d="M10 7v10"/>
-        </svg>
         <h3 data-i18n="visit.admission">Entrada</h3>
         <p data-i18n="visit.admission-detail">$40 MXN general<br>Estudiantes: $20 MXN</p>
         <p class="info-note" data-i18n="visit.admission-note">Martes entrada libre</p>
       </article>
 
       <article class="info-card">
-        <svg class="info-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true">
-          <path d="M9 18V5l12-2v13"/>
-          <circle cx="6" cy="18" r="3"/>
-          <circle cx="18" cy="16" r="3"/>
-        </svg>
         <h3 data-i18n="visit.services">Servicios</h3>
         <p data-i18n="visit.services-detail">Visitas guiadas gratuitas<br>Audioguías y exposiciones</p>
         <p class="info-note" data-i18n="visit.services-note">Sala temporal de exposiciones</p>
@@ -283,15 +257,14 @@
 
 <section id="historia" class="scroll-fade section-warm">
 
-  <div class="section-content historia-layout">
+  <div class="section-content">
+
+    <div class="section-header">
+      <span class="section-tag" data-i18n="history.tag">Historia</span>
+      <h2 data-i18n="history.title">Biblioteca · Juan de Palafox</h2>
+    </div>
 
     <div class="historia-text">
-
-      <div class="section-header">
-        <span class="section-tag" data-i18n="history.tag">Historia</span>
-        <h2 data-i18n="history.title">Biblioteca · Juan de Palafox</h2>
-        <div class="section-rule"></div>
-      </div>
 
       <p data-i18n="history.p1">
         En 1646 el obispo de Puebla <strong>Juan de Palafox y Mendoza</strong> donó al seminario su colección personal de 5,000 volúmenes, con la condición de que cualquier persona que supiera leer pudiera consultarla. Fue el acto fundacional de la primera biblioteca pública de América.
@@ -307,16 +280,14 @@
 
     </div>
 
-    <div class="historia-image">
-      <figure class="historia-figure">
+    <figure class="historia-figure">
         <picture>
-  <source type="image/avif" srcset="assets/grabdo-palafox375x566_oj8s4c-400.avif 400w, assets/grabdo-palafox375x566_oj8s4c-800.avif 800w, assets/grabdo-palafox375x566_oj8s4c-1200.avif 1200w" sizes="(max-width:600px) 100vw, 50vw" />
-  <source type="image/webp" srcset="assets/grabdo-palafox375x566_oj8s4c-400.webp 400w, assets/grabdo-palafox375x566_oj8s4c-800.webp 800w, assets/grabdo-palafox375x566_oj8s4c-1200.webp 1200w" sizes="(max-width:600px) 100vw, 50vw" />
+  <source type="image/avif" srcset="assets/grabdo-palafox375x566_oj8s4c-400.avif 400w, assets/grabdo-palafox375x566_oj8s4c-800.avif 800w, assets/grabdo-palafox375x566_oj8s4c-1200.avif 1200w" sizes="(max-width:768px) 50vw, 300px" />
+  <source type="image/webp" srcset="assets/grabdo-palafox375x566_oj8s4c-400.webp 400w, assets/grabdo-palafox375x566_oj8s4c-800.webp 800w, assets/grabdo-palafox375x566_oj8s4c-1200.webp 1200w" sizes="(max-width:768px) 50vw, 300px" />
   <img src="assets/grabdo-palafox375x566_oj8s4c-1200.jpg" alt="Juan de Palafox y Mendoza, fundador de la Biblioteca Palafoxiana" width="424" height="587" loading="lazy" decoding="async" />
 </picture>
         <figcaption class="imagen-caption">Juan de Palafox · 1646</figcaption>
       </figure>
-    </div>
 
   </div>
 
@@ -326,111 +297,56 @@
 
   <div class="section-content">
 
-    <div class="section-header centered">
+    <div class="section-header">
       <span class="section-tag" data-i18n="gallery.tag">Galería</span>
       <h2 data-i18n="gallery.title">Biblioteca en imágenes</h2>
-      <div class="section-rule"></div>
     </div>
 
-    <div class="gallery-grid collapsed" id="gallery-grid">
+    <div class="gallery-grid" id="gallery-grid">
       <button type="button" class="gallery-item" data-index="0" aria-label="Abrir galería en la imagen 1">
         <picture>
-  <source type="image/avif" srcset="assets/MG_2220-400.avif 400w, assets/MG_2220-800.avif 800w, assets/MG_2220-1200.avif 1200w" sizes="(max-width:600px) 50vw, (max-width:1024px) 33vw, 280px" />
-  <source type="image/webp" srcset="assets/MG_2220-400.webp 400w, assets/MG_2220-800.webp 800w, assets/MG_2220-1200.webp 1200w" sizes="(max-width:600px) 50vw, (max-width:1024px) 33vw, 280px" />
+  <source type="image/avif" srcset="assets/MG_2220-400.avif 400w, assets/MG_2220-800.avif 800w, assets/MG_2220-1200.avif 1200w" sizes="(max-width:600px) 50vw, (max-width:1240px) 33vw, 400px" />
+  <source type="image/webp" srcset="assets/MG_2220-400.webp 400w, assets/MG_2220-800.webp 800w, assets/MG_2220-1200.webp 1200w" sizes="(max-width:600px) 50vw, (max-width:1240px) 33vw, 400px" />
   <img src="assets/MG_2220-1200.jpg" alt="Sala principal de la Biblioteca Palafoxiana" width="1200" height="801" loading="lazy" decoding="async" />
 </picture>
       </button>
       <button type="button" class="gallery-item" data-index="1" aria-label="Abrir galería en la imagen 2">
         <picture>
-  <source type="image/avif" srcset="assets/MG_2221-400.avif 400w, assets/MG_2221-800.avif 800w, assets/MG_2221-1200.avif 1200w" sizes="(max-width:600px) 50vw, (max-width:1024px) 33vw, 280px" />
-  <source type="image/webp" srcset="assets/MG_2221-400.webp 400w, assets/MG_2221-800.webp 800w, assets/MG_2221-1200.webp 1200w" sizes="(max-width:600px) 50vw, (max-width:1024px) 33vw, 280px" />
-  <img src="assets/MG_2221-1200.jpg" alt="Estantería de cedro de la Biblioteca Palafoxiana" width="1200" height="801" loading="lazy" decoding="async" />
+  <source type="image/avif" srcset="assets/MG_2237-400.avif 400w, assets/MG_2237-800.avif 800w, assets/MG_2237-1200.avif 1200w" sizes="(max-width:600px) 50vw, (max-width:1240px) 33vw, 400px" />
+  <source type="image/webp" srcset="assets/MG_2237-400.webp 400w, assets/MG_2237-800.webp 800w, assets/MG_2237-1200.webp 1200w" sizes="(max-width:600px) 50vw, (max-width:1240px) 33vw, 400px" />
+  <img src="assets/MG_2237-1200.jpg" alt="Anaqueles de la biblioteca" width="1200" height="801" loading="lazy" decoding="async" />
 </picture>
       </button>
       <button type="button" class="gallery-item" data-index="2" aria-label="Abrir galería en la imagen 3">
         <picture>
-  <source type="image/avif" srcset="assets/MG_2234-400.avif 400w, assets/MG_2234-800.avif 800w, assets/MG_2234-1200.avif 1200w" sizes="(max-width:600px) 50vw, (max-width:1024px) 33vw, 280px" />
-  <source type="image/webp" srcset="assets/MG_2234-400.webp 400w, assets/MG_2234-800.webp 800w, assets/MG_2234-1200.webp 1200w" sizes="(max-width:600px) 50vw, (max-width:1024px) 33vw, 280px" />
-  <img src="assets/MG_2234-1200.jpg" alt="Detalle de encuadernaciones antiguas" width="1200" height="801" loading="lazy" decoding="async" />
+  <source type="image/avif" srcset="assets/MG_2278-400.avif 400w, assets/MG_2278-800.avif 800w, assets/MG_2278-1200.avif 1200w" sizes="(max-width:600px) 50vw, (max-width:1240px) 33vw, 400px" />
+  <source type="image/webp" srcset="assets/MG_2278-400.webp 400w, assets/MG_2278-800.webp 800w, assets/MG_2278-1200.webp 1200w" sizes="(max-width:600px) 50vw, (max-width:1240px) 33vw, 400px" />
+  <img src="assets/MG_2278-1200.jpg" alt="Detalle arquitectónico de la sala" width="1200" height="801" loading="lazy" decoding="async" />
 </picture>
       </button>
       <button type="button" class="gallery-item" data-index="3" aria-label="Abrir galería en la imagen 4">
         <picture>
-  <source type="image/avif" srcset="assets/MG_2235-400.avif 400w, assets/MG_2235-800.avif 800w, assets/MG_2235-1200.avif 1200w" sizes="(max-width:600px) 50vw, (max-width:1024px) 33vw, 280px" />
-  <source type="image/webp" srcset="assets/MG_2235-400.webp 400w, assets/MG_2235-800.webp 800w, assets/MG_2235-1200.webp 1200w" sizes="(max-width:600px) 50vw, (max-width:1024px) 33vw, 280px" />
-  <img src="assets/MG_2235-1200.jpg" alt="Colección de libros históricos" width="1200" height="801" loading="lazy" decoding="async" />
+  <source type="image/avif" srcset="assets/MG_2285-400.avif 400w, assets/MG_2285-800.avif 800w, assets/MG_2285-1200.avif 1200w" sizes="(max-width:600px) 50vw, (max-width:1240px) 33vw, 400px" />
+  <source type="image/webp" srcset="assets/MG_2285-400.webp 400w, assets/MG_2285-800.webp 800w, assets/MG_2285-1200.webp 1200w" sizes="(max-width:600px) 50vw, (max-width:1240px) 33vw, 400px" />
+  <img src="assets/MG_2285-1200.jpg" alt="Sala lateral de lectura" width="1200" height="801" loading="lazy" decoding="async" />
 </picture>
       </button>
       <button type="button" class="gallery-item" data-index="4" aria-label="Abrir galería en la imagen 5">
         <picture>
-  <source type="image/avif" srcset="assets/MG_2237-400.avif 400w, assets/MG_2237-800.avif 800w, assets/MG_2237-1200.avif 1200w" sizes="(max-width:600px) 50vw, (max-width:1024px) 33vw, 280px" />
-  <source type="image/webp" srcset="assets/MG_2237-400.webp 400w, assets/MG_2237-800.webp 800w, assets/MG_2237-1200.webp 1200w" sizes="(max-width:600px) 50vw, (max-width:1024px) 33vw, 280px" />
-  <img src="assets/MG_2237-1200.jpg" alt="Anaqueles de la biblioteca" width="1200" height="801" loading="lazy" decoding="async" />
+  <source type="image/avif" srcset="assets/MG_2306-400.avif 400w, assets/MG_2306-800.avif 800w, assets/MG_2306-1200.avif 1200w" sizes="(max-width:600px) 50vw, (max-width:1240px) 33vw, 400px" />
+  <source type="image/webp" srcset="assets/MG_2306-400.webp 400w, assets/MG_2306-800.webp 800w, assets/MG_2306-1200.webp 1200w" sizes="(max-width:600px) 50vw, (max-width:1240px) 33vw, 400px" />
+  <img src="assets/MG_2306-1200.jpg" alt="Volúmenes encuadernados en piel" width="1200" height="801" loading="lazy" decoding="async" />
 </picture>
       </button>
       <button type="button" class="gallery-item" data-index="5" aria-label="Abrir galería en la imagen 6">
         <picture>
-  <source type="image/avif" srcset="assets/MG_2278-400.avif 400w, assets/MG_2278-800.avif 800w, assets/MG_2278-1200.avif 1200w" sizes="(max-width:600px) 50vw, (max-width:1024px) 33vw, 280px" />
-  <source type="image/webp" srcset="assets/MG_2278-400.webp 400w, assets/MG_2278-800.webp 800w, assets/MG_2278-1200.webp 1200w" sizes="(max-width:600px) 50vw, (max-width:1024px) 33vw, 280px" />
-  <img src="assets/MG_2278-1200.jpg" alt="Detalle arquitectónico de la sala" width="1200" height="801" loading="lazy" decoding="async" />
-</picture>
-      </button>
-      <button type="button" class="gallery-item" data-index="6" aria-label="Abrir galería en la imagen 7">
-        <picture>
-  <source type="image/avif" srcset="assets/MG_2283-400.avif 400w, assets/MG_2283-800.avif 800w, assets/MG_2283-1200.avif 1200w" sizes="(max-width:600px) 50vw, (max-width:1024px) 33vw, 280px" />
-  <source type="image/webp" srcset="assets/MG_2283-400.webp 400w, assets/MG_2283-800.webp 800w, assets/MG_2283-1200.webp 1200w" sizes="(max-width:600px) 50vw, (max-width:1024px) 33vw, 280px" />
-  <img src="assets/MG_2283-1200.jpg" alt="Estantes con volúmenes antiguos" width="1200" height="801" loading="lazy" decoding="async" />
-</picture>
-      </button>
-      <button type="button" class="gallery-item" data-index="7" aria-label="Abrir galería en la imagen 8">
-        <picture>
-  <source type="image/avif" srcset="assets/MG_2285-400.avif 400w, assets/MG_2285-800.avif 800w, assets/MG_2285-1200.avif 1200w" sizes="(max-width:600px) 50vw, (max-width:1024px) 33vw, 280px" />
-  <source type="image/webp" srcset="assets/MG_2285-400.webp 400w, assets/MG_2285-800.webp 800w, assets/MG_2285-1200.webp 1200w" sizes="(max-width:600px) 50vw, (max-width:1024px) 33vw, 280px" />
-  <img src="assets/MG_2285-1200.jpg" alt="Sala lateral de lectura" width="1200" height="801" loading="lazy" decoding="async" />
-</picture>
-      </button>
-      <button type="button" class="gallery-item" data-index="8" aria-label="Abrir galería en la imagen 9">
-        <picture>
-  <source type="image/avif" srcset="assets/MG_2286-400.avif 400w, assets/MG_2286-800.avif 800w, assets/MG_2286-1200.avif 1200w" sizes="(max-width:600px) 50vw, (max-width:1024px) 33vw, 280px" />
-  <source type="image/webp" srcset="assets/MG_2286-400.webp 400w, assets/MG_2286-800.webp 800w, assets/MG_2286-1200.webp 1200w" sizes="(max-width:600px) 50vw, (max-width:1024px) 33vw, 280px" />
-  <img src="assets/MG_2286-1200.jpg" alt="Detalle de talla en madera de los estantes" width="1200" height="789" loading="lazy" decoding="async" />
-</picture>
-      </button>
-      <button type="button" class="gallery-item" data-index="9" aria-label="Abrir galería en la imagen 10">
-        <picture>
-  <source type="image/avif" srcset="assets/MG_2298-400.avif 400w, assets/MG_2298-800.avif 800w, assets/MG_2298-1200.avif 1200w" sizes="(max-width:600px) 50vw, (max-width:1024px) 33vw, 280px" />
-  <source type="image/webp" srcset="assets/MG_2298-400.webp 400w, assets/MG_2298-800.webp 800w, assets/MG_2298-1200.webp 1200w" sizes="(max-width:600px) 50vw, (max-width:1024px) 33vw, 280px" />
-  <img src="assets/MG_2298-1200.jpg" alt="Vista de la nave central" width="1200" height="787" loading="lazy" decoding="async" />
-</picture>
-      </button>
-      <button type="button" class="gallery-item" data-index="10" aria-label="Abrir galería en la imagen 11">
-        <picture>
-  <source type="image/avif" srcset="assets/MG_2304-400.avif 400w, assets/MG_2304-800.avif 800w, assets/MG_2304-1200.avif 1200w" sizes="(max-width:600px) 50vw, (max-width:1024px) 33vw, 280px" />
-  <source type="image/webp" srcset="assets/MG_2304-400.webp 400w, assets/MG_2304-800.webp 800w, assets/MG_2304-1200.webp 1200w" sizes="(max-width:600px) 50vw, (max-width:1024px) 33vw, 280px" />
-  <img src="assets/MG_2304-1200.jpg" alt="Detalle ornamental de la biblioteca" width="1200" height="789" loading="lazy" decoding="async" />
-</picture>
-      </button>
-      <button type="button" class="gallery-item" data-index="11" aria-label="Abrir galería en la imagen 12">
-        <picture>
-  <source type="image/avif" srcset="assets/MG_2306-400.avif 400w, assets/MG_2306-800.avif 800w, assets/MG_2306-1200.avif 1200w" sizes="(max-width:600px) 50vw, (max-width:1024px) 33vw, 280px" />
-  <source type="image/webp" srcset="assets/MG_2306-400.webp 400w, assets/MG_2306-800.webp 800w, assets/MG_2306-1200.webp 1200w" sizes="(max-width:600px) 50vw, (max-width:1024px) 33vw, 280px" />
-  <img src="assets/MG_2306-1200.jpg" alt="Volúmenes encuadernados en piel" width="1200" height="801" loading="lazy" decoding="async" />
-</picture>
-      </button>
-      <button type="button" class="gallery-item" data-index="12" aria-label="Abrir galería en la imagen 13">
-        <picture>
-  <source type="image/avif" srcset="assets/MG_2308-400.avif 400w, assets/MG_2308-800.avif 800w, assets/MG_2308-1200.avif 1200w" sizes="(max-width:600px) 50vw, (max-width:1024px) 33vw, 280px" />
-  <source type="image/webp" srcset="assets/MG_2308-400.webp 400w, assets/MG_2308-800.webp 800w, assets/MG_2308-1200.webp 1200w" sizes="(max-width:600px) 50vw, (max-width:1024px) 33vw, 280px" />
+  <source type="image/avif" srcset="assets/MG_2308-400.avif 400w, assets/MG_2308-800.avif 800w, assets/MG_2308-1200.avif 1200w" sizes="(max-width:600px) 50vw, (max-width:1240px) 33vw, 400px" />
+  <source type="image/webp" srcset="assets/MG_2308-400.webp 400w, assets/MG_2308-800.webp 800w, assets/MG_2308-1200.webp 1200w" sizes="(max-width:600px) 50vw, (max-width:1240px) 33vw, 400px" />
   <img src="assets/MG_2308-1200.jpg" alt="Estanterías en tres niveles" width="1200" height="801" loading="lazy" decoding="async" />
 </picture>
       </button>
     </div>
 
-    <div class="gallery-show-more-wrap">
-      <button class="books-show-more" id="gallery-show-more" type="button" aria-controls="gallery-grid" aria-expanded="false">
-        <span data-i18n="gallery.show-more">Mostrar galería completa</span>
-      </button>
-    </div>
 
     <!-- Lightbox / visor de galería -->
     <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Galería de la Biblioteca Palafoxiana" aria-hidden="true">
@@ -452,10 +368,9 @@
 
   <div class="section-content">
 
-    <div class="section-header centered">
+    <div class="section-header">
       <span class="section-tag" data-i18n="collection.tag">Acervo</span>
       <h2 data-i18n="collection.title">Uno de los más ricos del continente</h2>
-      <div class="section-rule"></div>
       <p class="section-lead" data-i18n="collection.lead">
         Tres colecciones — libros, manuscritos e impresos sueltos — distribuidos en 54 materias y catorce idiomas.
       </p>
@@ -466,25 +381,23 @@
         <span class="stat-num">45,059</span>
         <span class="stat-label" data-i18n="stat.volumes">Volúmenes</span>
       </div>
-      <div class="stat-divider" aria-hidden="true"></div>
       <div class="stat-item">
         <span class="stat-num">9</span>
         <span class="stat-label" data-i18n="stat.incunables">Incunables</span>
       </div>
-      <div class="stat-divider" aria-hidden="true"></div>
       <div class="stat-item">
         <span class="stat-num">5,345</span>
         <span class="stat-label" data-i18n="stat.manuscripts">Manuscritos</span>
       </div>
-      <div class="stat-divider" aria-hidden="true"></div>
-      <div class="stat-item">
-        <span class="stat-num">54</span>
-        <span class="stat-label" data-i18n="stat.subjects">Materias</span>
-      </div>
-      <div class="stat-divider" aria-hidden="true"></div>
-      <div class="stat-item">
-        <span class="stat-num">14</span>
-        <span class="stat-label" data-i18n="stat.languages">Idiomas</span>
+      <div class="stat-pair">
+        <div class="stat-item">
+          <span class="stat-num">54</span>
+          <span class="stat-label" data-i18n="stat.subjects">Materias</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">14</span>
+          <span class="stat-label" data-i18n="stat.languages">Idiomas</span>
+        </div>
       </div>
     </div>
 
@@ -659,15 +572,14 @@
 
 <section id="contacto" class="scroll-fade section-dark">
 
-  <div class="section-content contacto-layout">
+  <div class="section-content">
+
+    <div class="section-header">
+      <span class="section-tag" data-i18n="contact.tag">Contacto</span>
+      <h2 data-i18n="contact.title">Visítanos</h2>
+    </div>
 
     <div class="contacto-info">
-
-      <div class="section-header">
-        <span class="section-tag light" data-i18n="contact.tag">Contacto</span>
-        <h2 data-i18n="contact.title">Visítanos</h2>
-        <div class="section-rule light"></div>
-      </div>
 
       <address class="contact-block">
 
@@ -807,8 +719,7 @@
 
   <div class="footer-content">
 
-    <!-- Central section: Logo, tagline, social, nav links -->
-    <div class="footer-center-section">
+    <div class="footer-brand">
 
       <picture>
   <source type="image/avif" srcset="assets/logo-400.avif 400w, assets/logo-800.avif 800w, assets/logo-1200.avif 1200w" sizes="(max-width:600px) 100vw, 50vw" />
@@ -816,9 +727,7 @@
   <img class="footer-logo-img" src="assets/logo-1200.jpg" alt="Biblioteca Palafoxiana" width="242" height="50" loading="lazy" decoding="async" />
 </picture>
 
-      <p class="footer-tagline" data-i18n="footer.subtitle">
-        Patrimonio UNESCO · Memoria del Mundo
-      </p>
+      <p class="footer-tagline" data-i18n="footer.subtitle">Patrimonio UNESCO · Memoria del Mundo</p>
 
       <!-- Social links -->
       <div class="footer-social" aria-label="Síguenos">
@@ -841,48 +750,35 @@
         </a>
       </div>
 
-      <!-- Main navigation links -->
+    </div>
+
+    <div class="footer-info-block">
+      <h4 data-i18n="contact.hours-label">Horarios</h4>
+      <p data-i18n="contact.hours-detail">Martes a domingo<br>10:00 – 18:00 h</p>
+    </div>
+
+    <div class="footer-info-block">
+      <h4 data-i18n="contact.address-label">Dirección</h4>
+      <address>
+        <p>5 Oriente Núm. 5, 2º piso<br>Centro, Puebla · 72000</p>
+      </address>
+    </div>
+
+    <div class="footer-info-block">
+      <h4 data-i18n="contact.phone-label">Teléfono</h4>
+      <ul role="list">
+        <li><a href="tel:+522222323483">(222) 232 3483</a></li>
+        <li><a href="tel:+522222464835">(222) 246 4835</a> ext. 118</li>
+      </ul>
+    </div>
+
+    <div class="footer-bottom">
       <nav class="footer-nav-links" aria-label="Secciones principales">
         <a href="#visitar" data-i18n="footer.col1">Visitar</a>
         <a href="#acervo" data-i18n="footer.col2">Acervo</a>
         <a href="#contacto" data-i18n="footer.col3">Contacto</a>
       </nav>
-
-    </div>
-
-    <!-- Info section: Hours, phone, address -->
-    <div class="footer-info-section">
-
-      <div class="footer-info-block">
-        <h4 data-i18n="contact.hours-label">Horarios</h4>
-        <p data-i18n="contact.hours-detail">Martes a domingo<br>10:00 – 18:00 h</p>
-      </div>
-
-      <div class="footer-info-block">
-        <h4 data-i18n="contact.address-label">Dirección</h4>
-        <address>
-          <p>5 Oriente Núm. 5, 2º piso<br>Centro, Puebla · 72000</p>
-        </address>
-      </div>
-
-      <div class="footer-info-block">
-        <h4 data-i18n="contact.phone-label">Teléfono</h4>
-        <ul role="list">
-          <li><a href="tel:+522222323483">(222) 232 3483</a></li>
-          <li><a href="tel:+522222464835">(222) 246 4835</a> ext. 118</li>
-        </ul>
-      </div>
-
-    </div>
-
-    <!-- Bottom: Copyright & credits -->
-    <div class="footer-bottom">
-      <p class="footer-copy">
-        © <span id="footer-year">2026</span> Biblioteca Palafoxiana
-      </p>
-      <p class="footer-credits" data-i18n="footer.credits">
-        Rediseño conceptual con fines educativos
-      </p>
+      <p class="footer-copy">© <span id="footer-year">2026</span> Biblioteca Palafoxiana · <span data-i18n="footer.credits">Rediseño conceptual con fines educativos</span></p>
     </div>
 
   </div>

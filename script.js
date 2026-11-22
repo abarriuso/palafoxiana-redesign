@@ -8,8 +8,6 @@ import {
   shouldShowCard,
   computeOverflow,
   wrapIndex,
-  parseCountTarget,
-  formatCount,
   lookup,
   hasHtml,
   safeSetHTML,
@@ -21,7 +19,6 @@ import {
 
 /* ── Constantes (números mágicos nombrados) ──────────────── */
 const SCROLL_HEADER_THRESHOLD = 60;   // px para encoger el header
-const COUNTER_DURATION        = 1600; // ms de la animación de contadores
 const SUBMIT_SIM_DELAY        = 1200; // ms de la simulación de envío
 const FEEDBACK_HIDE_MS        = 6000; // ms antes de ocultar el feedback
 
@@ -109,8 +106,6 @@ const translations = {
     /* gallery */
     'gallery.tag':       'Galería',
     'gallery.title':     'Biblioteca en imágenes',
-    'gallery.show-more': 'Mostrar galería completa',
-    'gallery.show-less': 'Mostrar menos',
 
     /* collection */
     'collection.tag':       'Acervo',
@@ -225,8 +220,6 @@ const translations = {
     /* gallery */
     'gallery.tag':       'Gallery',
     'gallery.title':     'The library in pictures',
-    'gallery.show-more': 'Show full gallery',
-    'gallery.show-less': 'Show less',
 
     /* collection */
     'collection.tag':       'Collection',
@@ -294,7 +287,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initMobileMenu();
   initSmoothScroll();
   initScrollFx();
-  initCounters();
   initCollectionTabs();
   initContactForm();
   initFooterYear();
@@ -631,50 +623,6 @@ function initScrollFx() {
   document.querySelectorAll('.scroll-fade').forEach(el => fadeObs.observe(el));
 }
 
-/* ── Animated counters (ease-out-cubic) ──────────────── */
-function initCounters() {
-  const nums = document.querySelectorAll('.stat-num');
-  if (!nums.length) return;
-
-  // guardamos el valor original como data-attribute para evitar que se pierda
-  nums.forEach(el => {
-    if (!el.dataset.target) el.dataset.target = el.textContent.trim();
-    el.textContent = '0';
-  });
-
-  const obs = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (!e.isIntersecting) return;
-      obs.unobserve(e.target);
-      requestAnimationFrame(() => animateNumber(e.target));
-    });
-  }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
-
-  nums.forEach(el => obs.observe(el));
-}
-
-function animateNumber(el) {
-  const { raw, hasSuffix } = parseCountTarget(el.dataset.target || el.textContent);
-  if (!raw) return;
-
-  if (PREFERS_REDUCED_MOTION) {
-    el.textContent = formatCount(raw, hasSuffix);
-    return;
-  }
-
-  const start = performance.now();
-
-  const tick = now => {
-    const t    = Math.min((now - start) / COUNTER_DURATION, 1);
-    const ease = 1 - Math.pow(1 - t, 3);
-    const val  = Math.round(ease * raw);
-    el.textContent = formatCount(val, hasSuffix);
-    if (t < 1) requestAnimationFrame(tick);
-  };
-
-  requestAnimationFrame(tick);
-}
-
 /* ── Footer year ─────────────────────────────────────── */
 function initFooterYear() {
   const el = document.getElementById('footer-year');
@@ -918,18 +866,6 @@ function initLightbox() {
   items.forEach((btn, i) => {
     btn.addEventListener('click', () => open(i, btn));
   });
-
-  // botón mostrar más / menos
-  const moreBtn  = document.getElementById('gallery-show-more');
-  const moreWrap = moreBtn ? moreBtn.parentElement : null;
-  if (moreBtn && moreWrap) {
-    moreBtn.addEventListener('click', () => {
-      const isCollapsed = grid.classList.toggle('collapsed');
-      moreBtn.setAttribute('aria-expanded', String(!isCollapsed));
-      const span = moreBtn.querySelector('span');
-      if (span) span.textContent = dict(isCollapsed ? 'gallery.show-more' : 'gallery.show-less');
-    });
-  }
 
   btnClose.addEventListener('click', close);
   btnPrev.addEventListener('click', () => step(-1));

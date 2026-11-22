@@ -4,8 +4,6 @@ import {
   shouldShowCard,
   computeOverflow,
   wrapIndex,
-  parseCountTarget,
-  formatCount,
   lookup,
   hasHtml,
   safeSetHTML,
@@ -82,27 +80,6 @@ describe('wrapIndex', () => {
   });
   it('guards against zero length', () => {
     expect(wrapIndex(3, 0)).toBe(0);
-  });
-});
-
-describe('parseCountTarget / formatCount', () => {
-  it('parses comma-grouped numbers', () => {
-    expect(parseCountTarget('45,059')).toEqual({ raw: 45059, hasSuffix: false });
-    expect(parseCountTarget('5,345')).toEqual({ raw: 5345, hasSuffix: false });
-    expect(parseCountTarget('9')).toEqual({ raw: 9, hasSuffix: false });
-  });
-  it('detects the trailing + suffix', () => {
-    expect(parseCountTarget('9+')).toEqual({ raw: 9, hasSuffix: true });
-  });
-  it('formats with a thousands separator', () => {
-    // Independiente de la ICU: comparamos solo los dígitos.
-    const digits = (s) => s.replace(/\D/g, '');
-    expect(digits(formatCount(45059, false, 'en-US'))).toBe('45059');
-    expect(digits(formatCount(45059, false, 'es-MX'))).toBe('45059');
-    expect(formatCount(9, true, 'en-US')).toBe('9+');
-  });
-  it('returns 0 for unparseable input', () => {
-    expect(parseCountTarget('abc')).toEqual({ raw: 0, hasSuffix: false });
   });
 });
 

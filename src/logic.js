@@ -63,29 +63,6 @@ export function wrapIndex(i, len) {
 }
 
 /**
- * Extrae el valor numérico y si tiene sufijo '+' de una cadena de contador.
- * @param {string} str Texto original (p. ej. "45,059" o "9+")
- * @returns {{ raw: number, hasSuffix: boolean }}
- */
-export function parseCountTarget(str) {
-  const s = (str || '').trim();
-  const hasSuffix = s.endsWith('+');
-  const raw = parseInt(s.replace(/[^0-9]/g, ''), 10);
-  return { raw: Number.isFinite(raw) ? raw : 0, hasSuffix };
-}
-
-/**
- * Formatea un contador con separador de miles del locale.
- * @param {number} raw
- * @param {boolean} hasSuffix
- * @param {string} [locale]
- * @returns {string}
- */
-export function formatCount(raw, hasSuffix, locale = 'es-MX') {
-  return raw.toLocaleString(locale) + (hasSuffix ? '+' : '');
-}
-
-/**
  * Devuelve la traducción para una clave y un idioma (fallback a 'es').
  * @param {Record<string, string>} dict Diccionario de traducciones
  * @param {string} lang

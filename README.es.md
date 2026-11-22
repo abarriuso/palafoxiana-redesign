@@ -52,9 +52,8 @@ HTML5 semántico + ARIA    ·    CSS3 vanilla (0 dependencias)    ·    JavaScri
 
 - Tema claro / oscuro — persistencia en `localStorage`, respeta `prefers-color-scheme`
 - i18n ES / EN — traducciones completas con switch en header
-- Galería lightbox — 20 fotos, navegación por teclado, swipe táctil y flechas
+- Galería lightbox — 6 fotos, navegación por teclado, swipe táctil y flechas
 - Scroll animado — fade-in con IntersectionObserver
-- Contadores animados — ease-out-cubic en las estadísticas
 - Menú responsive — hamburger en móvil, dropdowns en desktop
 - Formulario — validación HTML5, honeypot anti-spam, feedback visual
 
@@ -109,7 +108,7 @@ flowchart LR
   HTML["index.html<br/>HTML semántico · ARIA · CSP · JSON-LD<br/>contenido legible sin JS"] --> JS["script.js<br/>módulo ES"]
   HTML --> CSS["styles.css<br/>claro / oscuro · forced-colors<br/>prefers-reduced-motion"]
   JS --> LOGIC["src/logic.js<br/>funciones puras"]
-  JS --> UI["tema · ES/EN · menús y desplegables<br/>pestañas de colección · lightbox · contadores<br/>formulario con honeypot"]
+  JS --> UI["tema · ES/EN · menús y desplegables<br/>pestañas de colección · lightbox<br/>formulario con honeypot"]
   JS --> LENIS["vendor/lenis.min.js<br/>scroll suave, pausado en el lightbox"]
   TESTS["tests/ (Vitest + jsdom)<br/>lógica · claves de traducción"] -.-> LOGIC
 ```
