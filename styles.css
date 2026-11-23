@@ -1056,49 +1056,6 @@ header::after{
 .gallery-item:focus-visible{ outline-offset:3px; }
 
 /* ── Acervo ───────────────────────────────────────────── */
-
-/* Cifras en las mismas cuatro columnas que las fichas de libro; las dos
-   últimas comparten la cuarta columna. */
-.stats-row{
-  display:grid;
-  grid-template-columns:subgrid;
-  margin-bottom:var(--sp-16);
-}
-
-.stat-item{
-  grid-column:span 3;
-  display:flex;
-  flex-direction:column;
-  gap:var(--sp-3);
-  padding-top:var(--sp-5);
-  border-top:1px solid var(--border);
-}
-
-.stat-pair{
-  grid-column:span 3;
-  display:grid;
-  grid-template-columns:repeat(2,minmax(0,1fr));
-  column-gap:var(--col-gap);
-}
-.stat-pair .stat-item{ grid-column:auto; }
-
-.stat-num{
-  font-family:var(--font-display);
-  font-size:clamp(2rem,3.6vw,3rem);
-  line-height:1;
-  font-variant-numeric:lining-nums tabular-nums;
-  color:var(--text);
-}
-
-.stat-label{
-  font-family:var(--font-sans);
-  font-size:.75rem;
-  font-weight:600;
-  letter-spacing:.14em;
-  text-transform:uppercase;
-  color:var(--text-muted);
-}
-
 .collection-tabs{
   display:flex;
   gap:var(--sp-8);
@@ -1753,7 +1710,7 @@ footer{
 }
 
 /* ── Aparición al hacer scroll (solo con JS) ──────────── */
-.js .scroll-fade{
+.fx .scroll-fade{
   opacity:0;
   transform:translateY(16px);
   transition:opacity .6s var(--ease),
@@ -1816,12 +1773,6 @@ footer{
 
   .gallery-grid{ grid-template-columns:repeat(2,minmax(0,1fr)); }
 
-  /* 45,059 a todo el ancho; las otras cuatro cifras en 2 × 2 */
-  .stats-row{ row-gap:var(--sp-6); }
-  .stats-row > .stat-item{ grid-column:span 6; }
-  .stats-row > .stat-item:first-child,
-  .stat-pair{ grid-column:1 / -1; }
-
   .book-card{ grid-column:span 6; }
 
   .form-row{ grid-template-columns:1fr; }
@@ -1843,7 +1794,7 @@ footer{
     transition-duration:.01ms !important;
     scroll-behavior:auto !important;
   }
-  .js .scroll-fade{ opacity:1; transform:none; }
+  .fx .scroll-fade{ opacity:1; transform:none; }
 }
 
 /* Alto contraste / Windows High Contrast: garantiza bordes y foco visibles */

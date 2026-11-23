@@ -80,45 +80,40 @@ const translations = {
 
     /* visit */
     'visit.tag':              'Visitar',
-    'visit.title':            'Planifica tu visita',
+    'visit.title':            'Antes de venir',
     'visit.hours':            'Horarios',
-    'visit.hours-detail':     'Martes a domingo<br>10:00 – 18:00 h',
-    'visit.hours-note':       'Lunes cerrado',
+    'visit.hours-detail':     'De martes a domingo<br>de 10:00 a 18:00 h',
+    'visit.hours-note':       'Los lunes está cerrada',
     'visit.location':         'Ubicación',
     'visit.location-detail':  '5 Oriente Núm. 5, 2º piso<br>Casa de Cultura, Centro, Puebla',
-    'visit.location-link':    'Cómo llegar →',
+    'visit.location-link':    'Ver en el mapa →',
     'visit.admission':        'Entrada',
-    'visit.admission-detail': '$40 MXN general<br>Estudiantes: $20 MXN',
-    'visit.admission-note':   'Martes entrada libre',
+    'visit.admission-detail': '$40 MXN la entrada general<br>$20 MXN con credencial de estudiante',
+    'visit.admission-note':   'Los martes la entrada es gratis',
     'visit.services':         'Servicios',
-    'visit.services-detail':  'Visitas guiadas gratuitas<br>Audioguías y exposiciones',
-    'visit.services-note':    'Sala temporal de exposiciones',
-    'visit.cta':              'Solicitar visita guiada',
-    'visit.cta-note':         'Visitas guiadas gratuitas — consulta disponibilidad',
+    'visit.services-detail':  'Visitas guiadas gratis<br>Audioguía y exposiciones',
+    'visit.services-note':    'También hay una sala de exposiciones temporales',
+    'visit.cta':              'Pedir una visita guiada',
+    'visit.cta-note':         'No cuestan nada. Escríbenos y te confirmamos el día.',
 
     /* history */
     'history.tag':   'Historia',
-    'history.title': 'Biblioteca · Juan de Palafox',
-    'history.p1':    'En 1646 el obispo de Puebla <strong>Juan de Palafox y Mendoza</strong> donó al seminario su colección personal de 5,000 volúmenes, con la condición de que cualquier persona que supiera leer pudiera consultarla. Fue el acto fundacional de la primera biblioteca pública de América.',
-    'history.p2':    'En 1773 el obispo <strong>Francisco Fabián y Fuero</strong> levantó la sala principal de <strong>43 metros de longitud</strong> con sus tres niveles de estantería en cedro y ayacahuite. Una estructura monumental que perdura como testigo de cuatro siglos de historia y conocimiento acumulado.',
-    'history.p3':    'El acervo creció a través de los siglos, alcanzando hoy más de 45,000 volúmenes distribuidos en 54 materias y catorce idiomas. Fue declarada Monumento Histórico en 1981 y reconocida por la UNESCO como Memoria del Mundo en 2005.',
+    'history.title': 'Un obispo y sus cinco mil libros',
+    'history.p1':    'En 1646, el obispo de Puebla <strong>Juan de Palafox y Mendoza</strong> regaló sus 5,000 libros al seminario con una condición: que pudiera consultarlos cualquiera que supiera leer. Así empezó la primera biblioteca pública de América.',
+    'history.p2':    'La sala que se ve hoy es posterior. La mandó construir en 1773 el obispo <strong>Francisco Fabián y Fuero</strong>: mide <strong>43 metros de largo</strong> y tiene tres pisos de estantería de cedro y ayacahuite.',
+    'history.p3':    'El fondo siguió creciendo y hoy pasa de los 45,000 volúmenes. En 1981 se declaró Monumento Histórico y en 2005 la UNESCO la incluyó en su registro Memoria del Mundo.',
 
     /* gallery */
     'gallery.tag':       'Galería',
-    'gallery.title':     'Biblioteca en imágenes',
+    'gallery.title':     'La sala por dentro',
 
     /* collection */
     'collection.tag':       'Acervo',
-    'collection.title':     'Uno de los más ricos del continente',
-    'collection.lead':      'Tres colecciones — libros, manuscritos e impresos sueltos — distribuidas en 54 materias y catorce idiomas.',
+    'collection.title':     'Qué hay en los estantes',
+    'collection.lead':      'Libros impresos, manuscritos e impresos sueltos sobre 54 materias y en 14 idiomas. Entre ellos hay 9 incunables y más de 5,000 manuscritos.',
     'collection.show-more': 'Mostrar más',
     'collection.show-less': 'Mostrar menos',
-    'collection.note':      'Selección de obras emblemáticas documentadas en el acervo. El conjunto completo abarca 54 materias en 14 idiomas — del derecho canónico a la química, del náhuatl al árabe.',
-    'stat.volumes':         'Volúmenes',
-    'stat.incunables':      'Incunables',
-    'stat.manuscripts':     'Manuscritos',
-    'stat.subjects':        'Materias',
-    'stat.languages':       'Idiomas',
+    'collection.note':      'Esto es solo una muestra. El fondo completo va del derecho canónico a la química, y del náhuatl al árabe.',
     'tab.todos':            'Todos',
     'tab.incunable':        'Incunables',
     'tab.libros':           'Libros impresos',
@@ -130,11 +125,11 @@ const translations = {
 
     /* contact + form */
     'contact.tag':                 'Contacto',
-    'contact.title':               'Visítanos',
+    'contact.title':               'Escríbenos',
     'contact.address-label':       'Dirección',
     'contact.phone-label':         'Teléfonos',
     'contact.hours-label':         'Horarios',
-    'contact.hours-detail':        'Martes a domingo<br>10:00 – 18:00 h',
+    'contact.hours-detail':        'De martes a domingo<br>de 10:00 a 18:00 h',
     'contact.social-label':        'Síguenos',
     'contact.name-label':          'Nombre completo',
     'contact.name-placeholder':    'Tu nombre',
@@ -148,13 +143,13 @@ const translations = {
     'contact.subject-press':       'Prensa y comunicación',
     'contact.subject-other':       'Otro asunto',
     'contact.message-label':       'Mensaje',
-    'contact.message-placeholder': 'Cuéntanos en qué podemos ayudarte',
-    'contact.message-hint':        'Demo: este formulario no envía mensajes. Para contactar a la biblioteca usa los datos de la izquierda.',
+    'contact.message-placeholder': '¿En qué te podemos ayudar?',
+    'contact.message-hint':        'Es una demo y este formulario no envía nada. Para escribir a la biblioteca, usa los datos de contacto.',
     'contact.submit':              'Enviar mensaje (demo)',
-    'contact.submit-loading':      'Procesando…',
-    'contact.privacy':             'Este es un rediseño conceptual sin backend. Los datos del formulario no se transmiten ni almacenan.',
-    'contact.success':             'Demo: el formulario no envía nada. Usa los datos de contacto de la izquierda para escribir a la biblioteca.',
-    'contact.error':               'Demo: ha ocurrido un error simulado. Vuelve a intentarlo o usa los datos de contacto de la izquierda.',
+    'contact.submit-loading':      'Enviando…',
+    'contact.privacy':             'Esta página es un rediseño sin servidor detrás. Lo que escribas aquí no se envía ni se guarda.',
+    'contact.success':             'Es una demo, así que no se ha enviado nada. Para escribir a la biblioteca, usa los teléfonos o las redes.',
+    'contact.error':               'Algo ha fallado (es un error simulado). Prueba otra vez o llama a la biblioteca.',
 
     /* footer */
     'footer.subtitle': 'Patrimonio UNESCO · Memoria del Mundo',
@@ -188,51 +183,46 @@ const translations = {
 
     /* hero */
     'hero.badge':    'UNESCO · Memory of the World · 2005',
-    'hero.title':    'Library<br>Palafoxiana',
+    'hero.title':    'Biblioteca<br>Palafoxiana',
     'hero.subtitle': 'The first public library in the Americas',
     'hero.location': 'Puebla, Mexico',
 
     /* visit */
     'visit.tag':              'Visit',
-    'visit.title':            'Plan your visit',
+    'visit.title':            'Before you go',
     'visit.hours':            'Hours',
-    'visit.hours-detail':     'Tuesday to Sunday<br>10:00 – 18:00',
+    'visit.hours-detail':     'Tuesday to Sunday<br>10 am to 6 pm',
     'visit.hours-note':       'Closed on Mondays',
     'visit.location':         'Location',
     'visit.location-detail':  '5 Oriente Núm. 5, 2nd floor<br>Casa de Cultura, Centro, Puebla',
-    'visit.location-link':    'Get directions →',
+    'visit.location-link':    'Open in Maps →',
     'visit.admission':        'Admission',
-    'visit.admission-detail': '$40 MXN general<br>Students: $20 MXN',
-    'visit.admission-note':   'Free admission on Tuesdays',
+    'visit.admission-detail': '$40 MXN general<br>$20 MXN with a student ID',
+    'visit.admission-note':   'Free on Tuesdays',
     'visit.services':         'Services',
-    'visit.services-detail':  'Free guided tours<br>Audio guides and exhibitions',
-    'visit.services-note':    'Temporary exhibition hall',
-    'visit.cta':              'Request a guided tour',
-    'visit.cta-note':         'Free guided tours — please check availability',
+    'visit.services-detail':  'Free guided tours<br>Audio guide and exhibitions',
+    'visit.services-note':    'There is also a temporary exhibition room',
+    'visit.cta':              'Book a guided tour',
+    'visit.cta-note':         "They're free. Write to us and we'll confirm a date.",
 
     /* history */
     'history.tag':   'History',
-    'history.title': 'Library · Juan de Palafox',
-    'history.p1':    'In 1646 Bishop <strong>Juan de Palafox y Mendoza</strong> donated his personal collection of 5,000 volumes to the seminary, on the condition that any literate person could consult it. It was the founding act of the first public library in the Americas.',
-    'history.p2':    'In 1773 Bishop <strong>Francisco Fabián y Fuero</strong> built the main reading hall, <strong>43 metres long</strong>, with three levels of cedar and ayacahuite shelving — a monumental structure that endures as witness to four centuries of history and accumulated knowledge.',
-    'history.p3':    'The collection grew across the centuries, now holding more than 45,000 volumes across 54 subjects and fourteen languages. Declared a National Historic Monument in 1981 and recognised by UNESCO as Memory of the World in 2005.',
+    'history.title': 'A bishop and his five thousand books',
+    'history.p1':    'In 1646 <strong>Juan de Palafox y Mendoza</strong>, Bishop of Puebla, gave his 5,000 books to the seminary on one condition: anyone who could read was allowed to use them. That was the start of the first public library in the Americas.',
+    'history.p2':    'The hall you see today came later. Bishop <strong>Francisco Fabián y Fuero</strong> had it built in 1773. It is <strong>43 metres long</strong>, with three tiers of cedar and ayacahuite shelving.',
+    'history.p3':    'The collection kept growing and now holds more than 45,000 volumes. It was declared a Historic Monument in 1981, and in 2005 UNESCO added it to its Memory of the World register.',
 
     /* gallery */
     'gallery.tag':       'Gallery',
-    'gallery.title':     'The library in pictures',
+    'gallery.title':     'Inside the hall',
 
     /* collection */
     'collection.tag':       'Collection',
-    'collection.title':     'Among the richest in the continent',
-    'collection.lead':      'Three collections — printed books, manuscripts and broadsides — across 54 subjects and fourteen languages.',
+    'collection.title':     "What's on the shelves",
+    'collection.lead':      'Printed books, manuscripts and broadsides covering 54 subjects in 14 languages. Among them are 9 incunabula and more than 5,000 manuscripts.',
     'collection.show-more': 'Show more',
     'collection.show-less': 'Show less',
-    'collection.note':      'Emblematic works documented in the collection. The full holdings span 54 subjects in 14 languages — from canon law to chemistry, from Nahuatl to Arabic.',
-    'stat.volumes':         'Volumes',
-    'stat.incunables':      'Incunabula',
-    'stat.manuscripts':     'Manuscripts',
-    'stat.subjects':        'Subjects',
-    'stat.languages':       'Languages',
+    'collection.note':      'This is just a sample. The full collection runs from canon law to chemistry, and from Nahuatl to Arabic.',
     'tab.todos':            'All',
     'tab.incunable':        'Incunabula',
     'tab.libros':           'Printed books',
@@ -244,11 +234,11 @@ const translations = {
 
     /* contact + form */
     'contact.tag':                 'Contact',
-    'contact.title':               'Visit us',
+    'contact.title':               'Write to us',
     'contact.address-label':       'Address',
     'contact.phone-label':         'Phone',
     'contact.hours-label':         'Hours',
-    'contact.hours-detail':        'Tuesday to Sunday<br>10:00 – 18:00',
+    'contact.hours-detail':        'Tuesday to Sunday<br>10 am to 6 pm',
     'contact.social-label':        'Follow us',
     'contact.name-label':          'Full name',
     'contact.name-placeholder':    'Your name',
@@ -262,13 +252,13 @@ const translations = {
     'contact.subject-press':       'Press & communications',
     'contact.subject-other':       'Other',
     'contact.message-label':       'Message',
-    'contact.message-placeholder': 'Tell us how we can help',
-    'contact.message-hint':        'Demo: this form does not send messages. To contact the library use the details on the left.',
+    'contact.message-placeholder': 'How can we help?',
+    'contact.message-hint':        'This is a demo and the form sends nothing. To reach the library, use the contact details.',
     'contact.submit':              'Send message (demo)',
-    'contact.submit-loading':      'Processing…',
-    'contact.privacy':             'This is a conceptual redesign with no backend. Form data is neither transmitted nor stored.',
-    'contact.success':             'Demo: this form does not send anything. Use the contact details on the left to write to the library.',
-    'contact.error':               'Demo: a simulated error occurred. Try again or use the contact details on the left.',
+    'contact.submit-loading':      'Sending…',
+    'contact.privacy':             'This redesign has no server behind it. Nothing you type here is sent or stored.',
+    'contact.success':             "It's a demo, so nothing was sent. To reach the library, use the phone numbers or social links.",
+    'contact.error':               'Something went wrong (a simulated error). Try again or call the library.',
 
     /* footer */
     'footer.subtitle': 'UNESCO Heritage · Memory of the World',
@@ -609,8 +599,11 @@ function initScrollFx() {
 
   update();
 
-  // Scroll-triggered fade-ins (one-shot). El contenido es visible por
-  // defecto (sin clase .js no se oculta); aquí solo se anima.
+  // Scroll-triggered fade-ins (one-shot). Las secciones solo se ocultan
+  // cuando este módulo ha cargado y añade .fx: si script.js falla (p. ej.
+  // al abrir el HTML desde file://) el contenido sigue visible.
+  if (!('IntersectionObserver' in window)) return;
+  document.documentElement.classList.add('fx');
   const fadeObs = new IntersectionObserver(entries => {
     entries.forEach(e => {
       if (e.isIntersecting) {

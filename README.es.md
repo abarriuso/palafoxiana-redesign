@@ -38,7 +38,7 @@ HTML5 semántico + ARIA    ·    CSS3 vanilla (0 dependencias)    ·    JavaScri
 
 | Componente | Tecnología | Detalle |
 |---|---|---|
-| **Fuentes** | Lora · DM Sans · Prata | Self-hosted woff2 — 0 requests a Google Fonts |
+| **Fuentes** | Lora · DM Sans · Prata | Self-hosted woff2 · 0 requests a Google Fonts |
 | **Smooth scroll** | [Lenis 1.1.18](https://github.com/darkroomengineering/lenis) | Servido localmente desde `vendor/` |
 | **Imágenes** | Sharp | AVIF y WebP en tres anchos, con JPEG de respaldo |
 | **Herramientas** | pnpm (solo desarrollo) | Tests, lint y optimización de imágenes |
@@ -50,12 +50,12 @@ HTML5 semántico + ARIA    ·    CSS3 vanilla (0 dependencias)    ·    JavaScri
 <details>
 <summary><strong>UI / UX</strong></summary>
 
-- Tema claro / oscuro — persistencia en `localStorage`, respeta `prefers-color-scheme`
-- i18n ES / EN — traducciones completas con switch en header
-- Galería lightbox — 6 fotos, navegación por teclado, swipe táctil y flechas
-- Scroll animado — fade-in con IntersectionObserver
-- Menú responsive — hamburger en móvil, dropdowns en desktop
-- Formulario — validación HTML5, honeypot anti-spam, feedback visual
+- Tema claro / oscuro: persistencia en `localStorage`, respeta `prefers-color-scheme`
+- i18n ES / EN: traducciones completas con switch en header
+- Galería lightbox: 6 fotos, navegación por teclado, swipe táctil y flechas
+- Scroll animado: fade-in con IntersectionObserver
+- Menú responsive: hamburger en móvil, dropdowns en desktop
+- Formulario: validación HTML5, honeypot anti-spam, feedback visual
 
 </details>
 
@@ -164,9 +164,9 @@ python3 -m http.server 8080
 | Archivo | Licencia |
 |---|---|
 | Código (HTML, CSS, JS) y documentación | [MIT](LICENSE) |
-| Fotografías, reproducciones históricas, textos institucionales, nombre y logotipo | Fuera de la licencia MIT: © de sus titulares, usados solo con fines educativos y de portafolio — ver [NOTICE](NOTICE) |
+| Fotografías, reproducciones históricas, textos institucionales, nombre y logotipo | Fuera de la licencia MIT: © de sus titulares, usados solo con fines educativos y de portafolio · ver [NOTICE](NOTICE) |
 
 ---
 
 Para información oficial, eventos, catálogo o solicitudes formales:
-[palafoxiana.com](https://www.palafoxiana.com) — 5 Oriente 5, 2º piso, Centro, Puebla, México.
+[palafoxiana.com](https://www.palafoxiana.com) · 5 Oriente 5, 2º piso, Centro, Puebla, México.

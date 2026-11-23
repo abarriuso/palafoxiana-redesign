@@ -38,7 +38,7 @@ Semantic HTML5 + ARIA    ·    Vanilla CSS3 (0 dependencies)    ·    Vanilla Ja
 
 | Component | Technology | Detail |
 |---|---|---|
-| **Fonts** | Lora · DM Sans · Prata | Self-hosted woff2 — no requests to Google Fonts |
+| **Fonts** | Lora · DM Sans · Prata | Self-hosted woff2 · no requests to Google Fonts |
 | **Smooth scroll** | [Lenis 1.1.18](https://github.com/darkroomengineering/lenis) | Served locally from `vendor/` |
 | **Images** | Sharp | AVIF and WebP at three widths, with a JPEG fallback |
 | **Tooling** | pnpm (dev only) | Tests, lint and image optimisation |
@@ -50,12 +50,12 @@ Semantic HTML5 + ARIA    ·    Vanilla CSS3 (0 dependencies)    ·    Vanilla Ja
 <details>
 <summary><strong>UI / UX</strong></summary>
 
-- Light / dark theme — saved in `localStorage`, follows `prefers-color-scheme`
-- ES / EN i18n — full translations with a switch in the header
-- Lightbox gallery — 6 photos, keyboard navigation, touch swipe and arrows
-- Animated scroll — fade-in with IntersectionObserver
-- Responsive menu — hamburger on mobile, dropdowns on desktop
-- Form — HTML5 validation, anti-spam honeypot, visual feedback
+- Light / dark theme: saved in `localStorage`, follows `prefers-color-scheme`
+- ES / EN i18n: full translations with a switch in the header
+- Lightbox gallery: 6 photos, keyboard navigation, touch swipe and arrows
+- Animated scroll: fade-in with IntersectionObserver
+- Responsive menu: hamburger on mobile, dropdowns on desktop
+- Form: HTML5 validation, anti-spam honeypot, visual feedback
 
 </details>
 
@@ -164,9 +164,9 @@ python3 -m http.server 8080
 | Files | Licence |
 |---|---|
 | Code (HTML, CSS, JS) and documentation | [MIT](LICENSE) |
-| Photographs, historical reproductions, institutional texts, name and logo | Not covered by the MIT licence: © their owners, used for educational/portfolio purposes only — see [NOTICE](NOTICE) |
+| Photographs, historical reproductions, institutional texts, name and logo | Not covered by the MIT licence: © their owners, used for educational/portfolio purposes only · see [NOTICE](NOTICE) |
 
 ---
 
 For official information, events, the catalogue or formal requests:
-[palafoxiana.com](https://www.palafoxiana.com) — 5 Oriente 5, 2nd floor, Centro, Puebla, Mexico.
+[palafoxiana.com](https://www.palafoxiana.com) · 5 Oriente 5, 2nd floor, Centro, Puebla, Mexico.
